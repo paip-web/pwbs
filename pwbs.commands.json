@@ -1,0 +1,9 @@
+{
+    "git-push" : "git push --tags",
+    "commit-major" : "bumpversion major",
+    "commit-minor" : "bumpversion minor",
+    "commit-patch" : "bumpversion patch",
+    "commit-level" : "bumpversion releaselevel",
+    "commit-serial" : "bumpversion serial",
+    "ci" : "python ci.py"
+}
