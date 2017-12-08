@@ -1,9 +1,9 @@
 {
     "git-push" : "git push --tags",
-    "commit-major" : "bumpversion major",
-    "commit-minor" : "bumpversion minor",
-    "commit-patch" : "bumpversion patch",
-    "commit-level" : "bumpversion releaselevel",
-    "commit-serial" : "bumpversion serial",
+    "commit-major" : "bumpversion --allow-dirty major",
+    "commit-minor" : "bumpversion --allow-dirty minor",
+    "commit-patch" : "bumpversion --allow-dirty patch",
+    "commit-level" : "bumpversion --allow-dirty releaselevel",
+    "commit-serial" : "bumpversion --allow-dirty serial",
     "ci" : "python ci.py"
 }

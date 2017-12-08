@@ -13,7 +13,8 @@ def findFiles(path_to_watch, arg_files):
             matches.append(os.path.join(root, filename))
     return matches
 def HashFiles(path_to_watch, filenames_to_watch, excluded=[]):
-    print("PWCIW: Hashing Files...")
+    #print("PWCIW: Hashing Files...")
+    print("\rPWCIW: Hashing Files...",end="")
     watch_files = findFiles(path_to_watch, filenames_to_watch)
     watch_files = [item for item in watch_files if item not in excluded]
     hash_table = []
@@ -28,22 +29,26 @@ def watchFile(path_to_watch, filenames_to_watch, excluded={}, function=print):
     excluded = ex2
     while True:
         lastHash = HashFiles(path_to_watch, filenames_to_watch, excluded)
-        print("PWCIW: Waiting for trigger")
+        print("\nPWCIW: Waiting for trigger")
         while lastHash == HashFiles(path_to_watch, filenames_to_watch, excluded):
+            from time import sleep
+            print("\rPWCIW: Waiting ........",end="")
+            sleep(0.05)
             try:
                 with open("stop.watching.file.1234567890", "r") as f:
-                    print("]\n")
                     print("PWCIW: Locking File Exist")
+                    raise Exception("STOP")
                     break
             except FileNotFoundError:
                 continue
         try:
             with open("stop.watching.file.1234567890", "r") as f:
                 print("PWCIW: Locking File Exist")
+                raise Exception("STOP")
                 break
         except FileNotFoundError:
             pass
-        print("PWCIW: Hash Changed")
+        print("\nPWCIW: Hash Changed")
         function()
 def execute(command):
     """Function to execute command line commands
@@ -144,7 +149,7 @@ works = {
         "C:\\Users\\patry\\OneDrive\\Projects\\paip-web-build-system Edition 2\\",
         '[!.~]*',
         {},
-        lambda: execute("green")
+        lambda: execute(["cd src/pwbs", "echo GREEN", "green -vvv --run-coverage", "echo PYTEST", "pytest"])
     )
 }
 while True:
@@ -155,7 +160,12 @@ while True:
             t.start()
             t.join()
     except FileNotFoundError:
+        for k, v in works.items():
+            print("Starting", k)
+            t = Thread(target=v, args=())
+            t.start()
+            t.join()
         continue
     except Exception as e:
+        break
         raise e
-
