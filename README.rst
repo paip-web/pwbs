@@ -1,13 +1,12 @@
 ==================
 PAiP Web Build System
 ==================
-Actual Version : v.0.0.0-dev5
+Actual Version : v.0.0.1-dev1
 
 PWBS is Build System for easy automation process.
 
 
 * Free software: MIT license
-* Documentation: https://python-boilerplate.readthedocs.io.
 
 
 Features

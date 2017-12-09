@@ -14,7 +14,8 @@ def findFiles(path_to_watch, arg_files):
     return matches
 def HashFiles(path_to_watch, filenames_to_watch, excluded=[]):
     #print("PWCIW: Hashing Files...")
-    print("\rPWCIW: Hashing Files...",end="")
+    from datetime import datetime
+    print("\rPWCIW[{0}]: Hashing Files...".format(datetime.now().strftime("%H:%M:%S")),end="")
     watch_files = findFiles(path_to_watch, filenames_to_watch)
     watch_files = [item for item in watch_files if item not in excluded]
     hash_table = []
@@ -31,9 +32,10 @@ def watchFile(path_to_watch, filenames_to_watch, excluded={}, function=print):
         lastHash = HashFiles(path_to_watch, filenames_to_watch, excluded)
         print("\nPWCIW: Waiting for trigger")
         while lastHash == HashFiles(path_to_watch, filenames_to_watch, excluded):
-            from time import sleep
-            print("\rPWCIW: Waiting ........",end="")
-            sleep(0.05)
+            #from time import sleep
+            from datetime import datetime
+            print("\rPWCIW[{0}]: Waiting ........".format(datetime.now().strftime("%H:%M:%S")),end="")
+            #sleep(0.05)
             try:
                 with open("stop.watching.file.1234567890", "r") as f:
                     print("PWCIW: Locking File Exist")
