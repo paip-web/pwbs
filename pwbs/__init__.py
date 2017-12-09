@@ -1,5 +1,5 @@
 __title__ = 'pwbs'
-__version__ = '0.0.1-dev1'
+__version__ = '0.0.1-dev2'
 __author__ = 'Patryk Adamczyk'
 __license__ = 'MIT'
 __docformat__ = 'restructuredtext en'
