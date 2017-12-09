@@ -31,10 +31,10 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0.1-dev2',
+    version='0.0.1-dev3',
 
     description='PWBS is Build System for easy automation process.',
-    long_description="",
+    long_description=readme + '\n\n' + history,
 
     # The project's main homepage.
     url='https://gitlab.com/paip-web/pwbs',
@@ -109,7 +109,8 @@ setup(
     # for example:
     # $ pip install -e .[dev,test]
     extras_require={
-        'test': ['green','pytest','coverage'],
+        'setup': ["wheel", "twine"],
+        'test': ['green', 'pytest', 'coverage'],
     },
 
     # If there are data files included in your packages that need to be
