@@ -7,4 +7,4 @@ def test_pwbs():
     try:
         main()
     except SystemExit:
-        pass
+        assert True

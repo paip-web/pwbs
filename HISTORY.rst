@@ -1,6 +1,15 @@
-=======
 History
 =======
+
+0.0.1-dev4 (09.12.2017)
+------------------
+
+* Release 3 on PyPi
+* Adding Command Interpreter
+* Repairing setup.py Script
+* Added Tox as Test Runner for checking with which version pwbs is compatible
+* Added Command --help
+* Added Command --verbose <mode>
 
 0.0.1-dev3 (09.12.2017)
 ------------------

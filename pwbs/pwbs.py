@@ -12,9 +12,12 @@ import sys
 from os import path, getcwd
 ### From Module Imports
 from .pwm.pwm_system import SystemVersion
+from .command_interpreter import print_prefix
 ### Functions
+# TO_TEST: NOT TESTED YET
 def baner(version, verbose, args):
     """Baner PWBS"""
+    global print_prefix
     print("PAiP Web Build System v" + version)
     if verbose == 0:
         return 0
@@ -29,10 +32,10 @@ def baner(version, verbose, args):
             v.system_version,
             v.machine
         ))
-        print("PWBS: Starting...")
+        print(print_prefix+"Starting...")
     elif verbose == 2:
         v = SystemVersion()
-        print("PWBS: Showing system information")
+        print(print_prefix+"Showing system information")
         print("-----------------------------------")
         print("Machine Spec")
         print("-----------------------------------")
@@ -48,10 +51,10 @@ def baner(version, verbose, args):
             v.machine
         ))
         print("-----------------------------------")
-        print("PWBS: Starting...")
+        print(print_prefix+"Starting...")
     elif verbose == 3:
         v = SystemVersion()
-        print("PWBS: Showing system information")
+        print(print_prefix+"Showing system information")
         print("-----------------------------------")
         print("Machine Spec")
         print("-----------------------------------")
@@ -75,7 +78,7 @@ def baner(version, verbose, args):
             str(args)
         ))
         print("-----------------------------------")
-        print("PWBS: Starting...")
+        print(print_prefix+"Starting...")
     elif verbose == 255:
         #TODO: Good Ideas Needed
         pass

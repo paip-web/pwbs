@@ -1,6 +1,3 @@
-==================
-PAiP Web Build System
-==================
 .. image:: https://badge.fury.io/py/pwbs.svg
     :target: https://badge.fury.io/py/pwbs
 .. image:: https://img.shields.io/pypi/l/pwbs.svg
@@ -12,7 +9,10 @@ PAiP Web Build System
 .. image:: https://img.shields.io/pypi/v/pwbs.svg
     :target: https://pypi.org/project/pwbs/
 
-Actual Version : v.0.0.1-dev3
+PAiP Web Build System
+==================
+
+Actual Version : v.0.0.1-dev4
 PWBS is Build System for easy automation process.
 
 

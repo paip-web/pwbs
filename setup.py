@@ -3,12 +3,13 @@
 
 """The setup script."""
 
-from setuptools import setup
+import io
+from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
+with io.open('README.rst', encoding='utf-8') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
+with io.open('HISTORY.rst', encoding='utf-8') as history_file:
     history = history_file.read()
 
 requirements = [
@@ -31,7 +32,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0.1-dev3',
+    version='0.0.1-dev4',
 
     description='PWBS is Build System for easy automation process.',
     long_description=readme + '\n\n' + history,
@@ -89,8 +90,9 @@ setup(
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    #packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-    packages=["pwbs"],
+    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    #packages=["pwbs"],
+    #packages=find_packages(exclude=['docs', 'tests*']),
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -135,5 +137,5 @@ setup(
         ],
     },
     # Python Required Version for the package
-    python_requires='~=3.6',
+    python_requires='~=3.5',
 )
