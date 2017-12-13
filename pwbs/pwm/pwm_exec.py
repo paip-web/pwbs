@@ -7,8 +7,9 @@ This module creates function to call command line commands.
 NAME - PAiP Web Module - Execute Commands
 AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
-VERSION - v.0.0.0.3
+VERSION - v.0.0.0.4
 """
+# TODO: MAKE MORE COMPLEX THAT SCRIPT [GENERATOR VERSION]
 def execute(command):
     """Function to execute command line commands
 
@@ -18,11 +19,11 @@ def execute(command):
     Returns:
         :obj:`str`: Returning Output of Command
     """
-    from subprocess import run
+    from subprocess import run, PIPE
     if isinstance(command, list):
         retval = ""
         for cmd in command:
-            retval += str(run(cmd, shell=True).stdout)
+            retval += str(run(cmd, shell=True, stdout=PIPE).stdout)
         return retval
     else:
-        return run(command, shell=True).stdout
+        return run(command, shell=True, stdout=PIPE).stdout

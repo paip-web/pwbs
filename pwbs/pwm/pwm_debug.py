@@ -36,8 +36,6 @@ Todo:
 from time import time
 # Getting Source and file of function
 from inspect import getsource, getfile
-# Getting ProgramBaseConfiguration Class
-from pwm_programbaseconfig import ProgramBaseConfiguration
 ### Functions
 
 def print_debug(name, *args, **kwargs):
@@ -108,39 +106,3 @@ def debug(
             return ret
         return f2
     return f1
-
-class ProgramConfiguration(ProgramBaseConfiguration):
-    """Program Conguration Class
-
-    Attributes:
-        args (object): Arguments provided through constructor
-        kwargs (object): Keyword Arguments provided through constructor
-        debug (function): Function which can be used as decorator but it doesn't need arguments by configuration which is in class
-        debug_verbose (object): Full Debug Mode Variable
-        debug_mode_a (object): Debug Mode Arguments
-        debug_mode_k (object): Debug Mode Keyword Arguments
-
-    """
-    def __init__(self, *args, **kwargs):
-        """Init Method
-
-        Constructor of class
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-        """
-        self.args, self.kwargs = args, kwargs
-        self.SetDebugMode(False)
-        self.debug = debug(self.debug_verbose, self.debug_mode_a, self.debug_mode_k)
-    def SetDebugMode(self, verbose_mode, *args, **kwargs):
-        """Method Setting Debug Mode
-
-        Function to change Debug Mode it also changes debug variable in class(which can be used as decorator) to use new debug mode
-        Args:
-            verbose_mode (bool): Full Debug Mode Variable. Here it doesn't have default because in constructor debug is default made to have Off Debug Mode
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-        """
-        self.debug_verbose = verbose_mode
-        self.debug_mode_a, self.debug_mode_k = args, kwargs
-        self.debug = debug(self.debug_verbose, self.debug_mode_a, self.debug_mode_k)
