@@ -13,21 +13,22 @@ from os import path, getcwd
 from collections import namedtuple
 from datetime import datetime
 ### From Module Imports
-from .__pwbs import print_pref, print_prefix, verboseSpecific
+from .__pwbs import print_pref, print_prefix, verboseSpecific, PWBSConfigManager
 from . import commands_special as special_commands_module
 ### Placeholders TODO:
 special_command = lambda x, y: 1
 command = lambda x, y: 1
-config = lambda x, y: 1
+config = PWBSConfigManager()
 plugin_command = lambda x, y: 1
 inner_plugin_command = lambda x, y: 1
 ### Functions
 # TO_TEST: NOT TESTED YET
 def special_task_interpreter(arg, verbose, argument_list, iterator):
     global print_prefix
+    global config
     special_tasks = {
         "--new-config" : lambda: 0, # Argument for creating new config
-        "--config" : lambda: 0, # Argument to specify which config you want to use
+        "--config" : special_commands_module.sc_config, # Argument to specify which config you want to use
         "--config-version" : lambda: 0, # Argument to specify which config version you want to use [Vars:1,2][Default: 2]
         # That Argument can be used only with existing config
         "--verbose" : special_commands_module.sc_verbose, # Argument to specify which verbose level you want [Vars: 0,1,2,3,255][Default:1]
@@ -51,6 +52,17 @@ def special_task_interpreter(arg, verbose, argument_list, iterator):
             except Exception:
                 print(print_prefix+"ERROR[2]: PWBS couldn't find parameter")
                 ret = r(return_code=2, err=arg)
+        elif arg == "--config":
+            try:
+                func_arg = [argument_list[iterator+1]]
+                ret = special_tasks[arg](*func_arg)
+                config.reload_JIOnf(ret.filepath, ret.filename)
+                verboseSpecific(verbose, ">=3", print, [print_prefix+"VERBOSE:\nFile Path: {0}\nFilename: {1}".format(ret.filepath, ret.filepath)])
+            except Exception as e:
+                print(print_prefix+"ERROR[2]: PWBS couldn't find parameter")
+                #verboseSpecific(verbose,">=3",print, [print_prefix+"ERROR: "+str(e)])
+                #verboseSpecific(verbose,">=3",print, [print_prefix+"ERROR: "+e])
+                ret = r(return_code=2, err=arg)
         else:
             ret = special_tasks[arg](*func_arg)
         '''PAST:
@@ -68,7 +80,12 @@ def special_task_interpreter(arg, verbose, argument_list, iterator):
 ### Main Command Interpreter
 # TO_TEST: NOT TESTED YET
 def command_interpreter(args, verbose):
+    global config
     skip = 0
+    _a = config.try_load()
+    if (_a == False) and (not("--config" in args)):
+        print(print_prefix + "ERROR[F1]: PWBS couldn't read default configuration file [pwbs.json] and couldn't find --config option.")
+        sys.exit(print_prefix + "ERROR[F1]: PWBS couldn't read default configuration file [pwbs.json] and couldn't find --config option.")
     for i, arg in enumerate(args):
         if skip > 0:
             skip -= 1

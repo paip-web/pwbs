@@ -9,6 +9,7 @@ LICENSE - MIT
 """
 ### Imports
 from collections import namedtuple
+from os import getcwd
 ### From Module Imports
 from .__pwbs import print_pref, print_prefix, verboseSpecific
 ### Functions
@@ -28,7 +29,7 @@ def sc_help():
         "       # Version \"1\": Used with older PWBS gitlab:/paipweb/paip-web-build-system",
         "       # Now good too but limited [good by simpler file]",
         "       # Version \"2\": [Default]Actual Version of Config",
-        "--verbose [level]                  # NOT_IMPLEMENTED:Option to specify which verbose level you want",
+        "--verbose [level]                  # Option to specify which verbose level you want",
         "       # Mode \"0\": No Verbose | Small Information about running",
         "       # Mode \"1\": [Default] Small Verbose | Some Information about what's going on",
         "       # Mode \"2\": Medium Verbose | Information about running and some about processes under the hood",
@@ -57,3 +58,11 @@ def sc_verbose(new_verbose):
     print(print_prefix+"Changing Verbose Mode")
     base = namedtuple("base", ["return_code", "err", "verbose_mode", "skip_args"])
     return base(return_code=0, err=0, verbose_mode=new_verbose, skip_args=1)
+
+def sc_config(newfilename):
+    global print_prefix
+    print(print_prefix+"Changing Config File to {0}".format(newfilename))
+    cwd = getcwd()
+    base = namedtuple("base", ["return_code", "err", "skip_args", "filepath", "filename"])
+    return base(return_code=0, err=0, filename=newfilename, filepath="{0}/{1}".format(cwd, newfilename), skip_args=1)
+    #return (newfilename, "{0}/{1}".format(cwd, newfilename)) # PAST: Deleted

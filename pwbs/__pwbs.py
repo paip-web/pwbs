@@ -10,6 +10,8 @@ LICENSE - MIT
 ### Imports
 from datetime import datetime
 import re
+from os import getcwd
+from .pwm.pwm_json import JSON_IO
 ### Functions and Variables
 print_prefix = "PWBS[{0}]: ".format(datetime.now().strftime("%H:%M:%S"))
 def print_pref():
@@ -24,3 +26,38 @@ def verboseSpecific(verbose, level, function, arg=[]):
 def regexString(string, regex):
     pattern = re.compile(regex)
     return pattern.match(string)
+
+class PWBSConfigManager:
+    def __init__(self):
+        cwd = getcwd()
+        self.filename = "pwbs.json"
+        self.filepath = "{0}/{1}".format(cwd, self.filename)
+        self.config_data = {}
+        self.JSONIO = JSON_IO(self.filepath)
+    def reload_JSONIO(self):
+        self.JSONIO = JSON_IO(self.filepath)
+    def reload_JIOnf(self, newfilepath, newfilename):
+        self.filename = newfilename
+        self.filepath = newfilepath
+        return self.reload_JSONIO()
+    def reload(self):
+        self.reload_JSONIO()
+        self.config_data = self.JSONIO.read()
+        return self.config_data
+    def update(self, newdata):
+        self.JSONIO.write(newdata)
+        self.config_data = self.JSONIO.read()
+        return self.config_data
+    def try_load(self):
+        try:
+            self.reload()
+            return True
+        except Exception:
+            print(print_prefix+"ERROR[F0]: PWBS couldn't read default configuration file [pwbs.json].")
+            return False
+    def init_config(self):
+        data = {
+            "commands" : {
+            }
+        }
+        return self.update(data)
