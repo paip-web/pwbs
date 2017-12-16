@@ -23,8 +23,8 @@ def sc_help():
         "Usage:",
         "pwbs [options] [task]",
         "Options:",
-        "--new-config                       # NOT_IMPLEMENTED:Option to make new config file [pwbs.json]",
-        "--config [file]                    # NOT_IMPLEMENTED:Option to specify which existing config you want to use",
+        "--new-config                       # Option to make new config file [pwbs.json]",
+        "--config [file]                    # Option to specify which existing config you want to use",
         "--config-version [version]         # NOT_IMPLEMENTED:Option to specify which version of config you want to use",
         "       # Version \"1\": Used with older PWBS gitlab:/paipweb/paip-web-build-system",
         "       # Now good too but limited [good by simpler file]",
@@ -37,6 +37,7 @@ def sc_help():
         "       # NOT_IMPLEMENTED:FUTURE:Mode \"255\": Extreme Verbose Mode | Information about everything",
         "--help                             # Option to see this message",
         "--commands-list                    # NOT_IMPLEMENTED:Option to see list of commands in actual config",
+        "--deamonize                        # NOT_IMPLEMENTED:Option to make deamon in linux or service in windows working from start of system",
         "",
         "Features:",
         "* NOT_IMPLEMENTED:Single Tasking",
@@ -66,3 +67,10 @@ def sc_config(newfilename):
     base = namedtuple("base", ["return_code", "err", "skip_args", "filepath", "filename"])
     return base(return_code=0, err=0, filename=newfilename, filepath="{0}/{1}".format(cwd, newfilename), skip_args=1)
     #return (newfilename, "{0}/{1}".format(cwd, newfilename)) # PAST: Deleted
+
+def sc_newconfig(configManager):
+    global print_prefix
+    print(print_prefix+"Initializing Config File")
+    newconfig = configManager
+    newconfig.init_config()
+    return newconfig

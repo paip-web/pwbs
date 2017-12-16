@@ -27,7 +27,7 @@ def special_task_interpreter(arg, verbose, argument_list, iterator):
     global print_prefix
     global config
     special_tasks = {
-        "--new-config" : lambda: 0, # Argument for creating new config
+        "--new-config" : special_commands_module.sc_newconfig, # Argument for creating new config
         "--config" : special_commands_module.sc_config, # Argument to specify which config you want to use
         "--config-version" : lambda: 0, # Argument to specify which config version you want to use [Vars:1,2][Default: 2]
         # That Argument can be used only with existing config
@@ -63,6 +63,9 @@ def special_task_interpreter(arg, verbose, argument_list, iterator):
                 #verboseSpecific(verbose,">=3",print, [print_prefix+"ERROR: "+str(e)])
                 #verboseSpecific(verbose,">=3",print, [print_prefix+"ERROR: "+e])
                 ret = r(return_code=2, err=arg)
+        elif arg == "--new-config":
+            config = special_tasks[arg](config)
+            ret = r(return_code=0, err=0)
         else:
             ret = special_tasks[arg](*func_arg)
         '''PAST:

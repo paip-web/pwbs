@@ -1,10 +1,12 @@
 History
 =======
 
-0.1.0-dev2 (13.12.2017)
+0.1.0-dev2 (13.12.2017-16.12.2017)
 -----------------------
 
 * Release 5 on PyPi
+* Added --new-config option as Working
+* Added --config <file> option as Working
 
 0.1.0-dev1 (12.12.2017-13.12.2017)
 ----------------------------------
