@@ -1,6 +1,12 @@
 History
 =======
 
+0.2.0-dev2 (16.12.2017)
+-----------------------
+
+* Release 7 on PyPi
+* Repaired RST Errors
+
 0.2.0-dev1 (16.12.2017)
 -----------------------
 
@@ -8,7 +14,7 @@ History
 * Added Signle Tasking
 
 0.1.0-dev2 (13.12.2017-16.12.2017)
------------------------
+----------------------------------
 
 * Release 5 on PyPi
 * Added --new-config option as Working
