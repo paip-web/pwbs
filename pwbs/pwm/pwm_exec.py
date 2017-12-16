@@ -27,3 +27,20 @@ def execute(command):
         return retval
     else:
         return run(command, shell=True, stdout=PIPE).stdout
+
+
+def execute_generator(command):
+    """Function to execute command line commands in generator style
+
+    Args:
+        command (object): Command
+
+    Yields:
+        :obj:`str`: Returning Output of Command
+    """
+    from subprocess import run, PIPE
+    if isinstance(command, list):
+        for cmd in command:
+            yield run(cmd, shell=True, stdout=PIPE).stdout
+    else:
+        yield run(command, shell=True, stdout=PIPE).stdout

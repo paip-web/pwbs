@@ -40,7 +40,7 @@ def sc_help():
         "--deamonize                        # NOT_IMPLEMENTED:Option to make deamon in linux or service in windows working from start of system",
         "",
         "Features:",
-        "* NOT_IMPLEMENTED:Single Tasking",
+        "* Single Tasking",
         "* NOT_IMPLEMENTED:Multi Tasking",
         "* NOT_IMPLEMENTED:Multi Command",
         "* NOT_IMPLEMENTED:Watcher",
@@ -49,6 +49,7 @@ def sc_help():
         "* NOT_IMPLEMENTED:PWBS Python Plugins",
         "* NOT_IMPLEMENTED:PWBS JSON Plugins",
         "* NOT_IMPLEMENTED:Support Legacy for Old PWBS",
+        "* NOT_IMPLEMENTED:Support Commented Tasks",
         ""
         , sep='\n')
     base = namedtuple("base", ["return_code", "err"])

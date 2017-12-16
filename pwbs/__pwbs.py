@@ -61,3 +61,6 @@ class PWBSConfigManager:
             }
         }
         return self.update(data)
+    def get_commands(self):
+        self.reload()
+        return self.config_data["commands"]

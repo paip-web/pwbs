@@ -11,10 +11,10 @@ LICENSE - MIT
 import sys
 from os import path, getcwd
 from collections import namedtuple
-from datetime import datetime
 ### From Module Imports
 from .__pwbs import print_pref, print_prefix, verboseSpecific, PWBSConfigManager
 from . import commands_special as special_commands_module
+from . import task_interpreter as task_module
 ### Placeholders TODO:
 special_command = lambda x, y: 1
 command = lambda x, y: 1
@@ -22,6 +22,7 @@ config = PWBSConfigManager()
 plugin_command = lambda x, y: 1
 inner_plugin_command = lambda x, y: 1
 ### Functions
+### Special Tasks Interpreter
 # TO_TEST: NOT TESTED YET
 def special_task_interpreter(arg, verbose, argument_list, iterator):
     global print_prefix
@@ -80,6 +81,35 @@ def special_task_interpreter(arg, verbose, argument_list, iterator):
         ret = r(return_code=1, err=arg)
     return ret
 
+### Tasks Interpreter
+# TO_TEST: NOT TESTED YET
+def normal_task_interpreter(arg, verbose, argument_list, iterator):
+    global print_prefix
+    global config
+    try:
+        commands = config.get_commands()
+    except Exception:
+        print(print_prefix + "ERROR[3]: PWBS couldn't find commands")
+        sys.exit(print_prefix + "ERROR[3]: PWBS couldn't find commands")
+    ret = None
+    r = namedtuple("r", [
+        "return_code",
+        "err"
+    ])
+    verboseSpecific(verbose, ">=3", print, [print_prefix+"Commands: {0}".format(str(commands))])
+    if arg in commands.keys():
+        verboseSpecific(verbose, ">0", print, [print_prefix+"Running {0} Task...".format(arg)])
+        singletask = task_module.singletask_interpreter(arg, verbose, commands)
+        if  singletask == 0:
+            pass
+            ret = r(return_code=0, err=0)
+        else: #FAIL
+            ret = r(return_code=2, err=0)
+        verboseSpecific(verbose, ">0", print, [print_prefix+"Finished {0} Task...".format(arg)])
+    else:
+        ret = r(return_code=1, err=arg)
+    return ret
+
 ### Main Command Interpreter
 # TO_TEST: NOT TESTED YET
 def command_interpreter(args, verbose):
@@ -94,7 +124,7 @@ def command_interpreter(args, verbose):
             skip -= 1
             continue
         sti = special_task_interpreter(arg, verbose, args, i)
-        cti = command(arg, verbose)
+        cti = normal_task_interpreter(arg, verbose, args, i)
         ipgi = inner_plugin_command(arg, verbose)
         pci = plugin_command(arg, verbose)
         verboseSpecific(verbose, ">=3", print, ["{0}Command Interpreter:\n{0}Skip Value: {1}\n{0}Special Task Interpreter Return: {2}\n{0}Command Task Interpreter Return: {3}\n{0}Inner Plugin Command Interpreter: {4}\n{0}Plugin Command Interpreter: {5}\n{0}Verbose Level: {6}".format(
@@ -118,9 +148,9 @@ def command_interpreter(args, verbose):
             continue
         elif sti.return_code == 2: #ERROR BRANCH
             continue
-        elif cti == 0: #SUCCESS BRANCH
+        elif cti.return_code == 0: #SUCCESS BRANCH
             continue
-        elif cti == 2: #ERROR BRANCH
+        elif cti.return_code == 2: #ERROR BRANCH
             continue
         elif ipgi == 0: #SUCCESS BRANCH
             continue
