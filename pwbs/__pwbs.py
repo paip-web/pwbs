@@ -12,6 +12,7 @@ from datetime import datetime
 import re
 from os import getcwd
 from .pwm.pwm_json import JSON_IO
+from .pwm.pwm_system import SystemVersion
 ### Functions and Variables
 print_prefix = "PWBS[{0}]: ".format(datetime.now().strftime("%H:%M:%S"))
 def print_pref():
@@ -31,7 +32,11 @@ class PWBSConfigManager:
     def __init__(self):
         cwd = getcwd()
         self.filename = "pwbs.json"
-        self.filepath = "{0}/{1}".format(cwd, self.filename)
+        if SystemVersion().system_system == "Windows":
+            path_to_file = cwd+"\\"+self.filename
+        else:
+            path_to_file = cwd+"/"+self.filename
+        self.filepath = path_to_file
         self.config_data = {}
         self.JSONIO = JSON_IO(self.filepath)
     def reload_JSONIO(self):

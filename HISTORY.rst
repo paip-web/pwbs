@@ -1,6 +1,14 @@
 History
 =======
 
+0.2.0-dev3 (20.12.2017)
+-----------------------
+
+* Repaired Code Errors (Showing when using OS other then Windows)
+* Repaired 4 Tests Failed on Linux
+* Repaired pwbs.pwm.pwm_json (Wrong Default | Now Default is dict not list)
+
+
 0.2.0-dev2 (16.12.2017)
 -----------------------
 
@@ -11,7 +19,7 @@ History
 -----------------------
 
 * Release 6 on PyPi
-* Added Signle Tasking
+* Added Single Tasking
 
 0.1.0-dev2 (13.12.2017-16.12.2017)
 ----------------------------------

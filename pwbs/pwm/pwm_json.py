@@ -22,7 +22,7 @@ def read_json(filename):
     Returns:
         :obj:`str`: Returning Data from JSON file
     """
-    dane = []
+    dane = {}
     if os.path.isfile(filename):
         with open(filename, "r") as plik:
             dane = json.load(plik)
