@@ -32,7 +32,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.2.0-dev3',
+    version='0.3.0-dev1',
 
     description='PWBS is Build System for easy automation process.',
     long_description=readme + '\n\n' + history,

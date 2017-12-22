@@ -10,7 +10,7 @@ LICENSE - MIT
 ### Underscore Variables
 __name__ = 'pwbs'
 __title__ = 'pwbs'
-__version__ = '0.2.0-dev3'
+__version__ = '0.3.0-dev1'
 __author__ = 'Patryk Adamczyk'
 __license__ = 'MIT'
 __docformat__ = 'restructuredtext en'

@@ -88,8 +88,9 @@ def normal_task_interpreter(arg, verbose, argument_list, iterator):
     global config
     try:
         commands = config.get_commands()
-    except Exception:
+    except Exception as e:
         print(print_prefix + "ERROR[3]: PWBS couldn't find commands")
+        #verboseSpecific(verbose,">=3", print, [print_prefix + "ERROR[3]:", str(repr(e))])
         sys.exit(print_prefix + "ERROR[3]: PWBS couldn't find commands")
     ret = None
     r = namedtuple("r", [
@@ -100,10 +101,14 @@ def normal_task_interpreter(arg, verbose, argument_list, iterator):
     if arg in commands.keys():
         verboseSpecific(verbose, ">0", print, [print_prefix+"Running {0} Task...".format(arg)])
         singletask = task_module.singletask_interpreter(arg, verbose, commands)
-        if  singletask == 0:
-            pass
+        multitask = task_module.multitask_interpreter(arg, verbose, commands)
+        if singletask == 0:
             ret = r(return_code=0, err=0)
-        else: #FAIL
+        elif singletask == 2: #FAIL
+            ret = r(return_code=2, err=0)
+        elif multitask == 0:
+            ret = r(return_code=0, err=0)
+        elif multitask == 2: #FAIL
             ret = r(return_code=2, err=0)
         verboseSpecific(verbose, ">0", print, [print_prefix+"Finished {0} Task...".format(arg)])
     else:

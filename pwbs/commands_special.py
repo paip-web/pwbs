@@ -41,7 +41,7 @@ def sc_help():
         "",
         "Features:",
         "* Single Tasking",
-        "* NOT_IMPLEMENTED:Multi Tasking",
+        "* Multi Tasking",
         "* NOT_IMPLEMENTED:Multi Command",
         "* NOT_IMPLEMENTED:Watcher",
         "* NOT_IMPLEMENTED:Scheduler",
