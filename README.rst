@@ -13,6 +13,7 @@ PAiP Web Build System
 =====================
 
 Actual Version : v.0.3.0-dev1
+By Project Rewrite and Rethink Dev 2.0 use pwbs==0.3.0.dev1 for any purpose. Actual version use only when you want to help developers.
 
 PWBS is Build System for easy automation process.
 
