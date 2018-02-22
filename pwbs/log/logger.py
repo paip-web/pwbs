@@ -1,0 +1,128 @@
+# -*- coding: utf-8 -*-
+"""PAiP Web Build System - Logger
+
+NAME - PAiP Web Build System
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
+LICENSE - MIT
+
+"""
+# Imports
+from __future__ import print_function
+from ..core import prefix_text
+
+# Class Definition
+
+
+class LoggerAssertionError(AssertionError):
+    """Error to show when Logger.log_assertion failed assertion."""
+    pass
+
+
+class BaseLogger(object):
+    """Base Logger Class"""
+    def __init__(self):
+        self.debug()
+        self.verbose()
+
+    def debug(self, state=False):
+        if state:
+            print(prefix_text("Debug Mode turned on!"))
+        self.debug_state = state
+
+    def verbose(self, state=1):
+        print(prefix_text("Verbose Mode is now set to: {0}".format(state)))
+        self.verbose_state = state
+
+    def log(self, text):
+        return print(prefix_text(text))
+
+    def log_verbose(self, text, verbose=1):
+        if self.verbose_state >= verbose:
+            return self.log(text)
+        return self.log_debug(
+            "Verbose Logger doesn't succeed to log by set verbose level."
+        )
+
+    def log_debug(self, text):
+        if self.debug_state:
+            return self.log("[DEBUG]: {0}".format(text))
+        return None
+
+    def log_assertion(self, assertion):
+        try:
+            assert assertion
+        except AssertionError as e:
+            raise LoggerAssertionError('Assertion failed!') from e
+
+
+class LogLogger(BaseLogger):
+    def __init__(self):
+        self.story = []
+        super().__init__()
+
+    def debug(self, state=False):
+        if state:
+            self.story.append(prefix_text("Debug Mode turned on!"))
+        self.debug_state = state
+
+    def verbose(self, state=1):
+        self.story.append(
+            prefix_text("Verbose Mode is now set to: {0}".format(state))
+        )
+        self.verbose_state = state
+
+    def log(self, text):
+        return self.story.append(prefix_text(text))
+
+    def log_verbose(self, text, verbose=1):
+        if self.verbose_state >= verbose:
+            return self.log(text)
+        return self.log_debug(
+            "Verbose Logger doesn't succeed to log by set verbose level."
+        )
+
+    def log_debug(self, text):
+        if self.debug_state:
+            return self.log("[DEBUG]: {0}".format(text))
+        return None
+
+    def log_assertion(self, assertion):
+        try:
+            assert assertion
+        except AssertionError as e:
+            self.story.append(prefix_text("Assertion failed!"))
+            raise LoggerAssertionError('Assertion failed!') from e
+
+    def log_file_write(self, file="pwbs.log"):
+        with open(file, mode="w") as f:
+            f.writelines([x+"\n" for x in self.story])
+
+
+class Logger(BaseLogger):
+    def __init__(self):
+        self.log_logger = LogLogger()
+        super().__init__()
+
+    def debug(self, state=False):
+        self.log_logger.debug(state)
+        return super().debug(state)
+
+    def verbose(self, state=1):
+        self.log_logger.verbose(state)
+        return super().verbose(state)
+
+    def log(self, text):
+        self.log_logger.log(text)
+        return super().log(text)
+
+    def log_verbose(self, text, verbose=1):
+        self.log_logger.log_verbose(text, verbose)
+        return super().log_verbose(text, verbose)
+
+    def log_debug(self, text):
+        self.log_logger.log_debug(text)
+        return super().log_debug(text)
+
+    def log_assertion(self, assertion):
+        self.log_logger.log_assertion(assertion)
+        return super().log_assertion(assertion)

@@ -1,52 +1,56 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """The setup script."""
 
+# Imports
 import io
 from setuptools import setup, find_packages
 
+# Readme file
 with io.open('README.rst', encoding='utf-8') as readme_file:
     readme = readme_file.read()
-
+# ChangeLog file
 with io.open('HISTORY.rst', encoding='utf-8') as history_file:
     history = history_file.read()
-
-requirements = [
+# Requirements Variable
+requirements: list = [
     # Package Requirements
 ]
-
-setup_requirements = [
+# Setup Requirements Variable
+setup_requirements: list = [
     # Setup Requirements
 ]
-
-test_requirements = [
+# Test Requirements Variable
+test_requirements: list = [
     # Test Requirements
     'green',
     'pytest',
     'coverage'
 ]
 setup(
+    # Name of Package
     name='pwbs',
 
-    # Versions should comply with PEP440.  For a discussion on single-sourcing
-    # the version across setup.py and the project code, see
-    # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.3.0-dev1',
+    # Version following SemVer Style
+    version='0.4.0-dev0',
 
+    # Description of the Package
     description='PWBS is Build System for easy automation process.',
+
+    # Description of the Package to show on PyPi (Longer Description)
     long_description=readme + '\n\n' + history,
 
-    # The project's main homepage.
+    # The Project Mainpage [For that project for now is just repository]
     url='https://gitlab.com/paip-web/pwbs',
 
-    # Author details
+    # Author Details
     author='Patryk Adamczyk',
     author_email='patrykadamczyk@paipweb.com',
 
-    # Choose your license
+    # License
     license='MIT',
 
+    # Classifiers of the Project
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         # How mature is this project? Common values are
@@ -63,6 +67,7 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
         'Intended Audience :: System Administrators',
+
         # Topic
         'Topic :: Software Development',
         'Topic :: Software Development :: Build Tools',
@@ -85,7 +90,7 @@ setup(
         'Environment :: Console'
     ],
 
-    # What does your project relate to?
+    # Keywords of your Project
     keywords='development build tools task runner',
 
     # You can just specify the packages manually here if your project is
@@ -98,10 +103,7 @@ setup(
     # this:
     #   py_modules=["my_module"],
 
-    # List run-time dependencies here.  These will be installed by pip when
-    # your project is installed. For an analysis of "install_requires" vs pip's
-    # requirements files see:
-    # https://packaging.python.org/en/latest/requirements.html
+    # Dependencies of the Project
     install_requires=requirements,
     tests_require=test_requirements,
     setup_requires=setup_requirements,
