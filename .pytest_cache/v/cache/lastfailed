@@ -2,5 +2,6 @@
   "OLDpwbs/pwm/tests/test_pwm.py": true,
   "OLDpwbs/tests/test_placeholder_pwbs.py": true,
   "OLDpwbs/tests/test_pwbs.py": true,
-  "OLDpwbs/tests/test_python.py": true
+  "OLDpwbs/tests/test_python.py": true,
+  "pwbs/lib/pwm/tests/test_pwm.py": true
 }
