@@ -18,6 +18,7 @@ class LoggerAssertionError(AssertionError):
     pass
 
 
+# TO_TEST:
 class BaseLogger(object):
     """Base Logger Class"""
     def __init__(self):
@@ -63,6 +64,7 @@ class BaseLogger(object):
             raise LoggerAssertionError('Assertion failed!') from e
 
 
+# TO_TEST:
 class LogLogger(BaseLogger):
     def __init__(self):
         self.story = []
@@ -107,7 +109,9 @@ class LogLogger(BaseLogger):
                 self.story.append(prefix_text("Assertion failed!"))
             else:
                 self.log_debug('Assertion "{0}" failed!'.format(name))
-                self.story.append(prefix_text('Assertion "{0}" failed!'.format(name)))
+                self.story.append(
+                    prefix_text('Assertion "{0}" failed!'.format(name))
+                )
             raise LoggerAssertionError('Assertion failed!') from e
 
     def log_file_write(self, file="pwbs.log"):
@@ -115,6 +119,7 @@ class LogLogger(BaseLogger):
             f.writelines([x+"\n" for x in self.story])
 
 
+# TO_TEST:
 class Logger(BaseLogger):
     def __init__(self):
         self.log_logger = LogLogger()
