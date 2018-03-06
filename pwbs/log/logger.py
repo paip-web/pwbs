@@ -48,10 +48,18 @@ class BaseLogger(object):
             return self.log("[DEBUG]: {0}".format(text))
         return None
 
-    def log_assertion(self, assertion):
+    def log_assertion(self, assertion, name=None):
         try:
             assert assertion
+            if name is None:
+                self.log_debug("Assertion succeed!")
+            else:
+                self.log_debug('Assertion "{0}" succeed!'.format(name))
         except AssertionError as e:
+            if name is None:
+                self.log_debug("Assertion failed!")
+            else:
+                self.log_debug('Assertion "{0}" failed!'.format(name))
             raise LoggerAssertionError('Assertion failed!') from e
 
 
@@ -86,11 +94,20 @@ class LogLogger(BaseLogger):
             return self.log("[DEBUG]: {0}".format(text))
         return None
 
-    def log_assertion(self, assertion):
+    def log_assertion(self, assertion, name=None):
         try:
             assert assertion
+            if name is None:
+                self.log_debug("Assertion succeed!")
+            else:
+                self.log_debug('Assertion "{0}" succeed!'.format(name))
         except AssertionError as e:
-            self.story.append(prefix_text("Assertion failed!"))
+            if name is None:
+                self.log_debug("Assertion failed!")
+                self.story.append(prefix_text("Assertion failed!"))
+            else:
+                self.log_debug('Assertion "{0}" failed!'.format(name))
+                self.story.append(prefix_text('Assertion "{0}" failed!'.format(name)))
             raise LoggerAssertionError('Assertion failed!') from e
 
     def log_file_write(self, file="pwbs.log"):
@@ -123,6 +140,6 @@ class Logger(BaseLogger):
         self.log_logger.log_debug(text)
         return super().log_debug(text)
 
-    def log_assertion(self, assertion):
-        self.log_logger.log_assertion(assertion)
-        return super().log_assertion(assertion)
+    def log_assertion(self, assertion, name=None):
+        self.log_logger.log_assertion(assertion, name)
+        return super().log_assertion(assertion, name)
