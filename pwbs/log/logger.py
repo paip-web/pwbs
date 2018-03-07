@@ -31,11 +31,14 @@ class BaseLogger(object):
         self.debug_state = state
 
     def verbose(self, state=1):
-        print(prefix_text("Verbose Mode is now set to: {0}".format(state)))
         self.verbose_state = state
+        self.log_verbose("Verbose Mode is now set to: {0}".format(state), 2)
 
-    def log(self, text):
-        return print(prefix_text(text))
+    def log(self, text, prefix=prefix_text):
+        return print(prefix(text))
+
+    def log_wop(self, text):
+        return print(text)
 
     def log_verbose(self, text, verbose=1):
         if self.verbose_state >= verbose:
@@ -81,8 +84,11 @@ class LogLogger(BaseLogger):
         )
         self.verbose_state = state
 
-    def log(self, text):
-        return self.story.append(prefix_text(text))
+    def log(self, text, prefix=prefix_text):
+        return self.story.append(prefix(text))
+
+    def log_wop(self, text):
+        return self.story.append(text)
 
     def log_verbose(self, text, verbose=1):
         if self.verbose_state >= verbose:
@@ -133,9 +139,13 @@ class Logger(BaseLogger):
         self.log_logger.verbose(state)
         return super().verbose(state)
 
-    def log(self, text):
-        self.log_logger.log(text)
-        return super().log(text)
+    def log(self, text, prefix=prefix_text):
+        self.log_logger.log(text, prefix)
+        return super().log(text, prefix)
+
+    def log_wop(self, text):
+        self.log_logger.log_wop(text)
+        return super().log_wop(text)
 
     def log_verbose(self, text, verbose=1):
         self.log_logger.log_verbose(text, verbose)
