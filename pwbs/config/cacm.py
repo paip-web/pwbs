@@ -16,23 +16,37 @@ from ..command.command import CommandType, CommandMode, Platform
 
 class ConfigurationManager(object):
     """Configuration Manager Class"""
+    # TODO: Placeholder
     pass
 
 
 class CommandManager(object):
     """Commands Manager Class"""
     def __init__(self, commands, verbose=1, debug=False):
+        """Constructor of the Class
+        Args:
+            commands: Commands readed from PWBS Commands File
+            verbose (int): Verbose Level
+                Defaults to Verbose Level 1.
+            debug (bool): Debug Mode
+                Defaults to False [Disabled Debug Mode].
+        """
+        # Special Variables
         self.special_vars = [verbose, debug]
+        # Commands
         self.commands = commands
+        # Time to understand commands
         self.understand()
 
     def understand(self):
+        # TODO: Not good implemented
         result = []
         for cmd_name, cmd in self.commands.items():
             result.append(self.understand_object(cmd_name, cmd))
         self.cmds = CommandList(result)
 
     def understand_object(self, name, command):
+        # TODO: Not good implemented
         if isinstance(command, str):
             # Single Task
             result = Command(
@@ -127,4 +141,5 @@ class CommandManager(object):
         return result
 
     def run_task(self, name):
+        """Task Runner"""
         return CommandList[name].run()

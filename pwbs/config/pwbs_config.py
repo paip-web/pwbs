@@ -15,5 +15,8 @@ from ..log.logger import Logger
 
 class PWBS_Config(object):
     """PWBS Config Class"""
+    # TODO: Placeholder
     def __init__(self):
+        """Constructor of the Class"""
+        """Logger"""
         self.log = Logger()
