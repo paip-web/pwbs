@@ -164,9 +164,7 @@ class LogLogger(BaseLogger):
         # Change State Class Variable
         self.verbose_state = state
         # Log that verbose level changed
-        self.story.append(
-            prefix_text("Verbose Mode is now set to: {0}".format(state))
-        )
+        self.log_verbose("Verbose Mode is now set to: {0}".format(state), 2)
 
     def log(self, text, prefix=prefix_text):
         """Log Function
@@ -228,12 +226,8 @@ class LogLogger(BaseLogger):
             # Assertion failed then log bad info
             if name is None:
                 self.log_debug("Assertion failed!")
-                self.story.append(prefix_text("Assertion failed!"))
             else:
                 self.log_debug('Assertion "{0}" failed!'.format(name))
-                self.story.append(
-                    prefix_text('Assertion "{0}" failed!'.format(name))
-                )
             # ReRaise AsserionError
             raise LoggerAssertionError('Assertion failed!') from e
 
@@ -247,13 +241,15 @@ class LogLogger(BaseLogger):
 
 
 class Logger(BaseLogger):
-    """Base Logger Class
+    """Logger Class
     Logging to variable and to STDOUT.
     """
     def __init__(self):
         """Constructor of the Class"""
         """Variable Logger"""
         self.log_logger = LogLogger()
+        """Locker"""
+        self.locker_log_logger = False
         """Running Base Logger Constructor"""
         super().__init__()
 
@@ -280,7 +276,10 @@ class Logger(BaseLogger):
                         Debug Verbose Mode
         """
         self.log_logger.verbose(state)
-        return super().verbose(state)
+        self.locker_log_logger = True
+        ret = super().verbose(state)
+        self.locker_log_logger = False
+        return ret
 
     def log(self, text, prefix=prefix_text):
         """Log Function
@@ -289,7 +288,8 @@ class Logger(BaseLogger):
             prefix (function): Prefixer
                 Defaults to Default PWBS Prefixer.
         """
-        self.log_logger.log(text, prefix)
+        if not self.locker_log_logger:
+            self.log_logger.log(text, prefix)
         return super().log(text, prefix)
 
     def log_wop(self, text):
@@ -297,7 +297,8 @@ class Logger(BaseLogger):
         Args:
             text: Text to log
         """
-        self.log_logger.log_wop(text)
+        if not self.locker_log_logger:
+            self.log_logger.log_wop(text)
         return super().log_wop(text)
 
     def log_verbose(self, text, verbose=1):
@@ -307,16 +308,24 @@ class Logger(BaseLogger):
             verbose (int): Level to see that
                 Defaults to 1.
         """
-        self.log_logger.log_verbose(text, verbose)
-        return super().log_verbose(text, verbose)
+        if not self.locker_log_logger:
+            self.log_logger.log_verbose(text, verbose)
+        self.locker_log_logger = True
+        ret = super().log_verbose(text, verbose)
+        self.locker_log_logger = False
+        return ret
 
     def log_debug(self, text):
         """Log Debug Function
         Args:
             text: Text to log
         """
-        self.log_logger.log_debug(text)
-        return super().log_debug(text)
+        if not self.locker_log_logger:
+            self.log_logger.log_debug(text)
+        self.locker_log_logger = True
+        ret = super().log_debug(text)
+        self.locker_log_logger = False
+        return ret
 
     def log_assertion(self, assertion, name=None):
         """Log Assertion Function
@@ -325,7 +334,10 @@ class Logger(BaseLogger):
             name (optional): Name of the assertion
         """
         self.log_logger.log_assertion(assertion, name)
-        return super().log_assertion(assertion, name)
+        self.locker_log_logger = True
+        ret = super().log_assertion(assertion, name)
+        self.locker_log_logger = False
+        return ret
 
     def log_file_write(self, file="pwbs.log"):
         """Log File Writer
@@ -333,3 +345,6 @@ class Logger(BaseLogger):
             file (:obj:`str`): Filename to write log
         """
         return self.log_logger.log_file_write(file)
+
+    def story(self):
+        return self.log_logger.story

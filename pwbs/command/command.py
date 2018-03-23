@@ -272,10 +272,26 @@ class Command(object):
         # Changing Type and Mode to MultiTask
         self.type = CommandType.MultiTask
         self.mode = CommandMode.MultiTask_Standard
-        self.commands.append(other.commands)
-        self.platform = self.platform | other.platform
-        self.arguments += other.arguments
-        self.special += other.special
+        self.commands.append(*other.commands)
+        self.platform = Platform(self.platform.value | other.platform.value)
+        # Arguments
+        if self.arguments is None and other.arguments is None:
+            self.arguments = None
+        elif self.arguments is None and other.arguments is not None:
+            self.arguments = other.arguments
+        elif self.arguments is not None and other.arguments is None:
+            self.arguments = self.arguments
+        else:
+            self.arguments += other.arguments
+        # Special Arguments
+        if self.special is None and other.special is None:
+            self.special = None
+        elif self.special is None and other.special is not None:
+            self.special = other.special
+        elif self.special is not None and other.special is None:
+            self.special = self.special
+        else:
+            self.special += other.special
         # Returning result
         return self
 

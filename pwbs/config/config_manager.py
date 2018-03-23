@@ -19,10 +19,10 @@ class ConfigManager(object):
     """Config Manager Class
     This class is for Managing Config File.
     """
-    def __init__(self):
+    def __init__(self, filename="pwbs.json"):
         """Constructor of the class"""
         """Configuration File Name"""
-        self.config_filename = "pwbs.json"
+        self.config_filename = filename
         # Getting path of configuration file
         cwd = getcwd()
         if SystemVersion().system_system == "Windows":
@@ -34,21 +34,13 @@ class ConfigManager(object):
         """Configuration File Manager"""
         self.filemanager = JSON_IO(self.config_filename_path)
         # Preloading File
-        # DEV: Needed in Costructor by defining class variable
-        self.file_load()
         self.load()
-
-    def file_load(self):
-        """File Loader
-        Reading Text from Config File."""
-        self.config_text = self.filemanager.read()
-        return self.config_text
 
     def load(self):
         """Configuration Loader
         Reading JSON from Config File and Converting to Dict.
         """
-        self.config_dict = dict(self.file_load())
+        self.config_dict = dict(self.filemanager.read())
         return self.config_dict
 
     def write(self, newdata):
