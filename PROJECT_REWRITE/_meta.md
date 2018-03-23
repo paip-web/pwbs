@@ -20,3 +20,16 @@ platform specific task?
         "platform": "Windows"
     }
 }
+
+===============================
+
+# MultiTask:
+* Command Class change [Add commands:list constructor variable as list of tasks
+    and add function variable to Command.run() as CommandList Variable good only in that one case]
+# Special Task
+* add Special Command Mode
+
+
+* add argparser to the Command Class
+* add to core NotImplementedFeatureError
+* add start of frontend of program with NIFE Handler

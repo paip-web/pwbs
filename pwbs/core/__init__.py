@@ -30,3 +30,8 @@ def prefix_text(text=""):
         text (:obj:`str`): Text to prefix
     """
     return "PWBS[{0}]: {1}".format(datetime.now().strftime("%H:%M:%S"), text)
+
+
+class NotImplementedFeatureError(NotImplementedError):
+    """Error for Not Implemented Functionality"""
+    pass
