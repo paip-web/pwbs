@@ -6,12 +6,12 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 
 """
+# Imports
+
+from . import main
+
 # Underscore Variables
 
-"""Title of Program"""
-__title__ = 'pwbs'
-"""Version of Program"""
-__version__ = '0.4.0-dev0'
 """Author of the module"""
 __author__ = 'Patryk Adamczyk'
 """Module License"""
@@ -19,17 +19,5 @@ __license__ = 'MIT'
 """Documentation format"""
 __docformat__ = 'restructuredtext en'
 
-# Imports
-
-from .pwbs_class import PWBS
-
-# Running as pwbs command
-
-
-def main():
-    pwbs_class_var = PWBS()
-    pwbs_class_var.main()
-
-
-if __name__ == '__main__':
-    main()
+# Main Script
+main()

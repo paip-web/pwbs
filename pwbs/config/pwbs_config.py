@@ -46,7 +46,7 @@ class PWBS_ConfigManager(object):
 
     def commands_to_commandlist(self):
         commands = []
-        for name, body in self.config_file().items():
+        for name, body in self.config_file()["commands"].items():
             if isinstance(body, str):
                 # Single Task
                 commands.append(Command(
@@ -72,9 +72,9 @@ class PWBS_ConfigManager(object):
                 except KeyError:
                     cmdmode = CommandMode.ErrorTask_ErrorMode
                 try:
-                    commands = PWBS_ConfigManager.ctcl__commands(body)
+                    cmds = PWBS_ConfigManager.ctcl__commands(body)
                 except KeyError:
-                    commands = None
+                    cmds = None
                 try:
                     arguments = PWBS_ConfigManager.ctcl__arguments(body)
                 except KeyError:
@@ -86,7 +86,7 @@ class PWBS_ConfigManager(object):
                 commands.append(Command(
                     name,
                     cmdtype,
-                    commands,
+                    cmds,
                     comment,
                     cmdmode,
                     arguments,

@@ -295,6 +295,11 @@ class Command(object):
         # Returning result
         return self
 
+    def argument_parser(self):
+        return {
+            "help": self.comment,
+            "action": "store_false"}
+
 
 class CommandList(object):
     """Command List Class
@@ -335,3 +340,6 @@ class CommandList(object):
             if i == item or i.name == item:
                 return True
         return False
+
+    def items(self):
+        return self.values

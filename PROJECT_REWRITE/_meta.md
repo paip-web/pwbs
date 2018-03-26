@@ -33,3 +33,5 @@ platform specific task?
 * add argparser to the Command Class
 * add to core NotImplementedFeatureError
 * add start of frontend of program with NIFE Handler
+
+* add active logging var to Logger and make auto log to log file if active logging var is active
