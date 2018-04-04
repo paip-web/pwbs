@@ -9,7 +9,7 @@ LICENSE - MIT
 # Imports
 from __future__ import print_function
 from ..log.logger import Logger
-from .config_manager import ConfigManager
+from .config_manager import ConfigManager, PWBSInvalidConfigFile
 from ..command.command import Command, CommandList
 from ..command.command import CommandType, Platform, CommandMode
 
@@ -46,6 +46,14 @@ class PWBS_ConfigManager(object):
 
     def commands_to_commandlist(self):
         commands = []
+        """Testing for invalid Configuration File"""
+        try:
+            assert self.config_file()["commands"] is not None
+        except AssertionError as e:
+            raise PWBSInvalidConfigFile("Invalid Configuration File") from e
+        except KeyError as e:
+            raise PWBSInvalidConfigFile("Invalid Configuration File") from e
+        """Loop of creating Commands"""
         for name, body in self.config_file()["commands"].items():
             if isinstance(body, str):
                 # Single Task
@@ -56,6 +64,8 @@ class PWBS_ConfigManager(object):
                     mode=CommandMode.SingleTask_Standard))
             elif isinstance(body, list):
                 # TODO: Multi Task
+                # from ..core import NotImplementedFeatureError
+                # raise NotImplementedFeatureError("Not Implemented Feature Called")
                 pass
             else:
                 # Everything Else

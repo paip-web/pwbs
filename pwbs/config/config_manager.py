@@ -9,10 +9,21 @@ LICENSE - MIT
 # Imports
 from __future__ import print_function
 from os import getcwd
+from os.path import isfile
 from ..lib.pwm.pwm_json import JSON_IO
 from ..lib.pwm.pwm_system import SystemVersion
 
 # Class Definition
+
+
+class PWBSConfigFileDontExistError(AssertionError):
+    """Error for handling configuration file that don't exist"""
+    pass
+
+
+class PWBSInvalidConfigFile(KeyError):
+    """Error for handling invalid configuration file"""
+    pass
 
 
 class ConfigManager(object):
@@ -31,6 +42,16 @@ class ConfigManager(object):
         else:
             """Configuration File Path"""
             self.config_filename_path = cwd+"/"+self.config_filename
+        """Test for existence"""
+        self.error = None
+        try:
+            try:
+                assert isfile(self.config_filename_path)
+            except AssertionError as e:
+                raise PWBSConfigFileDontExistError(
+                    "PWBS Configuration File Doesn't Exist!") from e
+        except PWBSConfigFileDontExistError as e:
+            self.error = e
         """Configuration File Manager"""
         self.filemanager = JSON_IO(self.config_filename_path)
         # Preloading File
@@ -41,6 +62,15 @@ class ConfigManager(object):
         Reading JSON from Config File and Converting to Dict.
         """
         self.config_dict = dict(self.filemanager.read())
+        try:
+            try:
+                self.config_dict["commands"]
+            except KeyError as e:
+                raise PWBSInvalidConfigFile(
+                    "PWBS Configuration File is invalid!") from e
+        except PWBSInvalidConfigFile as e:
+            if self.error is None:
+                self.error = e
         return self.config_dict
 
     def write(self, newdata):

@@ -257,12 +257,14 @@ class Command(object):
     def execute_as_watcher(self):
         """Watcher Task Runner"""
         # TODO: To be written
-        pass
+        from .core import NotImplementedFeatureError
+        raise NotImplementedFeatureError("Not Implemented Feature Called")
 
     def execute_as_scheduler(self):
         """Scheduler Task Runner"""
         # TODO: To be written
-        pass
+        from .core import NotImplementedFeatureError
+        raise NotImplementedFeatureError("Not Implemented Feature Called")
 
     def __add__(self, other):
         """Addition Operator Overload Function"""
@@ -296,9 +298,7 @@ class Command(object):
         return self
 
     def argument_parser(self):
-        return {
-            "help": self.comment,
-            "action": "store_false"}
+        return self.comment
 
 
 class CommandList(object):

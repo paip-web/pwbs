@@ -24,6 +24,8 @@ class BaseLogger(object):
     """
     def __init__(self):
         """Constructor of the Class"""
+        """Story Log for Delayed Debug"""
+        self.debug_delayed_story = []
         # Initiator of Debug Mode
         self.debug()
         # Initiator of Verbose Mode
@@ -38,6 +40,10 @@ class BaseLogger(object):
         # Inform when Debug Mode is turned on
         if state:
             print(prefix_text("Debug Mode turned on!"))
+            print(prefix_text("[DEBUG]: Delayed Messages"))
+            for text in self.debug_delayed_story:
+                print(text)
+
         # Change State Class Variable
         self.debug_state = state
 
@@ -98,6 +104,9 @@ class BaseLogger(object):
         # Checking is Debug Mode Activated and logging
         if self.debug_state:
             return self.log("[DEBUG]: {0}".format(text))
+        else:
+            self.debug_delayed_story.append(
+                prefix_text("[DEBUG]: {0}".format(text)))
         return None
 
     def log_assertion(self, assertion, name=None):
@@ -133,6 +142,10 @@ class LogLogger(BaseLogger):
         """Constructor of the Class"""
         """Story Log Variable"""
         self.story = []
+        """Log File Variable"""
+        self.logfile = "pwbs.log"
+        """Active Logging"""
+        self.activelogging = False
         """Running Base Logger Constructor"""
         super().__init__()
 
@@ -145,8 +158,14 @@ class LogLogger(BaseLogger):
         # Inform when Debug Mode is turned on
         if state:
             self.story.append(prefix_text("Debug Mode turned on!"))
+            self.story.append(prefix_text("[DEBUG]: Delayed Messages"))
+            for item in self.debug_delayed_story:
+                self.story.append(item)
         # Change State Class Variable
         self.debug_state = state
+        # Active Logging
+        if self.activelogging:
+            self.log_file_write()
 
     def verbose(self, state=1):
         """Verbose Mode Changer
@@ -165,22 +184,37 @@ class LogLogger(BaseLogger):
         self.verbose_state = state
         # Log that verbose level changed
         self.log_verbose("Verbose Mode is now set to: {0}".format(state), 2)
+        # Active Logging
+        if self.activelogging:
+            self.log_file_write()
 
-    def log(self, text, prefix=prefix_text):
+    def log(self, text, prefix=prefix_text, story=None):
         """Log Function
         Args:
             text: Text to log
             prefix (function): Prefixer
                 Defaults to Default PWBS Prefixer.
+            story: Story to write to
+                Defaults to Default Story
         """
-        return self.story.append(prefix(text))
+        if story is None:
+            story = self.story
+        ret = story.append(prefix(text))
+        # Active Logging
+        if self.activelogging:
+            self.log_file_write()
+        return ret
 
     def log_wop(self, text):
         """Log Function Without Prefixer
         Args:
             text: Text to log
         """
-        return self.story.append(text)
+        ret = self.story.append(text)
+        # Active Logging
+        if self.activelogging:
+            self.log_file_write()
+        return ret
 
     def log_verbose(self, text, verbose=1):
         """Log Verbose Function
@@ -191,11 +225,15 @@ class LogLogger(BaseLogger):
         """
         # Checking is Verbose Level of message is good to log it
         if self.verbose_state >= verbose:
-            return self.log(text)
+            ret = self.log(text)
         # Logging Debug info about message cannot be logged.
-        return self.log_debug(
+        ret = self.log_debug(
             "Verbose Logger doesn't succeed to log by set verbose level."
         )
+        # Active Logging
+        if self.activelogging:
+            self.log_file_write()
+        return ret
 
     def log_debug(self, text):
         """Log Debug Function
@@ -204,8 +242,16 @@ class LogLogger(BaseLogger):
         """
         # Checking is Debug Mode Activated and logging
         if self.debug_state:
-            return self.log("[DEBUG]: {0}".format(text))
-        return None
+            ret = self.log("[DEBUG]: {0}".format(text))
+        else:
+            self.log(
+                "[DEBUG]: {0}".format(text),
+                story=self.debug_delayed_story)
+        ret = None
+        # Active Logging
+        if self.activelogging:
+            self.log_file_write()
+        return ret
 
     def log_assertion(self, assertion, name=None):
         """Log Assertion Function
@@ -222,20 +268,29 @@ class LogLogger(BaseLogger):
                 self.log_debug("Assertion succeed!")
             else:
                 self.log_debug('Assertion "{0}" succeed!'.format(name))
+            # Active Logging
+            if self.activelogging:
+                self.log_file_write()
         except AssertionError as e:
             # Assertion failed then log bad info
             if name is None:
                 self.log_debug("Assertion failed!")
             else:
                 self.log_debug('Assertion "{0}" failed!'.format(name))
+            # Active Logging
+            if self.activelogging:
+                self.log_file_write()
             # ReRaise AsserionError
             raise LoggerAssertionError('Assertion failed!') from e
 
-    def log_file_write(self, file="pwbs.log"):
+    def log_file_write(self, file=None):
         """Log File Writer
         Args:
             file (:obj:`str`): Filename to write log
         """
+        #print(self.story)
+        if file is None:
+            file = self.logfile
         with open(file, mode="w") as f:
             f.writelines([x+"\n" for x in self.story])
 
@@ -339,7 +394,7 @@ class Logger(BaseLogger):
         self.locker_log_logger = False
         return ret
 
-    def log_file_write(self, file="pwbs.log"):
+    def log_file_write(self, file=None):
         """Log File Writer
         Args:
             file (:obj:`str`): Filename to write log

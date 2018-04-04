@@ -35,3 +35,7 @@ platform specific task?
 * add start of frontend of program with NIFE Handler
 
 * add active logging var to Logger and make auto log to log file if active logging var is active
+
+* add debug information to make debugging the easiest thing as it can be
+
+* debug if firsttime then log from array of debug messages delayed

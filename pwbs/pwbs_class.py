@@ -10,10 +10,13 @@ LICENSE - MIT
 """
 # Imports
 import argparse as ap
-from os import path
 from . import __version__ as pwbs_version
+from .config.config_manager import PWBSConfigFileDontExistError
+from .config.config_manager import PWBSInvalidConfigFile
+from .config.config_manager import ConfigManager
 from .config.pwbs_config import PWBS_ConfigManager as PWBS_CM
-from .lib.pwm.pwm_system import SystemVersion
+from .core import NotImplementedFeatureError
+# from .lib.pwm.pwm_system import SystemVersion #TODO: DEV:
 
 # Underscore Variables
 
@@ -41,6 +44,23 @@ class PWBS(object):
         self.parser_initializer()
         """PWBS Config Manager"""
         self.pwbscm = PWBS_CM()
+        """Try for errors"""
+        if isinstance(
+                self.pwbscm.configmanager.error,
+                PWBSConfigFileDontExistError):
+            print(
+                "Warning: Configuration File Doesn't Exist!")
+            self.pwbscm.log.log_debug(
+                "CALLER: pwbs.pwbs_class.PWBS.__init__()")
+            self.pwbscm.log.log_debug(repr(self.pwbscm.configmanager.error))
+        elif isinstance(
+                self.pwbscm.configmanager.error,
+                PWBSInvalidConfigFile):
+            print(
+                "Warning: Configuration File is Invalid")
+            self.pwbscm.log.log_debug(
+                "CALLER: pwbs.pwbs_class.PWBS.__init__()")
+            self.pwbscm.log.log_debug(repr(self.pwbscm.configmanager.error))
         self.localconfig_parser_initializer()
         """Arguments returned from argparse.parse_args()"""
         self.args = None
@@ -65,10 +85,11 @@ class PWBS(object):
         self.argparser_specialtasks.add_argument(
             "--debug",
             default=False,
+            action="store_true",
             required=False,
             help="""Changing Debug Mode:
-            \nTrue - Debug Mode Turned On [Good with -v 255]
-            \nFalse - Debug Mode Turned Off [Default]""")
+            \nDebug Mode Turned On [Good with -v 255]
+            \nDebug Mode Turned Off [Default]""")
         self.argparser_specialtasks.add_argument(
             "--version",
             action="store_true",
@@ -112,18 +133,40 @@ class PWBS(object):
             action="store_true",
             required=False,
             help="""Starting PWBS Self-Testing Module""")
+        self.argparser.add_argument(
+            "Task",
+            nargs="*",
+            help="""Task""")
         self.argparser_localconfigtasks = self.argparser.add_argument_group(
             "Local Tasks",
             "Local Configuration Tasks")
 
     def localconfig_parser_initializer(self):
         """Local Configuration Parser Initializer"""
-        self.pwbscm.commands_to_commandlist()
-        for cmd in self.pwbscm.commands.items():
-            arg = cmd.argument_parser()
-            self.argparser_localconfigtasks.add_argument(
-                cmd.name,
-                **arg)
+        try:
+            self.pwbscm.commands_to_commandlist()
+            for cmd in self.pwbscm.commands.items():
+                arg = cmd.argument_parser()
+                self.argparser_localconfigtasks.add_argument(
+                    cmd.name,
+                    nargs="?",
+                    help=arg)
+        except PWBSConfigFileDontExistError as e:
+            self.pwbscm.log.log_debug(
+                "CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
+            self.pwbscm.log.log_debug(repr(e))
+        except PWBSInvalidConfigFile as e:
+            if isinstance(
+                    self.pwbscm.configmanager.error,
+                    PWBSConfigFileDontExistError):
+                self.pwbscm.log.log_debug(
+                    "CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
+                self.pwbscm.log.log_debug(repr(e))
+            else:
+                print("Warning: Configuration File is Invalid")
+                self.pwbscm.log.log_debug(
+                    "CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
+                self.pwbscm.log.log_debug(repr(e))
 
     def special_tasks_interpreter(self):
         """Special Tasks Interpreter"""
@@ -131,9 +174,33 @@ class PWBS(object):
         self.pwbscm.log.debug(self.args.debug)
         if self.args.version is True:
             print("PAiP Web Build System v.{0}".format(pwbs_version))
+        if self.args.log is True:
+            self.pwbscm.log.log_logger.activelogging = True
+            self.pwbscm.log.log_file_write()
+        if self.args.logfile is not None:
+            self.pwbscm.log.log_logger.logfile = self.args.logfile
+        if self.args.configfile is not None:
+            self.pwbscm.config_manager = ConfigManager(self.args.configfile)
+            self.localconfig_parser_initializer()
+        if self.args.test_mode is True:
+            self.pwbscm.log.debug(True)
+            self.pwbscm.log.verbose(255)
+        if self.args.run_tests is True:
+            # TODO: Running Tests DEV: TO_TEST: Not tests yet
+            from .core import NotImplementedFeatureError
+            raise NotImplementedFeatureError("Not Implemented Feature Called")
+
+    def task_runner(self):
+        """Task Runner"""
+        for arg in self.args.Task:
+            self.pwbscm.commands[arg].run()
 
     def main(self):
         """Main Function of the Program"""
-        self.args = self.argparser.parse_args()
-        self.special_tasks_interpreter()
-        print(self.args)
+        try:
+            self.args = self.argparser.parse_args()
+            self.pwbscm.log.log_debug("Argument Parser: {0}".format(repr(self.args)))
+            self.special_tasks_interpreter()
+            self.task_runner()
+        except NotImplementedFeatureError:
+            print("Not Implemented Feature Called!")
