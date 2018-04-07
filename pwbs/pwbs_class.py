@@ -16,6 +16,7 @@ from .config.config_manager import PWBSInvalidConfigFile
 from .config.config_manager import ConfigManager
 from .config.pwbs_config import PWBS_ConfigManager as PWBS_CM
 from .core import NotImplementedFeatureError
+from .tests import test_runner
 # from .lib.pwm.pwm_system import SystemVersion #TODO: DEV:
 
 # Underscore Variables
@@ -187,8 +188,10 @@ class PWBS(object):
             self.pwbscm.log.verbose(255)
         if self.args.run_tests is True:
             # TODO: Running Tests DEV: TO_TEST: Not tests yet
-            from .core import NotImplementedFeatureError
-            raise NotImplementedFeatureError("Not Implemented Feature Called")
+            print("Test Runner Mode Activated!")
+            test_runner()
+            # NOT_IMPLEMENTED:from .core import NotImplementedFeatureError
+            # NOT_IMPLEMENTED:raise NotImplementedFeatureError("Not Implemented Feature Called")
 
     def task_runner(self):
         """Task Runner"""

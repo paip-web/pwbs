@@ -6,14 +6,14 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
 
 """
+# Imports
+import pytest
 # Documentation
 """
 Test 0
 ================
 Test for test
 """
-# Imports
-
 # Test Function
 
 
@@ -21,5 +21,6 @@ def test_0_0():
     assert True
 
 
+@pytest.mark.xfail(raises=AssertionError)
 def test_0_1():
     assert False

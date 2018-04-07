@@ -12,7 +12,7 @@
     * pwbs.command.command
         * Code | IMPLEMENTED:
         * Documentation | IMPLEMENTED:
-        * Test | TO_TEST:
+        * Test | IMPLEMENTED:
 * pwbs.config
     * Documentation: IMPLEMENTED:
     * pwbs.config.cacm

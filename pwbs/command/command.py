@@ -257,13 +257,13 @@ class Command(object):
     def execute_as_watcher(self):
         """Watcher Task Runner"""
         # TODO: To be written
-        from .core import NotImplementedFeatureError
+        from ..core import NotImplementedFeatureError
         raise NotImplementedFeatureError("Not Implemented Feature Called")
 
     def execute_as_scheduler(self):
         """Scheduler Task Runner"""
         # TODO: To be written
-        from .core import NotImplementedFeatureError
+        from ..core import NotImplementedFeatureError
         raise NotImplementedFeatureError("Not Implemented Feature Called")
 
     def __add__(self, other):
@@ -318,13 +318,20 @@ class CommandList(object):
 
     def __setitem__(self, key, value):
         """Dictionary Based Setting Value Overload Function"""
+        # To ReInstansiate Values of CommandList
         oldvalues = self.values
         self.values = []
+        # New Item Fallback
+        item_set = False
+        # Loop
         for i in oldvalues:
             if i == key or i.name == key:
+                item_set = True
                 self.values.append(value)
             else:
                 self.values.append(i)
+        if item_set is False:
+            self.values.append(value)
 
     def __delitem__(self, key):
         """Dictionary Based Deleting Value Overload Function"""
