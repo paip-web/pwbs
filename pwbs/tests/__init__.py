@@ -155,3 +155,37 @@ def test_runner():
              "Test CommandList",
              "pwbs.command.command.CommandList",
              False)
+    # ################## Test 2
+    from .test_2 import test_2_0, test_2_1, test_2_2
+    # # Test 2.0
+    run_test(test_2_0,
+             "2.0",
+             "Testing Exceptions",
+             "pwbs.config.config_manager.* : Exception",
+             False)
+    # # Test 2.1
+    run_test(test_2_1,
+             "2.1",
+             "Testing Config Manager",
+             "pwbs.config.config_manager.ConfigManager",
+             False)
+    # # Test 2.2
+    run_test(test_2_2,
+             "2.2",
+             "Testing PWBS Config Manager",
+             "pwbs.config.pwbs_config.PWBS_ConfigManager",
+             False)
+    # ################## Test 3
+    from .test_3 import test_3_0, test_3_1
+    # # Test 3.0
+    run_test(test_3_0,
+             "3.0",
+             "Testing pwbs.core.NotImplementedFeatureError",
+             "pwbs.core.NotImplementedFeatureError",
+             False)
+    # # Test 3.1
+    run_test(test_3_1,
+             "3.1",
+             "Testing pwbs.core.prefix_text",
+             "pwbs.core.prefix_text",
+             False)

@@ -6,8 +6,6 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
 
 """
-# Imports
-# import pytest # @pytest.mark.xfail(raises=AssertionError)
 # Documentation
 """
 Test 1

@@ -1,7 +1,1 @@
-{
-	"commands":{
-		"test":"echo Hello World",
-		"test2": ["test","test"],
-		"test3":"echo Hello"
-	}
-}
+{"commands": {"test": "echo Hello World", "test2": ["test", "test"], "test3": "echo Hello"}}

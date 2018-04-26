@@ -15,20 +15,18 @@
         * Test | IMPLEMENTED:
 * pwbs.config
     * Documentation: IMPLEMENTED:
-    * pwbs.config.cacm
-        * Code | TODO:
-        * Documentation | IMPLEMENTED:
-        * Test | TO_TEST:
     * pwbs.config.config_manager
-        * Code | NOT_IMPLEMENTED:
+        * Code | IMPLEMENTED:
         * Documentation | IMPLEMENTED:
-        * Test | TO_TEST:
+        * Test | IMPLEMENTED:
     * pwbs.config.pwbs_config
-        * Code | NOT_IMPLEMENTED:
+        * Code | IMPLEMENTED:
         * Documentation | IMPLEMENTED:
-        * Test | TO_TEST:
+        * Test | IMPLEMENTED:
 * pwbs.core
+    * Code | IMPLEMENTED:
     * Documentation: IMPLEMENTED:
+    * Test | IMPLEMENTED:
 * pwbs.tests
     * Documentation: TODO:
 * pwbs.lib
