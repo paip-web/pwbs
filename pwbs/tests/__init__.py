@@ -70,10 +70,12 @@ def run_test(
         tests_prefix_text(
             "[RESPONSE]: Test {0} - Success!".format(
                 test_name))
-    except TestFailed:
+    except TestFailed as e:
         tests_prefix_text(
             "[RESPONSE]: Test {0} - Fail!".format(
                 test_name))
+        # Failed Tests Debug
+        raise e
 
 
 def test_runner():
@@ -189,3 +191,30 @@ def test_runner():
              "Testing pwbs.core.prefix_text",
              "pwbs.core.prefix_text",
              False)
+    # ################## Test 5
+    from .test_5 import test_5_0, test_5_1, test_5_2, test_5_3
+    # # Test 5.0
+    run_test(test_5_0,
+             "5.0",
+             "Testing pwbs.log.logger.LoggerAssertionError",
+             "pwbs.log.logger.LoggerAssertionError",
+             False)
+    # # Test 5.1
+    run_test(test_5_1,
+             "5.1",
+             "Testing pwbs.log.logger.BaseLogger",
+             "pwbs.log.logger.BaseLogger",
+             False)
+    # # Test 5.2
+    run_test(test_5_2,
+             "5.2",
+             "Testing pwbs.log.logger.LogLogger",
+             "pwbs.log.logger.LogLogger",
+             False)
+    # # Test 5.3
+    run_test(test_5_3,
+             "5.3",
+             "Testing pwbs.log.logger.Logger",
+             "pwbs.log.logger.Logger",
+             False)
+

@@ -67,48 +67,24 @@ def test_5_2():
     test_array = test_object.story
     # # Debug
     test_object.log_debug("Test 5.2.1 - You shouldn't see that text immidiately")
-    if test_array == test_object.story:
-        assert False
-    if not(test_object.debug_state is False):
-        assert False
     test_object.debug(True)
-    if not(test_object.debug_state is True):
-        assert False
     test_object.log_debug("Test 5.2.1 - You should see that text immidiately")
-    if not(test_array == test_object.story):
-        assert False
     test_array = test_object.story
     # # Verbose
     test_object.log_verbose("Test 5.2.2 - You shouldn't see that text")
-    if test_array == test_object.story:
-        assert False
     test_array = test_object.story
-    if not(test_object.verbose_state == 1):
-        assert False
     test_object.verbose(255)
-    if not(test_object.verbose_state == 255):
-        assert False
     test_object.log_verbose("Test 5.2.2 - You should see that text")
-    if not(test_array == test_object.story):
-        assert False
     test_array = test_object.story
     # # Log Methods and Variations
     test_object.log("Test 5.2.3 - Log Method")
-    if not(test_array == test_object.story):
-        assert False
     test_array = test_object.story
     test_object.log_wop("Test 5.2.3 - Log Without Prefixer Method")
-    if not(test_array == test_object.story):
-        assert False
     test_array = test_object.story
     test_object.log_assertion(True, "Test 5.2.3 - Assertion")
-    if not(test_array == test_object.story):
-        assert False
     test_array = test_object.story
     try:
         test_object.log_assertion(False, "Test 5.2.3 - Assertion")
-        if not(test_array == test_object.story):
-            assert False
         test_array = test_object.story
         raise NotImplementedError()
     except LoggerAssertionError:
@@ -121,6 +97,7 @@ def test_5_3():
     from ..log.logger import Logger, LoggerAssertionError
     # Tests
     test_object = Logger()
+    test_array = test_object.story()
     # # # BaseLogger Part
     # # Debug
     test_object.log_debug("Test 5.3.1 - You shouldn't see that text immidiately")
@@ -142,49 +119,18 @@ def test_5_3():
     # # # LogLogger Part
     # # Debug
     test_object.log_debug("Test 5.3.4 - You shouldn't see that text immidiately")
-    if test_array == test_object.story():
-        assert False
-    if not(test_object.debug_state is False):
-        assert False
     test_object.debug(True)
-    if not(test_object.debug_state is True):
-        assert False
     test_object.log_debug("Test 5.3.4 - You should see that text immidiately")
-    if not(test_array == test_object.story()):
-        assert False
-    test_array = test_object.story()
     # # Verbose
     test_object.log_verbose("Test 5.3.5 - You shouldn't see that text")
-    if test_array == test_object.story():
-        assert False
-    test_array = test_object.story()
-    if not(test_object.verbose_state == 1):
-        assert False
     test_object.verbose(255)
-    if not(test_object.verbose_state == 255):
-        assert False
     test_object.log_verbose("Test 5.3.5 - You should see that text")
-    if not(test_array == test_object.story()):
-        assert False
-    test_array = test_object.story()
     # # Log Methods and Variations
     test_object.log("Test 5.3.6 - Log Method")
-    if not(test_array == test_object.story()):
-        assert False
-    test_array = test_object.story()
     test_object.log_wop("Test 5.3.6 - Log Without Prefixer Method")
-    if not(test_array == test_object.story()):
-        assert False
-    test_array = test_object.story()
     test_object.log_assertion(True, "Test 5.3.6 - Assertion")
-    if not(test_array == test_object.story()):
-        assert False
-    test_array = test_object.story()
     try:
         test_object.log_assertion(False, "Test 5.3.6 - Assertion")
-        if not(test_array == test_object.story()):
-            assert False
-        test_array = test_object.story()
         raise NotImplementedError()
     except LoggerAssertionError:
         assert True
