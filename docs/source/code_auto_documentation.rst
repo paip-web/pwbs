@@ -110,7 +110,7 @@ pwbs.tests.test_XXXXXX
 .. automodule:: pwbs.tests.test_3
     :members:
 
-..  Test 4 Deleted
+>> Test 4 Deleted
 
 .. automodule:: pwbs.tests.test_5
     :members:

@@ -8,6 +8,8 @@
 .. image:: https://img.shields.io/pypi/status/pwbs.svg
 .. image:: https://img.shields.io/pypi/v/pwbs.svg
     :target: https://pypi.org/project/pwbs/
+.. image:: https://readthedocs.org/projects/pwbs/badge/?version=latest
+    :target: http://pwbs.readthedocs.io/en/latest/?badge=latest
 
 PAiP Web Build System
 =====================
