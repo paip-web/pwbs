@@ -1,0 +1,51 @@
+=====================
+PAiP Web Build System
+=====================
+
+*********************************
+Documented Version : v.0.4.0-dev0
+*********************************
+.. image:: https://badge.fury.io/py/pwbs.svg
+    :target: https://badge.fury.io/py/pwbs
+.. image:: https://img.shields.io/pypi/l/pwbs.svg
+.. image:: https://img.shields.io/pypi/wheel/pwbs.svg
+.. image:: https://img.shields.io/pypi/format/pwbs.svg
+.. image:: https://img.shields.io/pypi/implementation/pwbs.svg
+.. image:: https://img.shields.io/pypi/pyversions/pwbs.svg
+.. image:: https://img.shields.io/pypi/status/pwbs.svg
+.. image:: https://img.shields.io/pypi/v/pwbs.svg
+    :target: https://pypi.org/project/pwbs/
+.. image:: https://readthedocs.org/projects/pwbs/badge/?version=latest
+    :target: http://pwbs.readthedocs.io/en/latest/?badge=latest
+
+By Project Rewrite and Rethink Dev 2.0 use pwbs==0.3.0.dev1 for any purpose. Actual version use only when you want to help developers.
+
+PWBS is Build System for easy automation process.
+
+
+* Free software: MIT license
+* PyPi Package: https://pypi.python.org/pypi/pwbs/ or https://pypi.org/project/pwbs/
+
+Features
+--------
+
+* Single Tasks - ``pwbs task`` executes one command
+* **NOT_IMPLEMENTED:** Multi Tasks - ``pwbs task`` executes other tasks
+* MultiCommand Tasks - ``pwbs task`` executes multiple commands
+* **NOT_IMPLEMENTED:** Watcher Tasks - ``pwbs task`` starting watcher which watching specified files for changes and executing specified commands on file modification
+* **NOT_IMPLEMENTED:** Scheduler Tasks - ``pwbs task`` starting scheduler which executing commands on specified schedule
+* **NOT_IMPLEMENTED:** Argumented Tasks - ``pwbs task "Hello World"`` starting specified commands and/or tasks with special argument (This task have to be used alone in execution of pwbs)
+
+*******
+Credits
+*******
+
+Development Lead
+----------------
+
+* Patryk Adamczyk <patrykadamczyk@paipweb.com>
+
+Contributors
+------------
+
+None yet. Why not be the first?
