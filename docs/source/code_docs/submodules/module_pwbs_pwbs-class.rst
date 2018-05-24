@@ -21,54 +21,74 @@ This module is place for main PWBS Program Class.
 
     * Initialize Config Manager
 
-.. py:method:: PWBS.parser_initializer()
-
-    This method is to initalize parser.
-
-    This method is making these steps:
-
-    * Making Special Tasks Argument Group
-
-    * Adding Special Tasks Commands: [--verbose, --debug, --version, --new-config, --log, --log-file, --config-file, --test-mode, --run-tests]
-
-    * Adding Task Argument [This argument takes everything which is after special tasks commands or everything if there isn't any special task command]
-
-    * Adding Local Configuration Tasks Argument Group
-
-.. py:method:: PWBS.localconfig_parser_initializer()
-
-    This method is to initalize parser of local configuration.
+    .. py:attribute:: argparser
     
-    This method is: 
+        Argument Parser
 
-    * Trying to change json tasks into Commands Class Object changing it into one CommandList Class Object with all commands.
-
-.. py:method:: PWBS.special_tasks_interpreter()
-
-    This method is to interpret special tasks.
-
-    This method is:
-
-    * Checking is any of special task was called.
-
-    * If yes then it executes that special task that was called.
-
-.. py:method:: PWBS.task_runner()
-
-    This method is to run local configurations tasks.
-
-    This method is:
-
-    * Calling run method on every Command object that was called.
-
-.. py:method:: PWBS.main()
-
-    This method is main function of Program.
-
-    This method is:
-
-    * Parsing Arguments
-
-    * Interpreting Special Tasks
+    .. py:attribute:: argparser_specialtasks
     
-    * Interpreting Normal Tasks
+        Argument Parser Argument Group for Special Tasks
+    
+    .. py:attribute:: argparser_localconfigtasks
+    
+        Argument Parser Argument Group for Local Configuration Tasks
+
+    .. py:attribute:: pwbscm
+    
+        PWBS Config Manager
+
+    .. py:attribute:: args
+    
+        Arguments from argparser
+
+    .. py:method:: parser_initializer()
+
+        This method is to initalize parser.
+
+        This method is making these steps:
+
+        * Making Special Tasks Argument Group
+
+        * Adding Special Tasks Commands: [--verbose, --debug, --version, --new-config, --log, --log-file, --config-file, --test-mode, --run-tests]
+
+        * Adding Task Argument [This argument takes everything which is after special tasks commands or everything if there isn't any special task command]
+
+        * Adding Local Configuration Tasks Argument Group
+
+    .. py:method:: localconfig_parser_initializer()
+
+        This method is to initalize parser of local configuration.
+        
+        This method is: 
+
+        * Trying to change json tasks into Commands Class Object changing it into one CommandList Class Object with all commands.
+
+    .. py:method:: special_tasks_interpreter()
+
+        This method is to interpret special tasks.
+
+        This method is:
+
+        * Checking is any of special task was called.
+
+        * If yes then it executes that special task that was called.
+
+    .. py:method:: task_runner()
+
+        This method is to run local configurations tasks.
+
+        This method is:
+
+        * Calling run method on every Command object that was called.
+
+    .. py:method:: main()
+
+        This method is main function of Program.
+
+        This method is:
+
+        * Parsing Arguments
+
+        * Interpreting Special Tasks
+        
+        * Interpreting Normal Tasks
