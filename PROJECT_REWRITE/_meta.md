@@ -39,3 +39,6 @@ platform specific task?
 * add debug information to make debugging the easiest thing as it can be
 
 * debug if firsttime then log from array of debug messages delayed
+
+
+sphinx-autobuild docs docs/_build/html

@@ -10,7 +10,7 @@ LICENSE - MIT
 """
 Test 3
 ================
-Tests for v0.4.0dev0 | pwbs.config
+Tests for v0.4.0dev0 | pwbs.core
 ================
 Test 3.0 - pwbs.core.NotImplementedFeatureError
 Test 3.1 - pwbs.core.prefix_text | TO_TEST: BAD TEST - Temporary Solution

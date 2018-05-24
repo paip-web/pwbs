@@ -87,7 +87,7 @@ def test_runner():
              "Test Asserting True",
              "Python",
              False)
-    # # Test 0.0
+    # # Test 0.1
     run_test(test_0_1,
              "0.1",
              "Test Asserting False",

@@ -6,61 +6,69 @@ pwbs.pwbs_class
 This module is place for main PWBS Program Class.
 
 .. py:class:: PWBS
+
     This class is main PWBS Program Class.
 
-Constructor is making these steps:
+    Constructor is making these steps:
 
-* Making Argument Parser [Parser of CLI Arguments]
+    * Making Argument Parser [Parser of CLI Arguments]
 
-* Initialize Parser
+    * Initialize Parser
 
-* Making PWBS Config Manager Object
+    * Making PWBS Config Manager Object
 
-* Check for errors of PWBS Config Manager Object
+    * Check for errors of PWBS Config Manager Object
 
-* Initialize Config Manager
+    * Initialize Config Manager
 
-.. py:method:: PWBS.parser_initializer(self)
+.. py:method:: PWBS.parser_initializer()
+
     This method is to initalize parser.
 
-This method is making these steps:
+    This method is making these steps:
 
-* Making Special Tasks Argument Group
+    * Making Special Tasks Argument Group
 
-* Adding Special Tasks Commands: [--verbose, --debug, --version, --new-config, --log, --log-file, --config-file, --test-mode, --run-tests]
+    * Adding Special Tasks Commands: [--verbose, --debug, --version, --new-config, --log, --log-file, --config-file, --test-mode, --run-tests]
 
-* Adding Task Argument [This argument takes everything which is after special tasks commands or everything if there isn't any special task command]
+    * Adding Task Argument [This argument takes everything which is after special tasks commands or everything if there isn't any special task command]
 
-* Adding Local Configuration Tasks Argument Group
+    * Adding Local Configuration Tasks Argument Group
 
-.. py:method:: PWBS.localconfig_parser_initializer(self)
+.. py:method:: PWBS.localconfig_parser_initializer()
+
     This method is to initalize parser of local configuration.
     
-This method is: 
+    This method is: 
 
-* Trying to change json tasks into Commands Class Object changing it into one CommandList Class Object with all commands.
+    * Trying to change json tasks into Commands Class Object changing it into one CommandList Class Object with all commands.
 
-.. py:method:: PWBS.special_tasks_interpreter(self)
+.. py:method:: PWBS.special_tasks_interpreter()
+
     This method is to interpret special tasks.
 
-This method is:
+    This method is:
 
-* Checking is any of special task was called.
+    * Checking is any of special task was called.
 
-* If yes then it executes that special task that was called.
+    * If yes then it executes that special task that was called.
 
-.. py:method:: PWBS.task_runner(self)
+.. py:method:: PWBS.task_runner()
+
     This method is to run local configurations tasks.
 
-This method is:
+    This method is:
 
-* Calling run method on every Command object that was called.
+    * Calling run method on every Command object that was called.
 
-.. py:method:: PWBS.main(self)
+.. py:method:: PWBS.main()
+
     This method is main function of Program.
 
-This method is:
+    This method is:
 
-* Parsing Arguments
-* Interpreting Special Tasks
-* Interpreting Normal Tasks
+    * Parsing Arguments
+
+    * Interpreting Special Tasks
+    
+    * Interpreting Normal Tasks

@@ -175,7 +175,7 @@ class Command(object):
         self.comment = comment
         """Mode of the Command"""
         self.mode = mode
-        """xArguments of the Command"""
+        """Arguments of the Command"""
         self.arguments = arguments
         """Special Arguments of the Command"""
         self.special = special

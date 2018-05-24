@@ -15,9 +15,11 @@ Place for initialization of the package.
 Here is script for running this script by ``python pwbs/__init__.py``.
 
 .. py:function:: pwbs.__init__.main()
+
     Main function of PWBS
 
 .. py:data:: pwbs.__version__
+
     Version of the PWBS
 
 
