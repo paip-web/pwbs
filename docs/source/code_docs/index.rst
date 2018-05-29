@@ -20,17 +20,6 @@ Convention of this documentation::
 
     # Every function and module have own RST file in DOCUMENTATION_ROOT/code_docs/ folder
 
-************************
-Code Documentation: Main
-************************
-
-.. toctree::
-   :maxdepth: 10
-   :caption: Contents:
-   :glob:
-
-   code_docs/*
-
 ***************************
 Code Documentation: Modules
 ***************************

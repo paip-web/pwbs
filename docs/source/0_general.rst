@@ -18,9 +18,8 @@ Documented Version : v.0.4.0-dev0
 .. image:: https://readthedocs.org/projects/pwbs/badge/?version=latest
     :target: http://pwbs.readthedocs.io/en/latest/?badge=latest
 
-By Project Rewrite and Rethink Dev 2.0 use pwbs==0.3.0.dev1 for any purpose. Actual version use only when you want to help developers.
-
 PWBS is Build System for easy automation process.
+This project makes one command for all what you can't remember or it's just too long to rewrite all over every time.
 
 
 * Free software: MIT license

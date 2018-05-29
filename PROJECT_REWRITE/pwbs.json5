@@ -1,0 +1,113 @@
+/* PWBS Local Configuration File 
+ * pwbs.json
+ * PWBS_LCF-pwbs.json v.0.3
+ */
+{
+    "config" : {
+        "settings" : {
+            "json-plugins" : true,                  // Enabling JSON Plugins [Default False]
+            "py-plugins" : true,                    // Enabling Python Plugins [Default False]
+            "verbose-mode" : 255,                   // Changing Verbose Mode [Default 1] (This setting can be overwrited in the run of pwbs by the --verbose flag)
+            "os-tasks" : true,                      // Enabling Operating System Specific Tasks [Default False]
+            "debug-mode" : true,                    // Enabling Debug Mode [Default False] (This setting can be overwrited in the run of pwbs by the --debug flag)
+            "test-mode" : true,                     // Enabling Test Mode [Default False] (This setting can be overwrited in the run of pwbs by the --test-mode flag)
+            "pwbs-integrated-tasks" : true,         // Enabling PWBS Integrated Tasks [Default False]
+            "pwbs-integrated-plugins" : true,       // Enabling PWBS Integrated Plugins [Default False]
+            "lcf-plugins" : true                    // Enabling PWBS Local Configuration File - Plugins [Default False] (This option is like importing tasks from another pwbs.json)
+        },
+        "use" : {
+            "py-plugins" : [ // Python Plugins
+                "coffeescript",
+                "stylus",
+                "concatenate",
+                "git"
+            ],
+            "json-plugins" : [ // JSON Plugins
+                "test"
+            ],
+            "lcf-plugins" : [ // Local Configuration File - Plugins
+                "test.pwbs.json"
+            ]
+        }
+    },
+    "commands" : {
+        "deps-install" : {
+            "mode" : "st", // Single Task
+            "commands" : { // Commands
+                "windows" : { // Commands for Windows
+                    "pip install -r requirements.txt"
+                },
+                "other" : { // Commands for everything else
+                    "pip3 install -r requirements.txt"
+                }
+            },
+            "comment" : "Installs Dependencies" // Comment
+        },
+        "compile" : {
+            "mode" : "wc0", // Watcher Task
+            "context" : [ // Watcher Context
+                "website/blog/static/blog/stylus",
+                "website/blog/static/blog/coffee"
+            ],
+            "comment" : "Compiling your files to normal static files.", // Comment
+            "arg" : { // Arguments to be used in this task (used from template language)
+                "tmpdir" : "compiled_tmpdir",
+                "compileddir" : "website/blog/static/blog/res"
+            },
+            "commands" : [
+                { // Argumented Task
+                    "task" : "--git--add",
+                    "args" : [
+                        "all"
+                    ]
+                },
+                {
+                    "task" : "--git--commit",
+                    "args" : [
+                        {
+                            "message" : "$(%tl->>date('d-m-Y H:M:s')) - PWBS Auto Compiler Task" // Argument with template language interpolatation
+                        }
+                    ]
+                }
+                "--coffeescript--init", // Normal task
+                "--stylus--init",
+                {
+                    "task" : "--coffeescript--compile",
+                    "args" : [
+                        "$(%this->>context)", // Argument with template language interpolation using task arguments and task context
+                        "$(%this->>arg->tmpdir)",
+                        [
+                            "bare",
+                            "map"
+                        ]
+                    ]
+                },
+                {
+                    "task" : "--stylus--compile",
+                    "args" : [
+                        "$(%this->>context)",
+                        "$(%this->>arg->tmpdir)",
+                        [
+                            "compress",
+                            "map",
+                            "autoprefix"
+                        ]
+                    ]
+                },
+                {
+                    "task" : "--concatenate--compile",
+                    "args" : [
+                        "$(%this->>arg->tmpdir)",
+                        "$(%this->>arg->compileddir)",
+                        [
+                            "main.css",
+                            "main.js"
+                        ]
+                    ]
+                },
+                "--test--testcompiled",
+                "--lcf--cleanup"
+            ]
+        }
+    }
+}
