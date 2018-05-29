@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "PAiP Web Build System - LCF v.0.2 [Used in PWBS E2 to and with v.0.3.0dev1] [Filename: pwbs.json]",
+    "type": "object",
+    "properties": {
+        "commands" : {
+            "type" : "object",
+            "properties": {
+                "^.+$": {
+                    "anyOf": [
+                        {
+                            "type" : "string"
+                        },
+                        {
+                            "type" : "array"
+                        },
+                        {
+                            "type" : "object",
+                            "properties" : {
+                                "mode" : {
+                                    "type" : "string"
+                                },
+                                "commands" : {
+                                    "type" : "array"
+                                },
+                                "context" : {
+                                    "type" : "array"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "config" : {
+            "type" : "object",
+            "properties": {
+                "json-mods" : {
+                    "type" : "boolean"
+                },
+                "py-mods" : {
+                    "type" : "boolean"
+                },
+                "verbose-mode" : {
+                    "type" : "integer"
+                },
+                "os-commands" : {
+                    "type" : "boolean"
+                },
+                "detailos-commands" : {
+                    "type" : "boolean"
+                }
+            }
+        },
+        "mods" : {
+            "type" : "array"
+        },
+        "json-mods" : {
+            "type" : "array"
+        },
+        "py-mods" : {
+            "type" : "array"
+        },
+        "os-commands" : {
+            "type" : "object",
+            "properties": {
+                "linux" : {
+                    "type" : "object"
+                },
+                "windows" : {
+                    "type" : "object"
+                },
+                "macos" : {
+                    "type" : "object"
+                },
+                "other" : {
+                    "type" : "object"
+                }
+            }
+        }
+    },
+    "patternProperties": {
+        "^.+$": {
+            "$id": "/properties/any",
+            "anyOf": [
+                {
+                    "type" : "string"
+                },
+                {
+                    "type" : "array"
+                },
+                {
+                    "type" : "object"
+                }
+            ]
+        }
+    },
+    "additionalProperties": false
+}

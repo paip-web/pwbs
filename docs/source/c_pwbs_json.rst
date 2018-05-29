@@ -153,14 +153,14 @@ Example ``pwbs.json`` ::
     {
         "commands" : {
             "task-1" : {
-                "mode" : "s0",
+                "mode" : "sc0",
                 "context" : 00000000000,
                 "commands" : [
                     "command1"
                 ]
             },
             "task-2" : {
-                "mode" : "s",
+                "mode" : "sc",
                 "context" : 00000000000,
                 "commands" : [
                     "command1"
@@ -187,19 +187,31 @@ PWBS Local Configuration File [It's schemas with not implemented features too]
 
 
 
-* `PWBS_LCF-pwbs.json Working Draft <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_WD.json>`_
+`PWBS_LCF-pwbs.json Working Draft <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_WD.json>`_
+======================================================================================================================
+
+``"$schema" : "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_WD.json"``
 
     .. literalinclude:: schema/PWBS_LCF_WD.json
 
-* `PWBS_LCF-pwbs.json v.0.3 <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_3.json>`_
+`PWBS_LCF-pwbs.json v.0.3 <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_3.json>`_
+=================================================================================================================
+
+``"$schema" : "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_3.json"``
 
     .. literalinclude:: schema/PWBS_LCF_v_0_3.json
 
-* `PWBS_LCF-pwbs.json v.0.2 <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_2.json>`_
+`PWBS_LCF-pwbs.json v.0.2 <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_2.json>`_
+=================================================================================================================
+    
+``"$schema" : "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_2.json"``
 
     .. literalinclude:: schema/PWBS_LCF_v_0_2.json
 
-* `PWBS_LCF-commands.json v.0.1 <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_1.json>`_
+`PWBS_LCF-commands.json v.0.1 <https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_1.json>`_
+=====================================================================================================================
+    
+``"$schema" : "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_1.json"``
 
     .. literalinclude:: schema/PWBS_LCF_v_0_1.json
 

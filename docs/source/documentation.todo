@@ -1,6 +1,7 @@
 ✔ Usage @done(18-05-24 17:06)
 ✔ pwbs.json file @done(18-05-29 12:00)
-☐ Installation
+    ✔ JSON Schemas for [v.0.1 pwbs.commands.json | v.0.2 pwbs.json | v.0.3 pwbs.json for actual releases | WD for future (here will be latest schema)] @done(18-05-29 15:13)
+✔ Installation @done(18-05-29 15:28)
 ☐ Contribution Guide (PAiP Web - Style)
 
 ☐ PWBS Class Repair

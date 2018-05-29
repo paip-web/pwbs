@@ -1,3 +1,7 @@
+==================
+Contribution Guide
+==================
+
 Contributing
 ============
 

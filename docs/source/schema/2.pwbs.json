@@ -1,0 +1,27 @@
+{
+    "$schema": ".\\PWBS_LCF_v_0_2.json",
+    "config" : {
+        "json-mods" : true,
+        "py-mods" : true,
+        "verbose-mode": 255,
+        "os-commands": true,
+        "detailos-commands": true
+    },
+    "mods": [
+        "test"
+    ],
+    "json-mods": [
+        "test"
+    ],
+    "py-mods": [
+        "test"
+    ],
+    "os-commands": {
+        "linux": {
+            "test" : "test"
+        }
+    },
+    "commands": {
+        "test" : "test"
+    }
+}

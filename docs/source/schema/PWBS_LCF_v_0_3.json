@@ -1,0 +1,252 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "PAiP Web Build System - LCF v.0.2 [Used in PWBS E2 to and with v.0.3.0dev1] [Filename: pwbs.json]",
+    "type": "object",
+    "definitions": {
+        "command" : {
+            "type" : "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type" : "string"
+                    },
+                    {
+                        "type" : "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "task" : {
+                                "type" : "string"
+                            },
+                            "args" : {
+                                "type" : "array"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "properties": {
+        "commands" : {
+            "description": "Place for all definitions of Tasks",
+            "type" : "object",
+            "additionalProperties": false,
+            "patternProperties" : {
+                "^.+$": {
+                    "anyOf": [
+                        {
+                            "description": "Advanced Task",
+                            "type" : "object",
+                            "additionalProperties": false,
+                            "properties" : {
+                                "mode" : {
+                                    "description": "Task Mode:\nst - Single Task\nmt - Multi Task\nmc - MultiCommand Task\nwc0 - Watcher (Run,Execute,Wait)\nwc - Watcher (Run, Wait)\nsc0 - Scheduler (Run,Execute,Wait)\nsc - Scheduler (Run,Wait)",
+                                    "type" : "string"
+                                },
+                                "commands" : {
+                                    "description": "Commands of Task",
+                                    "anyOf" : [
+                                        {
+                                            "type" : "array",
+                                            "$ref": "#/definitions/command"
+                                        },
+                                        {
+                                            "type" : "object",
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "windows" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "win" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "linux" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "lin" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "macos" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "macosx" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "mac" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "other" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "any" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                
+                                                "Windows" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Win" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Linux" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Lin" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Macos" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Macosx" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Mac" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Other" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "Any" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                
+                                                "WINDOWS" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "WIN" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "LINUX" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "LIN" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "MACOS" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "MACOSX" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "MAC" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "OTHER" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                },
+                                                "ANY" : {
+                                                    "type" : "array",
+                                                    "$ref": "#/definitions/command"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "context" : {
+                                    "type" : "array"
+                                },
+                                "comment" : {
+                                    "type" : "string"
+                                },
+                                "arg" : {
+                                    "type" : "object"
+                                }
+                            }
+                        },
+                        {
+                            "description": "Single Task",
+                            "type" : "string"
+                        },
+                        {
+                            "description": "Multi Task",
+                            "type" : "array"
+                        }
+                    ]
+                }
+            }
+        },
+        "config" : {
+            "type" : "object",
+            "additionalProperties": false,
+            "properties": {
+                "settings" : {
+                    "description": "Settings of PWBS",
+                    "type" : "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "json-plugins" : {
+                            "type" : "boolean"
+                        },
+                        "py-plugins" : {
+                            "type" : "boolean"
+                        },
+                        "verbose-mode" : {
+                            "type" : "integer"
+                        },
+                        "os-tasks" : {
+                            "type" : "boolean"
+                        },
+                        "debug-mode" : {
+                            "type" : "boolean"
+                        },
+                        "test-mode" : {
+                            "type" : "boolean"
+                        },
+                        "pwbs-integrated-tasks" : {
+                            "type" : "boolean"
+                        },
+                        "pwbs-integrated-plugins" : {
+                            "type" : "boolean"
+                        },
+                        "lcf-plugins" : {
+                            "type" : "boolean"
+                        }
+                    }
+                },
+                "use" : {
+                    "description": "Define what plugins you want to use",   
+                    "type" : "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "py-plugins" : {
+                            "type" : "array"
+                        },
+                        "json-plugins" : {
+                            "type" : "array"
+                        },
+                        "lcf-plugins" : {
+                            "type" : "array"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}
