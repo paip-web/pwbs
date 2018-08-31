@@ -10,7 +10,7 @@ LICENSE - MIT
 """
 # Imports
 
-from ..lib.singleton import Singleton
+from ..lib.singleton import Singleton, SingletonException
 
 # Underscore Variables
 
@@ -26,25 +26,43 @@ __docformat__ = 'restructuredtext en'
 class EventManager(Singleton):
     """Event Manager Class"""
 
-    def __init__(self):
-        super().__init__()
-        self.__events = {}
-
     def createEvent(self, name, handlers=None):
         """Create Event"""
         if handlers is None:
             handlers = list()
-        self.__events[name] = handlers
+        self.events[name] = handlers
 
     def addHandler(self, name, function):
         """Add Handler"""
-        self.__events[name].append(function)
+        self.events[name].append(function)
 
     def deleteEvent(self, name):
         """Delete Handler"""
-        del self.__events[name]
+        del self.events[name]
 
-    def startEvent(self, name, **args):
+    def startEvent(self, event_name, event_name_included=False, **args):
         """Start Event"""
-        for f in self.__events[name]:
-            f(**args)
+        for f in self.events[event_name]:
+            if event_name_included is False:
+                f(**args)
+            else:
+                f(event_name, **args)
+
+    # Event Manager Replacement in Singleton
+    # Here will be the instance stored.
+    __instance = None
+
+    @staticmethod
+    def getInstance():
+        """ Static access method. """
+        if EventManager.__instance is None:
+            EventManager()
+        return EventManager.__instance
+
+    def __init__(self):
+        """ Virtually private constructor. """
+        if EventManager.__instance is not None:
+            raise SingletonException("This class is a singleton!")
+        else:
+            EventManager.__instance = self
+        self.events = {}

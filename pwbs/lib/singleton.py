@@ -23,7 +23,7 @@ class SingletonException(Exception):
 
 # Singleton Class
 
-class Singleton:
+class Singleton(object):
     # Here will be the instance stored.
     __instance = None
 

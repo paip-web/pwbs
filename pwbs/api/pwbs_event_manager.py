@@ -10,6 +10,7 @@ LICENSE - MIT
 """
 # Imports
 
+from ..lib.singleton import SingletonException
 from .eventmanager import EventManager
 
 # Underscore Variables
@@ -23,11 +24,52 @@ __docformat__ = 'restructuredtext en'
 
 # Event Manager Class
 
-class PWBSEventManager(EventManager):
+class PWBSEventManager(object):
     """PWBS Event Manager Class"""
+    def createEvent(self, name, handlers=None):
+        """Create Event"""
+        if handlers is None:
+            handlers = list()
+        self.events[name] = handlers
+
+    def addHandler(self, name, function):
+        """Add Handler"""
+        self.events[name].append(function)
+
+    def deleteEvent(self, name):
+        """Delete Handler"""
+        del self.events[name]
+
+    def startEvent(self, event_name, event_name_included=True, **args):
+        """Start Event"""
+        for f in self.events[event_name]:
+            if event_name_included is False:
+                f(**args)
+            else:
+                f(event_name, **args)
+
+    # Event Manager Replacement in Singleton
+    # Here will be the instance stored.
+    __instance = None
+
+    @staticmethod
+    def getInstance():
+        """ Static access method. """
+        if PWBSEventManager.__instance is None:
+            PWBSEventManager()
+        return PWBSEventManager.__instance
+
+    def __init__(self):
+        """ Virtually private constructor. """
+        if PWBSEventManager.__instance is not None:
+            raise SingletonException("This class is a singleton!")
+        else:
+            PWBSEventManager.__instance = self
+        self.events = {}
 
     @staticmethod
     def initialize():
+        """This function initializes Event Manager for use in PWBS"""
         # PWBS Event Manager
         PWBS_EM = PWBSEventManager()
         # PWBS Event Called in pwbs.__init__.main() when PWBS class is initialized
@@ -118,3 +160,5 @@ class PWBSEventManager(EventManager):
         PWBS_EM.createEvent("pwbs-event--test-runner--before-test")
         # PWBS Event Called in test_runner after test
         PWBS_EM.createEvent("pwbs-event--test-runner--after-test")
+        # Return PWBS Event Manager
+        return PWBS_EM
