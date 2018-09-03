@@ -159,5 +159,7 @@ class PWBSEventManager(object):
         PWBS_EM.createEvent("pwbs-event--test-runner--before-test")
         # PWBS Event Called in test_runner after test
         PWBS_EM.createEvent("pwbs-event--test-runner--after-test")
+        # PWBS Event Called on plugins initilization
+        PWBS_EM.createEvent("pwbs-event--plugin-initilize")
         # Return PWBS Event Manager
         return PWBS_EM
