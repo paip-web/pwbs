@@ -11,7 +11,6 @@ LICENSE - MIT
 # Imports
 
 from ..lib.singleton import SingletonException
-from .eventmanager import EventManager
 
 # Underscore Variables
 
