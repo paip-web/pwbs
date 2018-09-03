@@ -1,1 +1,12 @@
-{"commands": {"test": "echo Hello World", "test2": ["test", "test"], "test3": "echo Hello"}}
+{
+    "$schema" : "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_WD.json",
+    "commands": 
+    {
+        "test": "echo Hello World", 
+        "test2": [
+            "test",
+            "test"
+        ], 
+        "test3": "echo Hello"
+    }
+}

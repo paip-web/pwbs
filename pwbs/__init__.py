@@ -27,6 +27,7 @@ from .api.pwbs_event_manager import PWBSEventManager
 # Running as pwbs command
 
 def main():
+    """Main Function of Program"""
     # Initialize PWBS Event Manager
     PWBS_EM = PWBSEventManager.initialize()
     pwbs_class_var = PWBS()
