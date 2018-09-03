@@ -32,7 +32,7 @@ setup(
     name='pwbs',
 
     # Version following SemVer Style
-    0.5.0-dev0,
+    version='0.5.0-dev0',
 
     # Description of the Package
     description='PWBS is Build System for easy automation process.',
