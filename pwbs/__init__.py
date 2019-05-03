@@ -21,6 +21,7 @@ __docformat__ = 'restructuredtext en'
 
 # Imports
 
+import sentry_sdk
 from .pwbs_class import PWBS
 from .api.pwbs_event_manager import PWBSEventManager
 
@@ -28,6 +29,8 @@ from .api.pwbs_event_manager import PWBSEventManager
 
 def main():
     """Main Function of Program"""
+    sentry_sdk\
+        .init("https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213")
     # Initialize PWBS Event Manager
     PWBS_EM = PWBSEventManager.initialize()
     pwbs_class_var = PWBS()
