@@ -3,7 +3,7 @@ CHANGELOG
 =========
 
 **************
-Branch v.0.4.X
+Branch v.0.5.X
 **************
 
 Description::
