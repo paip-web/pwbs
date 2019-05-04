@@ -8,10 +8,31 @@ Branch v.0.4.X
 
 Description::
 
+    # This version was:
+    # - changes in code style
+    # - Quality of Life improvements
+    # - Upgrades to newer versions of dependendencies
+
+0.5.0-dev0
+----------
+
+* Code Style changes
+
+**************
+Branch v.0.4.X
+**************
+
+Description::
+
     # This version branch was:
     # - complete rewrite of the project
 
-0.4.0-dev0 (TODO:Still Work In Progress)
+0.4.0-alpha0
+------------
+
+* First alpha version
+
+0.4.0-dev0
 ----------------------------------------
 * Rewrite of the project::
 

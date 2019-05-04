@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """PAiP Web Build System
 
-NAME - PAiP Web Build System
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
-LICENSE - MIT
+Author: Patryk Adamczyk <patrykadamczyk@patrykadamczyk.net>
+
+License: MIT
 
 """
 # Imports
