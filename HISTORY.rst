@@ -1,6 +1,21 @@
 History
 =======
 
+0.4.0-alpha0 (25.07.2018)
+-------------------------
+* Release 10 on PyPi
+* Release to block stable on alpha release
+
+0.4.0-dev0 (25.07.2018)
+-----------------------
+* Release 9 on PyPi
+* Rewrite of the project. All of code has been rewritten.
+    * Features in this version:
+        * Single Task
+        * Multi Command Task
+    * Features downgrade:
+        * MultiTask Task
+
 0.3.0-dev1 (22.12.2017)
 -----------------------
 
