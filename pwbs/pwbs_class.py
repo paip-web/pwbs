@@ -386,6 +386,9 @@ class PWBS(object):
                 "pwbs-event--pwbs_class-main-after-taskinterpreter",
                 this=self
             )
+            if len(self.args.Task) == 0:
+                self.argparser.print_help()
+
         except NotImplementedFeatureError as e:
             print("Not Implemented Feature Called!")
             PWBS_EM.startEvent(
