@@ -10,14 +10,14 @@ LICENSE - MIT
 """
 # Imports
 import argparse as ap
-from . import __version__ as pwbs_version
-from .config.config_manager import PWBSConfigFileDontExistError
-from .config.config_manager import PWBSInvalidConfigFile
-from .config.config_manager import ConfigManager
-from .config.pwbs_config import PWBS_ConfigManager as PWBS_CM
-from .core import NotImplementedFeatureError
-from .tests import test_runner
-from .api.pwbs_event_manager import PWBSEventManager
+from pwbs import __version__ as pwbs_version
+from pwbs.config.config_manager import PWBSConfigFileDontExistError
+from pwbs.config.config_manager import PWBSInvalidConfigFile
+from pwbs.config.config_manager import ConfigManager
+from pwbs.config.pwbs_config import PWBS_ConfigManager as PWBS_CM
+from pwbs.core import NotImplementedFeatureError
+from pwbs.tests import test_runner
+from pwbs.api.pwbs_event_manager import PWBSEventManager
 # from .lib.pwm.pwm_system import SystemVersion #TODO: DEV:
 
 # Underscore Variables

@@ -1,7 +1,7 @@
 PAiP Web Build System
 =====================
 
-Actual Version : **v.0.5.0-dev**
+Actual Version : **v.0.5.0-dev0**
 
 **PWBS** is Build System for easy automation process.
 

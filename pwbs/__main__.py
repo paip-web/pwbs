@@ -8,7 +8,7 @@ License: MIT
 """
 # Imports
 
-from . import main
+from pwbs import main
 
 # Underscore Variables
 

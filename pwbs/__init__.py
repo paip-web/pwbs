@@ -8,11 +8,6 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 
 """
-# Imports
-
-import sentry_sdk
-from .pwbs_class import PWBS
-from .api.pwbs_event_manager import PWBSEventManager
 
 # Underscore Variables
 
@@ -27,13 +22,21 @@ __license__ = 'MIT'
 """Documentation format"""
 __docformat__ = 'restructuredtext en'
 
+# Imports
+
+import sentry_sdk
+from pwbs.pwbs_class import PWBS
+from pwbs.api.pwbs_event_manager import PWBSEventManager
+
+
 # Running as pwbs command
 
 
 def main():
     """Main Function of Program"""
     sentry_sdk.init(
-        "https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213"
+        "https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213",
+        release=("{0}@{1}".format(__title__, __version__))
     )
     # Initialize PWBS Event Manager
     pwbs_em = PWBSEventManager.initialize()
