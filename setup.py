@@ -15,6 +15,7 @@ with io.open('HISTORY.rst', encoding='utf-8') as history_file:
 # Requirements Variable
 requirements: list = [
     # Package Requirements
+    'sentry_sdk'
 ]
 # Setup Requirements Variable
 setup_requirements: list = [
