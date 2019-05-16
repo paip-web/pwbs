@@ -32,10 +32,10 @@ Changed
 Deprecated
 ^^^^^^^^^^
 - PWM (To change into internal functions or pwm as dependency)
-- PWBS (Old version of PWBS runnning automation tasks for semantic versioning)
 
 Removed
 ^^^^^^^
+- PWBS (Old version of PWBS runnning automation tasks for semantic versioning)
 
 Fixed
 ^^^^^

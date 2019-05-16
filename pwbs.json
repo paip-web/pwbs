@@ -1,12 +1,9 @@
 {
-    "$schema" : "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_WD.json",
-    "commands": 
-    {
-        "test": "echo Hello World", 
-        "test2": [
-            "test",
-            "test"
-        ], 
-        "test3": "echo Hello"
-    }
+    "git-push" : "git push --tags",
+    "commit-major" : "bumpversion --allow-dirty major",
+    "commit-minor" : "bumpversion --allow-dirty minor",
+    "commit-patch" : "bumpversion --allow-dirty patch",
+    "commit-level" : "bumpversion --allow-dirty releaselevel",
+    "commit-serial" : "bumpversion --allow-dirty serial",
+    "ci" : "python ci.py"
 }
