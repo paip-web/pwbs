@@ -36,6 +36,7 @@ Deprecated
 Removed
 ^^^^^^^
 - PWBS (Old version of PWBS runnning automation tasks for semantic versioning)
+- Handling STDOUT of Commands
 
 Fixed
 ^^^^^

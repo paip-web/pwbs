@@ -234,6 +234,7 @@ class PWBS(object):
     def special_tasks_interpreter(self):
         """Special Tasks Interpreter"""
         PWBS_EM = PWBSEventManager.getInstance()
+        special_task_executed = False
         PWBS_EM.startEvent(
             "pwbs-event--before-specialtask-verbose",
             this=self,
@@ -272,6 +273,7 @@ class PWBS(object):
                 this=self,
                 args=self.args
             )
+            special_task_executed = True
         if self.args.log is True:
             PWBS_EM.startEvent(
                 "pwbs-event--before-specialtask-log",
@@ -287,6 +289,7 @@ class PWBS(object):
                 logger=self.pwbscm.log,
                 args=self.args
             )
+            special_task_executed = True
         if self.args.logfile is not None:
             PWBS_EM.startEvent(
                 "pwbs-event--before-specialtask-logfile",
@@ -301,6 +304,7 @@ class PWBS(object):
                 logger=self.pwbscm.log,
                 args=self.args
             )
+            special_task_executed = True
         if self.args.configfile is not None:
             PWBS_EM.startEvent(
                 "pwbs-event--before-specialtask-configfile",
@@ -316,6 +320,7 @@ class PWBS(object):
                 logger=self.pwbscm.log,
                 args=self.args
             )
+            special_task_executed = True
         if self.args.test_mode is True:
             PWBS_EM.startEvent(
                 "pwbs-event--before-specialtask-test_mode",
@@ -331,6 +336,7 @@ class PWBS(object):
                 logger=self.pwbscm.log,
                 args=self.args
             )
+            special_task_executed = True
         if self.args.run_tests is True:
             PWBS_EM.startEvent(
                 "pwbs-event--before-specialtask-run_tests",
@@ -347,6 +353,8 @@ class PWBS(object):
                 this=self,
                 args=self.args
             )
+            special_task_executed = True
+        return special_task_executed
 
     def task_runner(self):
         """Task Runner"""
@@ -372,7 +380,7 @@ class PWBS(object):
                 "pwbs-event--pwbs_class-main-before-specialtaskinterpreter",
                 this=self
             )
-            self.special_tasks_interpreter()
+            special_task_executed = self.special_tasks_interpreter()
             PWBS_EM.startEvent(
                 "pwbs-event--pwbs_class-main-after-specialtaskinterpreter",
                 this=self
@@ -386,7 +394,7 @@ class PWBS(object):
                 "pwbs-event--pwbs_class-main-after-taskinterpreter",
                 this=self
             )
-            if len(self.args.Task) == 0:
+            if (len(self.args.Task) == 0) and (not special_task_executed):
                 self.argparser.print_help()
 
         except NotImplementedFeatureError as e:
