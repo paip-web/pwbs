@@ -9,12 +9,12 @@ with additional group for informations,
 and this project adheres to `Semantic Versioning
 <https://semver.org/spec/v2.0.0.html>`_.
 
-[Unreleased]
-------------
+[0.5.0-dev0] - 2019-05-16
+-------------------------
 
-.. Informations
-.. ^^^^^^^^^^^^
-.. - `Release 11 (pwbs 0.5.0.dev0) <https://pypi.org/project/pwbs/0.5.0.dev0/>`_
+Informations
+^^^^^^^^^^^^
+- `Release 11 (pwbs 0.5.0.dev0) <https://pypi.org/project/pwbs/0.5.0.dev0/>`_
 
 Added
 ^^^^^

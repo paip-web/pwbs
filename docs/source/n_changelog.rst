@@ -17,6 +17,14 @@ Description::
 ----------
 
 * Code Style changes
+* Sentry Error Tracking
+* Help on no arguments
+* PWBS Event Manager (deprecated)
+* PWBS LCF Schema v.0.4
+* Deleted old PWBS used for automation
+* Stopped handling STDOUT of Commands
+* Base ChangeLog Format Changed
+* Some rephrase of Documentation
 
 **************
 Branch v.0.4.X
