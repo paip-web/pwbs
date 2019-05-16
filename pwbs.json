@@ -6,6 +6,13 @@
         "commit-patch" : "bumpversion --allow-dirty patch",
         "commit-level" : "bumpversion --allow-dirty releaselevel",
         "commit-serial" : "bumpversion --allow-dirty serial",
-        "ci" : "python ci.py"
+        "ci" : "python ci.py",
+        "make-release": {
+            "mode": "mc",
+            "commands": [
+                "python setup.py sdist",
+                "python setup.py bdist_wheel --universal"
+            ]
+        }
     }
 }

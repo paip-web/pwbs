@@ -13,40 +13,40 @@ and this project adheres to `Semantic Versioning
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 11 (pwbs 0.5.0.dev0) <https://pypi.org/project/pwbs/0.5.0.dev0/>`_
 
 Added
-^^^^^
+~~~~~
 - Sentry Error Tracking
 - Help on run without arguments
 - PWBS Event Manager
 - [Schema] PWBS Local Configuration File Schema Version v.0.4
 
 Changed
-^^^^^^^
+~~~~~~~
 - Changelog Format
 - Absolute Imports
 - Documentation Rephrase
 
 Deprecated
-^^^^^^^^^^
+~~~~~~~~~~
 - PWM (To change into internal functions or pwm as dependency)
 
 Removed
-^^^^^^^
+~~~~~~~
 - PWBS (Old version of PWBS runnning automation tasks for semantic versioning)
 - Handling STDOUT of Commands
 
 Fixed
-^^^^^
+~~~~~
 - Code Style
 
 [0.4.0-alpha0] - 2018-09-25
 ---------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 10 (pwbs 0.4.0a0) <https://pypi.org/project/pwbs/0.4.0a0/>`_
 - Release for blocking stable on Alpha Release
 
@@ -54,12 +54,12 @@ Informations
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 9 (pwbs 0.4.0.dev0) <https://pypi.org/project/pwbs/0.4.0.dev0/>`_
 - Complete Rewrite of PWBS
 
 Added
-^^^^^
+~~~~~
 - **[PWBS Functionality] Single Tasking**
 - **[PWBS Functionality] Multi Command Tasking**
 - CLI Argument Parsing using `argparse`
@@ -114,11 +114,11 @@ Added
 - Configuration to host documentation on ReadTheDocs
 
 Changed
-^^^^^^^
+~~~~~~~
 - Moved PWM to `lib/pwm`
 
 Removed
-^^^^^^^
+~~~~~~~
 - **[PWBS Functionality] Multi Tasking**
 - Task Interpreter
 - Special Commands Interpreter
@@ -131,48 +131,48 @@ Removed
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 8 (pwbs 0.3.0.dev1) <https://pypi.org/project/pwbs/0.3.0.dev1/>`_
 
 Added
-^^^^^
+~~~~~
 - Task Interpreter - Support for Multi Task
 
 [0.2.0-dev3] - 2017-12-20
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - Not Released on PyPi (Eventually it's not on in Release History)
 
 Changed
-^^^^^^^
+~~~~~~~
 - [PWM] Tests for PWM to check is Modules reads files correctly on whatever OS
 
 Fixed
-^^^^^
+~~~~~
 - File Path Errors (By base on Windows)
 
 [0.2.0-dev2] - 2017-12-16
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 7 (pwbs 0.2.0.dev2) <https://pypi.org/project/pwbs/0.2.0.dev2/>`_
 
 Fixed
-^^^^^
+~~~~~
 - Description Files
 
 [0.2.0-dev1] - 2017-12-16
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 6 (pwbs 0.2.0.dev1) <https://pypi.org/project/pwbs/0.2.0.dev1/>`_
 
 Added
-^^^^^
+~~~~~
 - Task Interpreter
 - Task Interpreter - Support for Single Tasks
 - Command Interpreter -> Normal Task Interpreter
@@ -182,11 +182,11 @@ Added
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 5 (pwbs 0.1.0.dev2) <https://pypi.org/project/pwbs/0.1.0.dev2/>`_
 
 Added
-^^^^^
+~~~~~
 - [PWBS CLI] Special Command --new-config
 - [PWBS CLI] Special Command --config <file>
 - PWBS Config Manager for loading Configuration File
@@ -195,28 +195,28 @@ Added
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 4 (pwbs 0.1.0.dev1) <https://pypi.org/project/pwbs/0.1.0.dev1/>`_
 
 Added
-^^^^^
+~~~~~
 - Documentation Base
 - Test for PWBS Module
 - [PWM] Tests for PAiP Web Modules
 
 Fixed
-^^^^^
+~~~~~
 - Package Description
 
 [0.0.1-dev4] - 2017-12-12
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 3 (pwbs 0.0.1.dev4) <https://pypi.org/project/pwbs/0.0.1.dev4/>`_
 
 Added
-^^^^^
+~~~~~
 - AUTHORS File
 - Contribution Guide
 - Error List
@@ -231,11 +231,11 @@ Added
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - `Release 2 (pwbs 0.0.1.dev3) <https://pypi.org/project/pwbs/0.0.1.dev3/>`_
 
 Added
-^^^^^
+~~~~~
 - Full Baner with Debug Information in verbose modes [PWBS CLI]
 - Description for Package on PyPi
 - Basic Test for PWBS
@@ -245,12 +245,12 @@ Added
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - First Release on PyPi
 - `Release 1 (pwbs 0.0.1.dev2) <https://pypi.org/project/pwbs/0.0.1.dev2/>`_
 
 Changed
-^^^^^^^
+~~~~~~~
 - README File
 - Ready To Release Improvements
 
@@ -258,7 +258,7 @@ Changed
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - PAiP Web Modules
     -
         It's was an idea as simple modules which act
@@ -268,7 +268,7 @@ Informations
         writed in pwbs as internal dependency
 
 Added
-^^^^^
+~~~~~
 - Setup Configuration for Release to PyPi
 - PyLint Configuration
 - Coverage Configuration
@@ -285,14 +285,14 @@ Added
 -------------------------
 
 Changed
-^^^^^^^
+~~~~~~~
 - Version Change for checking bumpversion configuration
 
 [0.0.0-dev4] - 2017-12-08
 -------------------------
 
 Added
-^^^^^
+~~~~~
 - Tests for checking is Python working correctly
 - Started working on base Python Module
 
@@ -300,11 +300,11 @@ Added
 -------------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - First Commit on GitLab Repository of PWBS Project
 
 Added
-^^^^^
+~~~~~
 - PAiP Web Build System Edition 1 - v.0.9.1.0
 - GitLab Repository for Project
 - Base requirements file
@@ -316,10 +316,10 @@ Added
 --------------------
 
 Informations
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 - Actual Versions of PWBS are based on single file implementation of pwbs ideas
 - These Version of PWBS starts work on PAiP Web Build System Edition 2 Project
 
 Added
-^^^^^
+~~~~~
 - PAiP Web Build System Edition 1 - v.0.9.1.0
