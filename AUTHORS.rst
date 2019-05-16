@@ -4,7 +4,7 @@ Credits
 Development Lead
 ----------------
 
-* Patryk Adamczyk <patrykadamczyk@paipweb.com>
+* Patryk Adamczyk <patrykadamczyk@patrykadamczyk.net>
 
 Contributors
 ------------

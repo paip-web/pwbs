@@ -5,25 +5,33 @@ PAiP Web Build System
 *********************************
 Documented Version : v.0.4.0-dev0
 *********************************
-.. image:: https://badge.fury.io/py/pwbs.svg
-    :target: https://badge.fury.io/py/pwbs
-.. image:: https://img.shields.io/pypi/l/pwbs.svg
-.. image:: https://img.shields.io/pypi/wheel/pwbs.svg
-.. image:: https://img.shields.io/pypi/format/pwbs.svg
-.. image:: https://img.shields.io/pypi/implementation/pwbs.svg
-.. image:: https://img.shields.io/pypi/pyversions/pwbs.svg
-.. image:: https://img.shields.io/pypi/status/pwbs.svg
-.. image:: https://img.shields.io/pypi/v/pwbs.svg
-    :target: https://pypi.org/project/pwbs/
-.. image:: https://readthedocs.org/projects/pwbs/badge/?version=latest
-    :target: http://pwbs.readthedocs.io/en/latest/?badge=latest
 
-PWBS is Build System for easy automation process.
+**PWBS** is Build System for easy automation process.
 This project makes one command for all what you can't remember or it's just too long to rewrite all over every time.
 
 
-* Free software: MIT license
-* PyPi Package: https://pypi.python.org/pypi/pwbs/ or https://pypi.org/project/pwbs/
+* Licensed under MIT License
+    *
+        .. image:: https://img.shields.io/pypi/l/pwbs.svg
+            :target: https://gitlab.com/paip-web/pwbs/blob/master/LICENSE
+* PyPi Package: https://pypi.org/project/pwbs/
+    *
+        .. image:: https://img.shields.io/pypi/v/pwbs.svg
+            :target: https://pypi.org/project/pwbs/
+    *
+        .. image:: https://badge.fury.io/py/pwbs.svg
+            :target: https://badge.fury.io/py/pwbs
+    *
+        .. image:: https://img.shields.io/pypi/status/pwbs.svg
+    *
+        .. image:: https://img.shields.io/pypi/format/pwbs.svg
+    *
+        .. image:: https://img.shields.io/pypi/implementation/pwbs.svg
+        .. image:: https://img.shields.io/pypi/pyversions/pwbs.svg
+* Documentation on **readthedocs.io**
+    *
+        .. image:: https://readthedocs.org/projects/pwbs/badge/?version=latest
+            :target: http://pwbs.readthedocs.io/en/latest/?badge=latest
 
 Features
 --------
@@ -42,7 +50,7 @@ Credits
 Development Lead
 ----------------
 
-* Patryk Adamczyk <patrykadamczyk@paipweb.com>
+* Patryk Adamczyk <patrykadamczyk@patrykadamczyk.net>
 
 Contributors
 ------------

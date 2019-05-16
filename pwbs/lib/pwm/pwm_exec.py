@@ -38,9 +38,9 @@ def execute_generator(command):
     Yields:
         :obj:`str`: Returning Output of Command
     """
-    from subprocess import run, PIPE
+    from subprocess import run
     if isinstance(command, list):
         for cmd in command:
-            yield run(cmd, shell=True, stdout=PIPE).stdout
+            yield run(cmd, shell=True)
     else:
-        yield run(command, shell=True, stdout=PIPE).stdout
+        yield run(command, shell=True)

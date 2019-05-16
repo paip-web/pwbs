@@ -241,16 +241,6 @@ class Command(object):
                 execute_generator(self.commands)):
             # Log Execute
             self._log.log_verbose('Executing "{0}"...'.format(cmd_in), 2)
-
-            def prefixer(text):
-                """Custom prefixer function needed only in that function"""
-                return "[{0}]: {1}".format(
-                    datetime.now().strftime("%H:%M:%S"),
-                    text)
-            # Log Output
-            self._log.log(
-                cmd_out.decode("utf-8"),
-                prefixer)
         # Log Finish
         self._log.log_verbose("Finished {0} Task...".format(self.name), 1)
 

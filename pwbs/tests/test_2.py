@@ -45,7 +45,7 @@ def test_2_1():
     from ..config.config_manager import PWBSInvalidConfigFile
     # Values
     try:
-        t1 = ConfigManager("pwbs.json")
+        t1 = ConfigManager("pwbs.test.json")
         t1.write(t1.load())
     except PWBSConfigFileDontExistError:
         assert True # It's Working

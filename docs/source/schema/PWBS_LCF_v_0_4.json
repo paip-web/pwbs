@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "description": "PAiP Web Build System - LCF Working Draft [Last-Modified: 03.09.2018] [PWBS Local Configuration File] [Filename: pwbs.json]",
+    "description": "PAiP Web Build System - LCF v.0.4 [PWBS Local Configuration File] [Filename: pwbs.json]",
     "type": "object",
     "definitions": {
         "command" : {
