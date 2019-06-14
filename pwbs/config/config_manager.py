@@ -10,8 +10,9 @@ LICENSE - MIT
 from __future__ import print_function
 from os import getcwd
 from os.path import isfile
-from ..lib.pwm.pwm_json import JSON_IO
-from ..lib.pwm.pwm_system import SystemVersion
+from pwbs.lib.pwm.pwm_json import JSON_IO
+from pwbs.lib.pwm.pwm_system import SystemVersion
+
 
 # Class Definition
 
@@ -30,6 +31,7 @@ class ConfigManager(object):
     """Config Manager Class
     This class is for Managing Config File.
     """
+
     def __init__(self, filename="pwbs.json"):
         """Constructor of the class"""
         """Configuration File Name"""

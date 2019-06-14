@@ -11,8 +11,8 @@ LICENSE - MIT
 # Imports
 
 import abc
-from .pwbs_event_manager import PWBSEventManager
-from .plugin_event_manager import PluginEventManager
+from pwbs.api.pwbs_event_manager import PWBSEventManager
+from pwbs.api.plugin_event_manager import PluginEventManager
 
 # Underscore Variables
 
@@ -24,6 +24,7 @@ __license__ = 'MIT'
 __docformat__ = 'restructuredtext en'
 
 # Plugin Class
+
 
 class BasePlugin(object):
     """Base Plugin Class"""
@@ -37,18 +38,20 @@ class BasePlugin(object):
         # PWBS Plugin Event Manager
         self.event_manager = PluginEventManager.initialize()
 
-
     def __call__(self, **kwargs):
         """Call magic method of BasePlugin Class
         It's called upon initilization of Plugin.
         """
-        self.event_manager.startEvent("pwbs-event--plugin-main-start", args=kwargs, this=self)
+        self.event_manager.startEvent(
+            "pwbs-event--plugin-main-start", args=kwargs, this=self)
         self.main()
-        self.event_manager.startEvent("pwbs-event--plugin-main-end", args=kwargs, this=self)
+        self.event_manager.startEvent(
+            "pwbs-event--plugin-main-end", args=kwargs, this=self)
 
     def __del__(self):
         """Destructor"""
-        self.event_manager.startEvent("pwbs-event--plugin-uninitialize", this=self)
+        self.event_manager.startEvent(
+            "pwbs-event--plugin-uninitialize", this=self)
 
     @abc.abstractmethod
     def main(self):

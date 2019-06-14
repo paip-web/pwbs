@@ -8,7 +8,7 @@ LICENSE - MIT
 """
 # Imports
 from __future__ import print_function
-from ..core import prefix_text
+from pwbs.core import prefix_text
 
 # Class Definition
 
@@ -22,6 +22,7 @@ class BaseLogger(object):
     """Base Logger Class
     Logging to STDOUT.
     """
+
     def __init__(self):
         """Constructor of the Class"""
         """Story Log for Delayed Debug"""
@@ -138,6 +139,7 @@ class LogLogger(BaseLogger):
     """Base Logger Class
     Logging to variable and can to file.
     """
+
     def __init__(self):
         """Constructor of the Class"""
         """Story Log Variable"""
@@ -288,7 +290,7 @@ class LogLogger(BaseLogger):
         Args:
             file (:obj:`str`): Filename to write log
         """
-        #print(self.story)
+        # print(self.story)
         if file is None:
             file = self.logfile
         with open(file, mode="w") as f:
@@ -299,6 +301,7 @@ class Logger(BaseLogger):
     """Logger Class
     Logging to variable and to STDOUT.
     """
+
     def __init__(self):
         """Constructor of the Class"""
         """Variable Logger"""
