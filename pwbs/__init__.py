@@ -38,6 +38,7 @@ def main():
         "https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213",
         release=("{0}@{1}".format(__title__, __version__))
     )
+
     with sentry_sdk.configure_scope() as scope:
         sys_info = SystemVersion()
         scope.set_extra("network_name", sys_info.network_name)
@@ -56,6 +57,7 @@ def main():
                 sys_info.system_version
             )
         )
+
     # Initialize PWBS Event Manager
     pwbs_em = PWBSEventManager.initialize()
     pwbs_class_var = PWBS()
