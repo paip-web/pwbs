@@ -27,7 +27,7 @@ __docformat__ = 'restructuredtext en'
 import sentry_sdk
 from pwbs.pwbs_class import PWBS
 from pwbs.api.pwbs_event_manager import PWBSEventManager
-
+from pwbs.lib.pwm.pwm_system import SystemVersion
 
 # Running as pwbs command
 

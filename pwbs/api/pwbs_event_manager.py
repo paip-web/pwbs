@@ -86,47 +86,35 @@ class PWBSEventManager(object):
         # PWBS Event Called in pwbs.pwbs_class.PWBS.__init__ after parser_initializer being called
         PWBS_EM.createEvent("pwbs-event--pwbs_class-after-parser_initializer")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.parser_initializer after specialtasks group is created
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-parser_initializer-specialtasks-groupcreated-start")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-parser_initializer-specialtasks-groupcreated-start")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.parser_initializer after specialtasks group has added all PWBS special tasks
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-parser_initializer-specialtasks-groupcreated-end")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-parser_initializer-specialtasks-groupcreated-end")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.parser_initializer after localconfigtasks group is created
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-parser_initializer-localconfigtasks-groupcreated")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-parser_initializer-localconfigtasks-groupcreated")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.__init__ before PWBS Config Manager is created
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-before-configmanager-created")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-before-configmanager-created")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.__init__ after PWBS Config Manager is created
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-after-configmanager-created")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-after-configmanager-created")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.__init__ in "Try for errors" block if there are errors
         PWBS_EM.createEvent("pwbs-event--pwbs_class-configmanager-errored")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.localconfig_parser_initializer at start of function
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-localconfig_parser_initilizer-started")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-localconfig_parser_initilizer-started")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.localconfig_parser_initializer on every element in CommandList object from Configuration Manager
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-localconfig_parser_initilizer-command-listitem")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-localconfig_parser_initilizer-command-listitem")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main before argparser.parse_args()
         PWBS_EM.createEvent("pwbs-event--pwbs_class-main-before-parseargs")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main after argparser.parse_args()
         PWBS_EM.createEvent("pwbs-event--pwbs_class-main-after-parseargs")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main before special_tasks_interpreter being called
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-main-before-specialtaskinterpreter")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-main-before-specialtaskinterpreter")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main after special_tasks_interpreter being called
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-main-after-specialtaskinterpreter")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-main-after-specialtaskinterpreter")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main before task_runner being called
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-main-before-taskinterpreter")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-main-before-taskinterpreter")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main after task_runner being called
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-main-after-taskinterpreter")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-main-after-taskinterpreter")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.main on throwing NotImplmentedError
-        PWBS_EM.createEvent(
-            "pwbs-event--pwbs_class-main-notimplementedfeatureerror")
+        PWBS_EM.createEvent("pwbs-event--pwbs_class-main-notimplementedfeatureerror")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.special_tasks_interpreter before verbose Special Task
         PWBS_EM.createEvent("pwbs-event--before-specialtask-verbose")
         # PWBS Event Called in pwbs.pwbs_class.PWBS.special_tasks_interpreter before debug Special Task
