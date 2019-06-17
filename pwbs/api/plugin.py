@@ -42,16 +42,13 @@ class BasePlugin(object):
         """Call magic method of BasePlugin Class
         It's called upon initilization of Plugin.
         """
-        self.event_manager.startEvent(
-            "pwbs-event--plugin-main-start", args=kwargs, this=self)
+        self.event_manager.startEvent("pwbs-event--plugin-main-start", args=kwargs, this=self)
         self.main()
-        self.event_manager.startEvent(
-            "pwbs-event--plugin-main-end", args=kwargs, this=self)
+        self.event_manager.startEvent("pwbs-event--plugin-main-end", args=kwargs, this=self)
 
     def __del__(self):
         """Destructor"""
-        self.event_manager.startEvent(
-            "pwbs-event--plugin-uninitialize", this=self)
+        self.event_manager.startEvent("pwbs-event--plugin-uninitialize", this=self)
 
     @abc.abstractmethod
     def main(self):
