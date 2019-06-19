@@ -9,6 +9,40 @@ with additional group for informations,
 and this project adheres to `Semantic Versioning
 <https://semver.org/spec/v2.0.0.html>`_.
 
+[0.6.0-dev0] - Unreleased
+-------------------------
+
+Informations
+~~~~~~~~~~~~
+- Rewrite of Project
+- Regressions:
+
+    - X
+
+Added
+^^^^^
+- X
+
+Changed
+^^^^^^^
+- X
+
+Deprecated
+^^^^^^^^^^
+- X
+
+Removed
+^^^^^^^
+- X
+
+Fixed
+^^^^^
+- X
+
+Security
+^^^^^^^^
+- X
+
 [0.5.0-dev2] - 2019-06-19
 -------------------------
 
