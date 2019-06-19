@@ -11,7 +11,7 @@ LICENSE - MIT
 """
 # Imports
 
-from .event_manager import EventManager
+from pwbs.api.event_manager import EventManager
 
 # Underscore Variables
 

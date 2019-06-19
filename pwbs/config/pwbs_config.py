@@ -8,16 +8,16 @@ LICENSE - MIT
 """
 # Imports
 from __future__ import print_function
-from ..log.logger import Logger
-from .config_manager import ConfigManager, PWBSInvalidConfigFile
-from ..command.command import Command, CommandList
-from ..command.command import CommandType, Platform, CommandMode
-
+from pwbs.log.logger import Logger
+from pwbs.config.config_manager import ConfigManager, PWBSInvalidConfigFile
+from pwbs.command.command import Command, CommandList
+from pwbs.command.command import CommandType, Platform, CommandMode
 # Class Definition
 
 
 class PWBS_ConfigManager(object):
     """PWBS Config Class"""
+
     def __init__(self):
         """Constructor of the Class"""
         # Variables

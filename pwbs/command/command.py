@@ -12,10 +12,10 @@ LICENSE - MIT
 # Imports
 from __future__ import print_function
 from enum import Enum
+import sentry_sdk
 from datetime import datetime
-from ..lib.pwm.pwm_exec import execute_generator
-from ..log.logger import Logger
-
+from pwbs.lib.pwm.pwm_exec import execute_generator
+from pwbs.log.logger import Logger
 # Class Definition
 
 
@@ -133,6 +133,7 @@ class Command(object):
     This class is for making Commands [Tasks].
     This class is for making Commands File Interpreter too.
     """
+
     def __init__(
             self,
             name,
@@ -192,6 +193,15 @@ class Command(object):
 
     def run(self):
         """Run Function of Command"""
+        with sentry_sdk.configure_scope() as scope:
+            scope.set_extra("task_name", self.name)
+            scope.set_extra("task_type", self.type)
+            scope.set_extra("task_commands", self.commands)
+            scope.set_extra("task_comment", self.comment)
+            scope.set_extra("task_mode", self.mode)
+            scope.set_extra("task_arguments", self.arguments)
+            scope.set_extra("task_platform", self.platform)
+
         # Type Checking and running special function for type
         if self.type is CommandType.SingleTask:
             # Single Task
@@ -295,6 +305,7 @@ class CommandList(object):
     """Command List Class
     This class is to make custom list type for Command Class.
     """
+
     def __init__(self, value: Command) -> None:
         """Constructor of the Class"""
         self.values = value

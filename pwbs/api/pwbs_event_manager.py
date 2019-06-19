@@ -10,7 +10,7 @@ LICENSE - MIT
 """
 # Imports
 
-from ..lib.singleton import SingletonException
+from pwbs.lib.singleton import SingletonException
 
 # Underscore Variables
 
@@ -23,8 +23,10 @@ __docformat__ = 'restructuredtext en'
 
 # Event Manager Class
 
+
 class PWBSEventManager(object):
     """PWBS Event Manager Class"""
+
     def createEvent(self, name, handlers=None):
         """Create Event"""
         if handlers is None:
