@@ -13,6 +13,13 @@ Description::
     # - Quality of Life improvements
     # - Upgrades to newer versions of dependendencies
 
+0.5.0-dev1
+----------
+* Relative imports changed to absolute imports
+* Added more information on Error Dumping
+
+    It's for better understanding errors on Sentry
+
 0.5.0-dev0
 ----------
 

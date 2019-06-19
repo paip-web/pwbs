@@ -11,8 +11,8 @@ LICENSE - MIT
 # Imports
 
 import abc
-from .pwbs_event_manager import PWBSEventManager
-from .plugin_event_manager import PluginEventManager
+from pwbs.api.pwbs_event_manager import PWBSEventManager
+from pwbs.api.plugin_event_manager import PluginEventManager
 
 # Underscore Variables
 
@@ -25,6 +25,7 @@ __docformat__ = 'restructuredtext en'
 
 # Plugin Class
 
+
 class BasePlugin(object):
     """Base Plugin Class"""
     # Abstract Class Metaclass
@@ -36,7 +37,6 @@ class BasePlugin(object):
         self._pwbsem = PWBSEventManager.getInstance()
         # PWBS Plugin Event Manager
         self.event_manager = PluginEventManager.initialize()
-
 
     def __call__(self, **kwargs):
         """Call magic method of BasePlugin Class
