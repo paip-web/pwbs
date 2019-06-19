@@ -25,9 +25,6 @@ __docformat__ = 'restructuredtext en'
 # Imports
 
 import sentry_sdk
-from pwbs.pwbs_class import PWBS
-from pwbs.api.pwbs_event_manager import PWBSEventManager
-from pwbs.lib.pwm.pwm_system import SystemVersion
 
 # Running as pwbs command
 
@@ -39,41 +36,7 @@ def main():
         release=("{0}@{1}".format(__title__, __version__))
     )
 
-    with sentry_sdk.configure_scope() as scope:
-        sys_info = SystemVersion()
-        scope.set_extra("network_name", sys_info.network_name)
-        scope.set_extra(
-            "python_version",
-            "{0} v{1} compiled with {2}".format(
-                sys_info.python_implementation,
-                sys_info.python_version,
-                sys_info.python_compiler,
-            )
-        )
-        scope.set_extra(
-            "os_version",
-            "{0} {1}".format(
-                sys_info.system_system,
-                sys_info.system_version
-            )
-        )
-
-    # Initialize PWBS Event Manager
-    pwbs_em = PWBSEventManager.initialize()
-    pwbs_class_var = PWBS()
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-initialized",
-        pwbs_var=pwbs_class_var
-    )
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-before-main",
-        pwbs_var=pwbs_class_var
-    )
-    pwbs_class_var.main()
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-after-main",
-        pwbs_var=pwbs_class_var
-    )
+    print('PAiP Web Build System v.{0}'.format(__version__))
 
 
 if __name__ == '__main__':
