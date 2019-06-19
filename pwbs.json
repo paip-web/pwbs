@@ -13,6 +13,7 @@
                 "python setup.py sdist",
                 "python setup.py bdist_wheel --universal"
             ]
-        }
+        },
+        "publish-pypi": "twine upload dist/*"
     }
 }

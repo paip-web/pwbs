@@ -14,7 +14,7 @@ LICENSE - MIT
 """Title of Program"""
 __title__ = 'pwbs'
 """Version of Program"""
-__version__ = '0.5.0-dev0'
+__version__ = '0.5.0-dev1'
 """Author of the module"""
 __author__ = 'Patryk Adamczyk'
 """Module License"""
