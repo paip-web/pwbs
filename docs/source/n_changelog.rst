@@ -13,7 +13,7 @@ Description::
     # - Quality of Life improvements
     # - Upgrades to newer versions of dependendencies
 
-0.5.0-dev1
+0.5.0-dev2
 ----------
 * Relative imports changed to absolute imports
 * Added more information on Error Dumping
