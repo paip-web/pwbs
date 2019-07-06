@@ -112,3 +112,8 @@ venv.bak/
 .vscode/
 # PyCharm
 .idea/
+# Floo
+.floo
+.flooignore
+# Pytest
+.pytest_cache

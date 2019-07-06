@@ -12,6 +12,8 @@ from pwbs.core.event_sourcing.event import Event
 from pwbs.core.event_sourcing.event_bus import EventBus
 from pwbs.core.event_sourcing.queue_change_handler import QueueChangeHandler
 from pwbs.core.exceptions.event_handle_not_implemented import EventHandleNotImplemented
+from abc import ABC
+from abc import abstractmethod
 from typing import List
 
 # Underscore Variables
@@ -23,13 +25,18 @@ __license__ = 'MIT'
 """Documentation format"""
 __docformat__ = 'restructuredtext en'
 
-class EventHandler(QueueChangeHandler):
+class EventHandler(QueueChangeHandler, ABC):
     """
     Event Handler Class
     :argument str queue_name: Event Queue Name which this handler is for
     """
-    # Event Queue Name
-    queue: str = ''
+    @property
+    @abstractmethod
+    def queue(self):
+        """
+        Event Queue Name
+        """
+        return self.queue
 
     def __init__(self, queue_name: str):
         super().__init__(queue_name, None)

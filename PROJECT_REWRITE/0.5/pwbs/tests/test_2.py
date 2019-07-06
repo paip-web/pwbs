@@ -13,7 +13,7 @@ Test 2
 Tests for v0.4.0dev0 | pwbs.config
 ================
 Test 2.0 - 2.1 - pwbs.config.config_manager.*
-# Test 2.0 - Exceptions Tests
+# Test 2.0 - exceptions Tests
 # Test 2.1 - Config Manager Tests
 # Test 2.2 - pwbs.config.pwbs_config.PWBS_ConfigManager
 """
@@ -21,7 +21,7 @@ Test 2.0 - 2.1 - pwbs.config.config_manager.*
 
 
 def test_2_0():
-    """Testing Exceptions"""
+    """Testing exceptions"""
     # Import
     from ..config.config_manager import PWBSConfigFileDontExistError
     from ..config.config_manager import PWBSInvalidConfigFile

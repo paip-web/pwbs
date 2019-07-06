@@ -18,7 +18,7 @@ __author__ = 'Patryk Adamczyk'
 __license__ = 'MIT'
 """Documentation format"""
 __docformat__ = 'restructuredtext en'
-# Special Exceptions
+# Special exceptions
 
 
 class TestSucceed(Exception):
@@ -162,7 +162,7 @@ def test_runner():
     # # Test 2.0
     run_test(test_2_0,
              "2.0",
-             "Testing Exceptions",
+             "Testing exceptions",
              "pwbs.config.config_manager.* : Exception",
              False)
     # # Test 2.1
