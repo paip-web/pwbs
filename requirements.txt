@@ -20,7 +20,7 @@ pylint==1.7.4
 python-dateutil==2.6.1
 requests==2.18.4
 six==1.11.0
-urllib3==1.22
+urllib3==1.24.2
 wcwidth==0.1.7
 whichcraft==0.4.1
 wrapt==1.10.11
