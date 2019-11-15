@@ -6,7 +6,7 @@ jobs:
   tests:
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 4
+      max-parallel: 9
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
         python-version: [3.6, 3.7, 3.8]
@@ -33,4 +33,4 @@ jobs:
     - name: Lint with pylint
       continue-on-error: true
       run: |
-        pylint
+        pylint **/*.py
