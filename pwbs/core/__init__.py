@@ -10,6 +10,8 @@ LICENSE - MIT
 """
 # Imports
 from datetime import datetime
+from pwbs.core.event_manager import EventManager
+from pwbs.core.service_manager import ServiceManager
 
 # Underscore Variables
 
@@ -21,6 +23,8 @@ __license__ = 'MIT'
 __docformat__ = 'restructuredtext en'
 
 # Globals for PWBS
+service_manager = ServiceManager()
+event_manager = EventManager()
 
 
 def prefix_text(text=""):
