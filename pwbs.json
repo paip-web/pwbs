@@ -6,7 +6,7 @@
         "commit-patch" : "bumpversion --allow-dirty patch",
         "commit-level" : "bumpversion --allow-dirty releaselevel",
         "commit-serial" : "bumpversion --allow-dirty serial",
-        "ci" : "python ci.py",
+        "ci" : "nodemon -e \"py\" -x \"cls && python -m pwbs --run-tests\"",
         "make-release": {
             "mode": "mc",
             "commands": [
