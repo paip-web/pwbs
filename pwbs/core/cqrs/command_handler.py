@@ -32,7 +32,6 @@ class CommandHandler(CommandQueueChangeHandler, ABC):
     :argument str queue_name: Command Queue Name which this handler is for
     """
     @property
-    @abstractmethod
     def queue(self):
         """
         Command Queue Name

@@ -25,7 +25,8 @@ __docformat__ = 'restructuredtext en'
 BusType = TypeVar("BusType")
 HandlerType = TypeVar("HandlerType")
 
-class Bus(object, Generic[BusType, HandlerType]):
+
+class Bus(Generic[BusType, HandlerType]):
     """
     This is Bus Class which is responsible for managing Elements in Queues.
     """

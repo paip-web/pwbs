@@ -37,8 +37,12 @@ class CommandBus(Bus[Command, CommandHandler]):
         :param str queue_name: Queue Name to Emit Change to
         :param Event new_event: New Element which was added to Elements Queue
         """
-        event_handler = self.get_handlers(queue_name)
-        event_handler(new_event, self[queue_name], queue_name, self)
+        event_handlers = self.get_handlers(queue_name)
+        for event_handler in event_handlers:
+            try:
+                event_handler(new_event, self[queue_name], queue_name, self)
+            except AttributeError:
+                pass
         self.delete_event_from_queue(queue_name, new_event.__type__)
 
     def update_handlers(self, queue_name: str, new_handler: CommandHandler) -> None:
@@ -58,3 +62,7 @@ class CommandBus(Bus[Command, CommandHandler]):
         for i, command in enumerate(self.queues[queue]):
             if command.__type__ is command_type:
                 del self.queues[queue][i]
+
+    def handler(self, cls) -> None:
+        self.add_handler(cls)
+        return None

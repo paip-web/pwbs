@@ -25,7 +25,7 @@ setup_requirements: list = [
 # Test Requirements Variable
 test_requirements: list = [
     # Test Requirements
-    'green',
+    'pylint',
     'pytest',
     'coverage'
 ]
@@ -116,7 +116,7 @@ setup(
     # $ pip install -e .[dev,test]
     extras_require={
         'setup': ["wheel", "twine", "collective.checkdocs"],
-        'test': ['green', 'pytest', 'coverage'],
+        'test': ['pylint', 'pytest', 'coverage'],
     },
 
     # If there are data files included in your packages that need to be
