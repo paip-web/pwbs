@@ -14,7 +14,7 @@ LICENSE - MIT
 """Title of Program"""
 __title__ = 'pwbs'
 """Version of Program"""
-__version__ = '0.5.0-dev2'
+__version__ = '0.6.0-dev0'
 """Author of the module"""
 __author__ = 'Patryk Adamczyk'
 """Module License"""
@@ -33,6 +33,7 @@ from pwbs.lib.pwm.pwm_system import SystemVersion
 
 def main():
     """Main Function of Program"""
+    print("PAiP Web Build System v.{0}".format(__version__))
     sentry_sdk.init(
         "https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213",
         release=("{0}@{1}".format(__title__, __version__))
