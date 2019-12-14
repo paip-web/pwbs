@@ -26,7 +26,6 @@ __docformat__ = 'restructuredtext en'
 
 import sentry_sdk
 from pwbs.pwbs_class import PWBS
-from pwbs.api.pwbs_event_manager import PWBSEventManager
 from pwbs.lib.pwm.pwm_system import SystemVersion
 
 # Running as pwbs command
@@ -58,22 +57,8 @@ def main():
             )
         )
 
-    # Initialize PWBS Event Manager
-    pwbs_em = PWBSEventManager.initialize()
     pwbs_class_var = PWBS()
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-initialized",
-        pwbs_var=pwbs_class_var
-    )
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-before-main",
-        pwbs_var=pwbs_class_var
-    )
     pwbs_class_var.main()
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-after-main",
-        pwbs_var=pwbs_class_var
-    )
 
 
 if __name__ == '__main__':
