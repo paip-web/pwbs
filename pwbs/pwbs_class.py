@@ -17,6 +17,7 @@ from pwbs.config.config_manager import ConfigManager
 from pwbs.config.pwbs_config import PWBS_ConfigManager as PWBS_CM
 from pwbs.core import NotImplementedFeatureError
 from pwbs.tests import test_runner
+from pwbs.lib.argparse_plugins import FileNameType
 
 # Underscore Variables
 
@@ -107,7 +108,7 @@ class PWBS(object):
             "--logfile",
             "--log-file",
             required=False,
-            type=ap.FileType("w"),
+            type=FileNameType("w"),
             help="""Specifying Log File
             \nDefault Log File: ./pwbs.log""")
         self.argparser_specialtasks.add_argument(
@@ -115,7 +116,7 @@ class PWBS(object):
             "--configfile",
             "--config-file",
             required=False,
-            type=ap.FileType("rw"),
+            type=FileNameType("r"),
             help="""Specifying Configuration File
             \nDefault Configuration File: ./pwbs.json""")
         self.argparser_specialtasks.add_argument(
