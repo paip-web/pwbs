@@ -149,7 +149,7 @@ class PWBS(object):
             self.pwbscm.log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
             self.pwbscm.log.log_debug(repr(e))
         except PWBSInvalidConfigFile as e:
-            if isinstance(self.pwbscm.configmanager.error,PWBSConfigFileDontExistError):
+            if isinstance(self.pwbscm.configmanager.error, PWBSConfigFileDontExistError):
                 self.pwbscm.log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
                 self.pwbscm.log.log_debug(repr(e))
             else:
@@ -168,18 +168,14 @@ class PWBS(object):
         if self.args.log is True:
             self.pwbscm.log.log_logger.activelogging = True
             self.pwbscm.log.log_file_write()
-            special_task_executed = True
         if self.args.logfile is not None:
             self.pwbscm.log.log_logger.logfile = self.args.logfile
-            special_task_executed = True
         if self.args.configfile is not None:
             self.pwbscm.config_manager = ConfigManager(self.args.configfile)
             self.localconfig_parser_initializer()
-            special_task_executed = True
         if self.args.test_mode is True:
             self.pwbscm.log.debug(True)
             self.pwbscm.log.verbose(255)
-            special_task_executed = True
         if self.args.run_tests is True:
             print("Test Runner Mode Activated!")
             test_runner()
