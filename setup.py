@@ -42,8 +42,8 @@ setup(
     # Description of the Package to show on PyPi (Longer Description)
     long_description=readme + '\n\n' + history,
 
-    # The Project Mainpage [For that project for now is just repository]
-    url='https://gitlab.com/paip-web/pwbs',
+    # The Project Main Page [For that project for now is just repository]
+    url='https://github.com/paip-web/pwbs',
 
     # Author Details
     author='Patryk Adamczyk',
@@ -63,7 +63,7 @@ setup(
         # 'Development Status :: 5 - Production/Stable'
         # 'Development Status :: 6 - Mature'
         # 'Development Status :: 7 - Inactive'
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
 
         # Indicate who your project is intended for
         'Intended Audience :: Developers',
@@ -115,7 +115,7 @@ setup(
     # for example:
     # $ pip install -e .[dev,test]
     extras_require={
-        'setup': ["wheel", "twine", "collective.checkdocs"],
+        'setup': ["wheel", "twine", "collective.checkdocs", "bumpversion"],
         'test': ['pylint', 'pytest', 'coverage'],
     },
 
