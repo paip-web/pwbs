@@ -12,6 +12,7 @@ LICENSE - MIT
 from datetime import datetime
 from pwbs.core.event_manager import EventManager
 from pwbs.core.service_manager import ServiceManager
+from pwbs.core.plugin_manager import PluginManager
 
 # Underscore Variables
 
@@ -25,6 +26,10 @@ __docformat__ = 'restructuredtext en'
 # Globals for PWBS
 service_manager = ServiceManager()
 event_manager = EventManager()
+"""Initialization of Service Manager"""
+service_manager['plugin_manager'] = PluginManager()
+service_manager['event_manager'] = event_manager
+service_manager['service_manager'] = service_manager
 
 
 def prefix_text(text=""):

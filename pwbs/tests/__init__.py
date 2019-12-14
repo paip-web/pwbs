@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """PAiP Web Build System - Tests Module
 This module contains tests in the submodules.
-In exacly this file is some functions for runnning tests from code.
+In exactly this file is some functions for running tests from code.
 READ - README.md in tests for rules of tests
 
 NAME - PAiP Web Build System
@@ -217,4 +217,17 @@ def test_runner():
              "Testing pwbs.log.logger.Logger",
              "pwbs.log.logger.Logger",
              False)
-
+    # ################## Test 7
+    from .test_7 import test_7_0, test_7_1
+    # # Test 7.0
+    run_test(test_7_0,
+             "7.0",
+             "Load example plugin",
+             "pwbs.core.plugin_manager",
+             False)
+    # # Test 7.1
+    run_test(test_7_1,
+             "7.1",
+             "Try load invalid plugin path",
+             "pwbs.core.plugin_manager",
+             False)
