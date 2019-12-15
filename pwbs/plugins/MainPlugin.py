@@ -39,7 +39,9 @@ class MainPlugin(Plugin):
             print("Not Implemented Feature Called!")
             print(e)
         except SystemExit as e:
-            event_manager('@pwbs/main/catch/SysExit', exception=e, *args, **kwargs)
+            event_manager('@pwbs/main/catch/SystemExit', exception=e, *args, **kwargs)
+        except KeyboardInterrupt as e:
+            event_manager('@pwbs/main/catch/KeyboardInterrupt', exception=e, *args, **kwargs)
         except BaseException as e:
             event_manager('@pwbs/main/catch', exception=e, *args, **kwargs)
             raise e
