@@ -37,6 +37,8 @@ class PluginManager:
     plugins: List[Plugin] = []
     """Seen Paths in loading"""
     seen_paths: List[str] = []
+    """Loaded Plugin Names"""
+    plugin_names: List[str] = []
 
     def __init__(self, plugin_packages: Union[List[str], None] = None):
         """
@@ -61,9 +63,19 @@ class PluginManager:
     def reload_plugins(self) -> None:
         """Reload Plugins"""
         self.plugins = []
+        self.plugin_names = []
         self.seen_paths = []
-        for plugin_package in self.plugin_packages:
+        plugin_packages = ['pwbs.plugins']
+        plugin_packages.extend(self.plugin_packages)
+        for plugin_package in plugin_packages:
             self.walk_package(plugin_package)
+
+    def get_loaded_plugin_names(self) -> List[str]:
+        """
+        Get Loaded Plugin Names
+        :return: Loaded Plugin Names
+        """
+        return self.plugin_names
 
     def init_plugins(self) -> None:
         """Init all plugins"""
@@ -89,6 +101,7 @@ class PluginManager:
                             # Only add classes that are a sub class of Plugin, but NOT Plugin itself
                             if issubclass(c, Plugin) & (c is not Plugin):
                                 self.plugins.append(c())
+                                self.plugin_names.append("{}::{}".format(plugin_name, c.__name__))
                     except ModuleNotFoundError:
                         pass
             # Now that we have looked at all the modules in the current package, start looking

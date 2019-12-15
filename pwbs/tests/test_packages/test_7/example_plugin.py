@@ -1,9 +1,28 @@
+# -*- coding: utf-8 -*-
+"""PAiP Web Build System - Example Plugin
+
+NAME - PAiP Web Build System
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+LICENSE - MIT
+"""
+# Imports
 from pwbs.api.plugin import Plugin
 
+# Underscore Variables
+"""Author of the module"""
+__author__ = 'Patryk Adamczyk'
+"""Module License"""
+__license__ = 'MIT'
+"""Documentation format"""
+__docformat__ = 'restructuredtext en'
+
+
 class ExamplePlugin(Plugin):
-    """Plugin Base Class"""
+    """Example Plugin Class"""
+
     def __init__(self):
         self.test = 21
+
     def init(self):
         """
         Plugin Initialization Method

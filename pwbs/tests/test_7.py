@@ -28,8 +28,8 @@ def test_7_0():
     pm.change_plugins([plugin_name])
     assert len(pm.plugin_packages) == 1
     assert pm.plugin_packages[0] == plugin_name
-    assert len(pm.plugins) == 1
-    assert pm.plugins[0].test == 22
+    assert len(pm.plugins) >= 1
+    assert pm.plugins[-1].test == 22
 
 
 def test_7_1():
@@ -42,4 +42,3 @@ def test_7_1():
     pm.change_plugins([plugin_name])
     assert len(pm.plugin_packages) == 1
     assert pm.plugin_packages[0] == plugin_name
-    assert len(pm.plugins) == 0

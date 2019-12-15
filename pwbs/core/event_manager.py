@@ -105,6 +105,7 @@ class EventManager:
         Execute Event
         :param event_name: Event to Execute
         """
+        kwargs['@event'] = event_name
         return Pipeline.from_list(self.get_event(event_name))(*args, **kwargs)
 
     def handler_decorator(self, event_name: EventName):

@@ -15,10 +15,10 @@ from pwbs.command.command import CommandType, Platform, CommandMode
 # Class Definition
 
 
-class PWBS_ConfigManager(object):
+class PWBS_ConfigManager:
     """PWBS Config Class"""
 
-    def __init__(self):
+    def __init__(self, filename="pwbs.json"):
         """Constructor of the Class"""
         # Variables
         """Logger"""
@@ -28,7 +28,7 @@ class PWBS_ConfigManager(object):
         """Debug Mode"""
         self.debug = False
         """Config File Manager"""
-        self.configmanager = ConfigManager()
+        self.configmanager = ConfigManager(filename)
         """Commands"""
         self.commands = CommandList([])
         # Constructor Methods
@@ -104,63 +104,63 @@ class PWBS_ConfigManager(object):
                     platform))
         self.commands = CommandList(commands)
 
+    @staticmethod
     def ctcl__cmdtype(commandbody):
         ct = commandbody["mode"]
         if ct == "st":
             return CommandType.SingleTask
-        elif ct == "mt":
+        if ct == "mt":
             return CommandType.MultiTask
-        elif ct == "mc":
+        if ct == "mc":
             return CommandType.MultiCommandTask
-        elif ct == "wc0" or ct == "wc":
+        if ct in ("wc0", "wc"):
             return CommandType.WatcherTask
-        elif ct == "sc0" or ct == "sc":
+        if ct in ("sc0", "sc"):
             return CommandType.SchedulerTask
         return CommandType.ErrorTask
 
+    @staticmethod
     def ctcl__comment(commandbody):
         return commandbody["comment"]
 
+    @staticmethod
     def ctcl__cmdmode(commandbody):
         ct = commandbody["mode"]
         if ct == "st":
             return CommandMode.SingleTask_Standard
-        elif ct == "mt":
+        if ct == "mt":
             return CommandMode.MultiTask_Standard
-        elif ct == "mc":
+        if ct == "mc":
             return CommandMode.MultiCommandTask_Standard
-        elif ct == "wc0":
+        if ct == "wc0":
             return CommandMode.WatcherTask_StartAndRun
-        elif ct == "wc":
+        if ct == "wc":
             return CommandMode.WatcherTask_StartAndWait
-        elif ct == "sc0":
+        if ct == "sc0":
             return CommandMode.SchedulerTask_StartAndRun
-        elif ct == "sc":
+        if ct == "sc":
             return CommandMode.SchedulerTask_StartAndWait
         return CommandMode.ErrorTask_ErrorMode
 
+    @staticmethod
     def ctcl__arguments(commandbody):
         return commandbody["context"]
 
+    @staticmethod
     def ctcl__commands(commandbody):
         return commandbody["commands"]
 
+    @staticmethod
     def ctcl__platform(commandbody):
         ct = commandbody["platform"]
         if isinstance(ct, int):
             return Platform(ct)
-        elif isinstance(ct, str):
-            if ct.lower() == "windows" or ct.lower() == "win":
+        if isinstance(ct, str):
+            if ct.lower() in ("windows", "win"):
                 return Platform.Windows
-            elif ct.lower() == "linux" or ct.lower() == "lin":
+            if ct.lower() in ("linux", "lin"):
                 return Platform.Linux
-            elif ct.lower() == "macos":
+            if ct.lower() in ("macos", "macosx", "mac"):
                 return Platform.MacOS
-            elif ct.lower() == "macosx":
-                return Platform.MacOS
-            elif ct.lower() == "mac":
-                return Platform.MacOS
-            else:
-                return Platform.Other
-        else:
-            raise ValueError("Not Supported Type for that operation")
+            return Platform.Other
+        raise ValueError("Not Supported Type for that operation")

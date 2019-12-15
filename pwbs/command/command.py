@@ -12,8 +12,8 @@ LICENSE - MIT
 # Imports
 from __future__ import print_function
 from enum import Enum
+from typing import List
 import sentry_sdk
-from datetime import datetime
 from pwbs.lib.pwm.pwm_exec import execute_generator
 from pwbs.log.logger import Logger
 # Class Definition
@@ -128,7 +128,7 @@ class CommandMode(Enum):
     ErrorMode = 0xFFFFFFFF
 
 
-class Command(object):
+class Command:
     """Command Class
     This class is for making Commands [Tasks].
     This class is for making Commands File Interpreter too.
@@ -306,7 +306,7 @@ class CommandList(object):
     This class is to make custom list type for Command Class.
     """
 
-    def __init__(self, value: Command) -> None:
+    def __init__(self, value: List[Command]) -> None:
         """Constructor of the Class"""
         self.values = value
 

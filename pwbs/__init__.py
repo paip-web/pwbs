@@ -25,8 +25,9 @@ __docformat__ = 'restructuredtext en'
 # Imports
 
 import sentry_sdk
-from pwbs.pwbs_class import PWBS
 from pwbs.lib.pwm.pwm_system import SystemVersion
+from pwbs.core import service_manager
+from pwbs.core import event_manager
 
 # Running as pwbs command
 
@@ -34,6 +35,8 @@ from pwbs.lib.pwm.pwm_system import SystemVersion
 def main():
     """Main Function of Program"""
     print("PAiP Web Build System v.{0}".format(__version__))
+    service_manager['plugin_manager'].change_plugins()
+    print("Loaded Plugins: {}".format(service_manager['plugin_manager'].get_loaded_plugin_names()))
     sentry_sdk.init(
         "https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213",
         release=("{0}@{1}".format(__title__, __version__))
@@ -57,9 +60,7 @@ def main():
                 sys_info.system_version
             )
         )
-
-    pwbs_class_var = PWBS()
-    pwbs_class_var.main()
+    event_manager('@pwbs/main')
 
 
 if __name__ == '__main__':

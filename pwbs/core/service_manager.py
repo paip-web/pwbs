@@ -46,7 +46,7 @@ class ServiceManager:
     """Service Manager Class"""
 
     """Services registered in Service Manager"""
-    queues: Dict[ServiceName, ServiceType] = {}
+    services: Dict[ServiceName, ServiceType] = {}
 
     def __init__(self):
         """Service Manager Constructor"""
@@ -62,10 +62,15 @@ class ServiceManager:
             return self.services[service_name]
         raise ServiceNotFoundException.create_error(service_name)
 
-    def inject(self, *services_to_inject: ServiceName):
+    def __contains__(self, service_name: ServiceName):
+        """Service Manager Is Service Exist Method"""
+        return service_name in self.services.keys()
+
+    def inject(self, *services_to_inject: ServiceName, as_kwargs: bool = True):
         """
         Service Injector Decorator
         :param services_to_inject: Services to Inject
+        :param as_kwargs: Inject Services as kwargs not as services object
         """
         def inject(injection_destination):
             """
@@ -77,6 +82,10 @@ class ServiceManager:
                 services = {}
                 for service in services_to_inject:
                     services[service] = self[service]
-                return injection_destination(*args, **kwargs, services=services)
+                if as_kwargs:
+                    kwargs = {**kwargs, **services}
+                else:
+                    kwargs['services'] = services
+                return injection_destination(*args, **kwargs)
             return injector
         return inject
