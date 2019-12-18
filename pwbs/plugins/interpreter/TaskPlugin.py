@@ -32,9 +32,15 @@ class TaskPlugin(Plugin):
     @staticmethod
     @event_manager.handler_decorator('@pwbs/interpreter/task')
     @configuration.inject('arguments')
-    @service_manager.inject('config_manager')
-    def main(*args, nf, config_manager, arguments, **kwargs):
+    def main(*args, nf, arguments, **kwargs):
         """Task Interpreter"""
         for arg in arguments.Task:
-            config_manager.commands[arg].run()
+            event_manager('@pwbs/interpreter/interpret_task', task=arg)
+        return nf(*args, **kwargs)
+
+    @staticmethod
+    @event_manager.handler_decorator('@pwbs/interpreter/interpret_task')
+    @service_manager.inject('config_manager')
+    def run_task(*args, nf, config_manager, task, **kwargs):
+        config_manager.commands[task].run()
         return nf(*args, **kwargs)
