@@ -9,6 +9,8 @@ LICENSE - MIT
 from pwbs.api.plugin import Plugin
 from pwbs.core import event_manager
 from pwbs.core import config_manager as configuration
+from pwbs.core import UserError
+from pwbs.core.error_messages import ErrorMessages
 
 # Underscore Variables
 """Author of the module"""
@@ -42,5 +44,15 @@ class TaskPlugin(Plugin):
     @configuration.inject('tasks')
     def run_task(*args, nf, tasks, task, **kwargs):
         """Run Task"""
-        tasks[task](*args, **kwargs, tasks=tasks, task=task)
-        return nf(*args, **kwargs)
+        if task in tasks:
+            tasks[task](*args, **kwargs, tasks=tasks, task=task)
+            return True
+        return nf(*args, task=task, **kwargs)
+
+    @staticmethod
+    @event_manager.handler_decorator('@after_@pwbs/interpreter/interpret_task')
+    def error_if_not_found(*args, nf, **kwargs):
+        """Error if no task was called"""
+        if 'task' in kwargs.keys():
+            raise UserError(ErrorMessages.task_not_found(kwargs['task']))
+        raise UserError(ErrorMessages.no_task_called())

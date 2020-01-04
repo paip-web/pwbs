@@ -65,7 +65,7 @@ class ErrorMessages:
         :param str task_name: Task Name
         :return str: Error Message
         """
-        return "Skipped Task {0}".format(task_name)
+        return "Skipped task {0}".format(task_name)
 
     @staticmethod
     def task_not_found(task_name: str) -> str:
@@ -74,4 +74,12 @@ class ErrorMessages:
         :param str task_name: Task Name
         :return str: Error Message
         """
-        return "Cannot find Task {0}".format(task_name)
+        return 'Cannot find task "{0}"'.format(task_name)
+
+    @staticmethod
+    def no_task_called() -> str:
+        """
+        No task was called Error
+        :return str: Error Message
+        """
+        return "No task was executed"
