@@ -61,3 +61,8 @@ class NotImplementedFeatureError(NotImplementedError):
 class UserError(UserWarning):
     """Error for user based errors"""
     pass
+
+
+class PlatformError(OSError):
+    """Invalid Platform"""
+    pass

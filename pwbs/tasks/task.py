@@ -8,6 +8,7 @@ LICENSE - MIT
 # Imports
 from abc import ABC
 from abc import abstractmethod
+import sentry_sdk
 from pwbs.api.task import Task as BaseTask
 from pwbs.core import UserError
 from pwbs.core.error_messages import ErrorMessages
@@ -31,7 +32,17 @@ class Task(BaseTask, ABC):
         """
         Task Initialization Method
         """
-        self.config = TaskConfig(config)
+        if isinstance(config, TaskConfig):
+            self.config = config
+        else:
+            self.config = TaskConfig(config)
+
+    @property
+    def name(self):
+        """
+        Task Name
+        """
+        return self.config.name
 
     @property
     def comment(self):
@@ -45,24 +56,24 @@ class Task(BaseTask, ABC):
         Process Task Configuration
         """
         if self.config.deprecated:
-            raise UserError(ErrorMessages.task_deprecated(self.config.name))
+            raise UserError(ErrorMessages.task_deprecated(self.name))
         try:
             Platform.assure_os(self.config.os)
         except PlatformError as e:
-            raise UserError(ErrorMessages.task_incorrect_os(self.config.name, e)) from e
+            raise UserError(ErrorMessages.task_incorrect_os(self.name, e)) from e
 
     @abstractmethod
-    def execute(self, context=None):
+    def execute(self, *args, **kwargs):
         """
         Task Execution Method
-        :arg context: Context of Task Execution
         """
         raise NotImplementedError('Not implemented Task Execution Method')
 
-    def __call__(self, context=None):
+    def __call__(self, *args, **kwargs):
         """
         Task Execution Method
-        :arg context: Context of Task Execution
         """
         self.process_config()
-        self.execute(context)
+        with sentry_sdk.configure_scope() as scope:
+            self.config.attach_to_sentry(scope)
+        self.execute(*args, **kwargs)

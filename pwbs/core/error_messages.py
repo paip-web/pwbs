@@ -6,7 +6,7 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
 """
 # Imports
-from pwbs.core.platform import PlatformError
+from pwbs.core import PlatformError
 
 # Underscore Variables
 """Author of the module"""
@@ -48,3 +48,21 @@ class ErrorMessages:
         :return str: Error Message
         """
         return "Your os is {0} not {1}".format(actual_os, os)
+
+    @staticmethod
+    def task_mode_not_implemented(task_mode: str) -> str:
+        """
+        Task Mode is not implemented Error
+        :param str task_mode: Task Mode
+        :return str: Error Message
+        """
+        return "Task Mode {0} is not implemented".format(task_mode)
+
+    @staticmethod
+    def task_skipped(task_name: str) -> str:
+        """
+        Task is skipped Error
+        :param str task_name: Task Name
+        :return str: Error Message
+        """
+        return "Skipped Task {0}".format(task_name)

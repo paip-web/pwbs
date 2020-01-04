@@ -7,7 +7,6 @@ LICENSE - MIT
 """
 # Imports
 from pwbs.api.plugin import Plugin
-from pwbs.core import service_manager
 from pwbs.core import event_manager
 from pwbs.core import config_manager as configuration
 
@@ -21,7 +20,7 @@ __docformat__ = 'restructuredtext en'
 
 
 class TaskPlugin(Plugin):
-    """Initialization Plugin Class"""
+    """Task Interpreter Plugin Class"""
 
     def init(self):
         """
@@ -40,7 +39,8 @@ class TaskPlugin(Plugin):
 
     @staticmethod
     @event_manager.handler_decorator('@pwbs/interpreter/interpret_task')
-    @configuration.inject('commands')
-    def run_task(*args, nf, commands, task, **kwargs):
-        commands[task].run()
+    @configuration.inject('tasks')
+    def run_task(*args, nf, tasks, task, **kwargs):
+        """Run Task"""
+        tasks[task](*args, **kwargs, tasks=tasks, task=task)
         return nf(*args, **kwargs)

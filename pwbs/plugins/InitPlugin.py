@@ -15,10 +15,10 @@ from pwbs.core import config_manager
 from pwbs import __version__ as pwbs_version
 from pwbs.config.config_manager import PWBSConfigFileDontExistError
 from pwbs.config.config_manager import PWBSInvalidConfigFile
-from pwbs.config.pwbs_config import PWBS_ConfigManager as PWBS_CM
 from pwbs.lib.argparse_plugins import FileNameType
 from pwbs.log.logger import Logger
 from pwbs.config.config_manager import ConfigManager
+from pwbs.tasks.task_factory import TaskFactory
 
 # Underscore Variables
 """Author of the module"""
@@ -170,19 +170,15 @@ class InitPlugin(Plugin):
     def initialize_local_config(*args, nf, log, services, **kwargs):
         """Initialize Local Configuration"""
         try:
-            config_manager['commands'] = PWBS_CM.commands_to_commandlist(config_manager['config_data'])
-            for cmd in config_manager['commands'].items():
-                arg = cmd.argument_parser()
-                services['argument_parser/local'].add_argument(cmd.name, nargs="?", help=arg)
+            config_manager['tasks'] = TaskFactory.make_list(config_manager['config_data'].get('commands', {}))
+            for task in config_manager['tasks'].items():
+                services['argument_parser/local'].add_argument(task.name, nargs="?", help=task.comment)
         except PWBSConfigFileDontExistError as e:
-            log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
             log.log_debug(repr(e))
         except PWBSInvalidConfigFile as e:
             if isinstance(services['config_manager'].configmanager.error, PWBSConfigFileDontExistError):
-                log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
                 log.log_debug(repr(e))
             else:
                 print("Warning: Configuration File is Invalid")
-                log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
                 log.log_debug(repr(e))
         return nf(*args, **kwargs)

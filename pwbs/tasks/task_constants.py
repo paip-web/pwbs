@@ -38,7 +38,7 @@ class TaskConstants:
             @staticmethod
             def multi_command_task():
                 """Multi Command Task"""
-                return 'mct'
+                return 'mc'
 
             @staticmethod
             def watcher_task():

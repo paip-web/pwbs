@@ -6,8 +6,9 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
 """
 # Imports
-from pwbs.core.error_messages import ErrorMessages
 import platform
+from pwbs.core.error_messages import ErrorMessages
+from pwbs.core import PlatformError
 
 # Underscore Variables
 """Author of the module"""
@@ -16,11 +17,6 @@ __author__ = 'Patryk Adamczyk'
 __license__ = 'MIT'
 """Documentation format"""
 __docformat__ = 'restructuredtext en'
-
-
-class PlatformError(OSError):
-    """Invalid Platform"""
-    pass
 
 
 class Platform:
@@ -59,6 +55,17 @@ class Platform:
                 """Any OS"""
                 return 'any'
 
+            @staticmethod
+            def all():
+                """All OS"""
+                return (
+                    OSConstants.linux(),
+                    OSConstants.windows(),
+                    OSConstants.mac(),
+                    OSConstants.other(),
+                    OSConstants.any()
+                )
+
         return OSConstants
 
     @staticmethod
@@ -69,8 +76,8 @@ class Platform:
         :return str: Operating System Constant
         """
         alias = alias.lower()
-        if alias == Platform.os().any():
-            return Platform.os().any()
+        if alias in Platform.os().all():
+            return alias
         if alias in ['win', 'w', 'windows']:
             return Platform.os().windows()
         if alias in ['linux', 'lin']:
@@ -86,10 +93,10 @@ class Platform:
         :param os: System that you want to enforce
         """
         real_os = Platform.get_os_from_alias(os)
-        if real_os is Platform.os().any():
+        if real_os == Platform.os().any():
             return
         actual_os = Platform.get_os()
-        if actual_os is real_os:
+        if actual_os == real_os:
             return
         raise PlatformError(ErrorMessages.incorrect_os(actual_os, real_os))
 

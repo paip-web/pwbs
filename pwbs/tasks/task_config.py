@@ -7,6 +7,7 @@ LICENSE - MIT
 """
 # Imports
 from typing import Dict
+from sentry_sdk.scope import Scope
 from pwbs.tasks.task_constants import TaskConstants as Constants
 from pwbs.core.platform import Platform
 
@@ -63,7 +64,26 @@ class TaskConfig:
         self.docker = config.get('dockerized', False)
 
         """OS that this task need to work on"""
-        self.os = config.get('os', Platform.os().any())
+        self.os = Platform.get_os_from_alias(config.get('os', Platform.os().any()))
 
         """Is task deprecated"""
         self.deprecated = config.get('deprecated', False)
+
+        """Configuration Data"""
+        self.data = config
+
+    def attach_to_sentry(self, scope: Scope):
+        """Attach configuration information to sentry scope"""
+        scope.set_extra("task_name", self.name)
+        scope.set_extra("task_commands", self.commands)
+        scope.set_extra("task_comment", self.comment)
+        scope.set_extra("task_mode", self.mode)
+        scope.set_extra("task_arguments", self.arguments)
+        scope.set_extra("task_async", self.asynchronous)
+        scope.set_extra("task_configuration", self.configuration)
+        scope.set_extra("task_extends", self.extends)
+        scope.set_extra("task_verbose", self.verbose)
+        scope.set_extra("task_debug", self.debug)
+        scope.set_extra("task_docker", self.docker)
+        scope.set_extra("task_deprecated", self.deprecated)
+        scope.set_extra("task_data", self.data)
