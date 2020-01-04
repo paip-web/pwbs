@@ -33,6 +33,12 @@ class Task(ABC):
         raise NotImplementedError('Not implemented Task Initialization Method')
 
     @abstractmethod
+    @property
+    def comment(self):
+        """Comment of the task"""
+        return ''
+
+    @abstractmethod
     def __call__(self, context=None):
         """
         Task Execution Method
