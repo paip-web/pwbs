@@ -8,6 +8,7 @@ LICENSE - MIT
 # Imports
 from pwbs.api.plugin import Plugin
 from pwbs.plugins.tasks.interpreter.single_task_mode import SingleTaskMode
+from pwbs.plugins.tasks.interpreter.multi_task_mode import MultiTaskMode
 
 # Underscore Variables
 """Author of the module"""
@@ -26,3 +27,4 @@ class TaskModePlugin(Plugin):
         Plugin Initialization Method
         """
         SingleTaskMode.init()
+        MultiTaskMode.init()
