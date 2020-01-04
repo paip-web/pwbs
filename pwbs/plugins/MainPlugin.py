@@ -9,6 +9,8 @@ LICENSE - MIT
 from pwbs.api.plugin import Plugin
 from pwbs.core import event_manager
 from pwbs.core import NotImplementedFeatureError
+from pwbs.core import UserError
+from pwbs.core import service_manager
 
 # Underscore Variables
 """Author of the module"""
@@ -34,10 +36,18 @@ class MainPlugin(Plugin):
         """Main Function of PWBS"""
         try:
             event_manager('@pwbs/init', *args, **kwargs)
-            event_manager('@pwbs/main/main', *args, **kwargs)
+            try:
+                event_manager('@pwbs/main/main', *args, **kwargs)
+            except UserError as e:
+                if 'log' in service_manager:
+                    service_manager['log'].log_error(e)
+                else:
+                    print(str(e))
+        except UserError as e:
+            print(str(e))
         except NotImplementedFeatureError as e:
             print("Not Implemented Feature Called!")
-            print(e)
+            print(str(e))
         except SystemExit as e:
             event_manager('@pwbs/main/catch/SystemExit', exception=e, *args, **kwargs)
         except KeyboardInterrupt as e:

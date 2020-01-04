@@ -7,8 +7,8 @@ LICENSE - MIT
 
 """
 # Imports
-from __future__ import print_function
 from pwbs.core import prefix_text
+from pwbs.core import prefix_error_text
 
 # Class Definition
 
@@ -74,6 +74,14 @@ class BaseLogger(object):
                 Defaults to Default PWBS Prefixer.
         """
         return print(prefix(text))
+
+    def log_error(self, error: BaseException, prefix=prefix_error_text) -> None:
+        """
+        Log Error
+        :param BaseException error: Text to log
+        :param prefix: Prefixer
+        """
+        return self.log(str(error), prefix)
 
     def log_wop(self, text):
         """Log Function Without Prefixer

@@ -44,6 +44,20 @@ def prefix_text(text=""):
     return "PWBS[{0}]: {1}".format(datetime.now().strftime("%H:%M:%S"), text)
 
 
+def prefix_error_text(text=""):
+    """Function to prefix error text
+    Error Prefixer
+    Args:
+        text (:obj:`str`): Text to prefix
+    """
+    return "PWBS[ERROR][{0}]: {1}".format(datetime.now().strftime("%H:%M:%S"), text)
+
+
 class NotImplementedFeatureError(NotImplementedError):
     """Error for Not Implemented Functionality"""
+    pass
+
+
+class UserError(UserWarning):
+    """Error for user based errors"""
     pass
