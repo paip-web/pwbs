@@ -20,6 +20,7 @@ __license__ = 'MIT'
 """Documentation format"""
 __docformat__ = 'restructuredtext en'
 
+
 class FileNameType:
     """Factory for creating file name types
 
