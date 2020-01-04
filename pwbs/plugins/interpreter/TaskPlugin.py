@@ -40,7 +40,7 @@ class TaskPlugin(Plugin):
 
     @staticmethod
     @event_manager.handler_decorator('@pwbs/interpreter/interpret_task')
-    @service_manager.inject('config_manager')
-    def run_task(*args, nf, config_manager, task, **kwargs):
-        config_manager.commands[task].run()
+    @configuration.inject('commands')
+    def run_task(*args, nf, commands, task, **kwargs):
+        commands[task].run()
         return nf(*args, **kwargs)

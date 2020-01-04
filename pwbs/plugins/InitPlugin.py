@@ -11,11 +11,14 @@ from gettext import gettext as _
 from pwbs.api.plugin import Plugin
 from pwbs.core import service_manager
 from pwbs.core import event_manager
+from pwbs.core import config_manager
 from pwbs import __version__ as pwbs_version
 from pwbs.config.config_manager import PWBSConfigFileDontExistError
 from pwbs.config.config_manager import PWBSInvalidConfigFile
 from pwbs.config.pwbs_config import PWBS_ConfigManager as PWBS_CM
 from pwbs.lib.argparse_plugins import FileNameType
+from pwbs.log.logger import Logger
+from pwbs.config.config_manager import ConfigManager
 
 # Underscore Variables
 """Author of the module"""
@@ -39,6 +42,7 @@ class InitPlugin(Plugin):
     @event_manager.handler_decorator('@pwbs/init')
     def initialize_pwbs(*args, nf, **kwargs):
         """Initialize PWBS"""
+        service_manager['log'] = Logger()
         service_manager['argument_parser'] = ap.ArgumentParser(
             formatter_class=ap.RawTextHelpFormatter,
             prog="pwbs",
@@ -145,49 +149,36 @@ class InitPlugin(Plugin):
     @event_manager.handler_decorator('@pwbs/init/init_config')
     def initialize_config(*args, nf, config='pwbs.json', **kwargs):
         """Initialize Configuration Manager"""
-        service_manager['config_manager'] = PWBS_CM(config)
+        service_manager['config_manager'] = ConfigManager(config)
+        service_manager['log'].log_debug("Loading Configuration File Data...")
+        commands = service_manager['config_manager'].load()
+        config_manager['config_data'] = commands
+        service_manager['log'].log_debug("Configuration File Data Loaded.")
         """Try for errors"""
-        if isinstance(
-                service_manager['config_manager'].configmanager.error,
-                PWBSConfigFileDontExistError,
-        ):
+        if isinstance(service_manager['config_manager'].error, PWBSConfigFileDontExistError):
             print("Warning: Configuration File Doesn't Exist!")
-            service_manager['config_manager'].log.log_debug(
-                "CALLER: pwbs.pwbs_class.PWBS.__init__()",
-            )
-            service_manager['config_manager'].log.log_debug(
-                repr(service_manager['config_manager'].configmanager.error),
-            )
-        elif isinstance(
-                service_manager['config_manager'].configmanager.error,
-                PWBSInvalidConfigFile,
-        ):
+            service_manager['log'].log_debug(repr(service_manager['config_manager'].error))
+        elif isinstance(service_manager['config_manager'].error, PWBSInvalidConfigFile):
             print("Warning: Configuration File is Invalid")
-            service_manager['config_manager'].log.log_debug(
-                "CALLER: pwbs.pwbs_class.PWBS.__init__()",
-            )
-            service_manager['config_manager'].log.log_debug(
-                repr(service_manager['config_manager'].configmanager.error),
-            )
-        service_manager['log'] = service_manager['config_manager'].log
+            service_manager['log'].log_debug(repr(service_manager['config_manager'].error))
         return nf(*args, **kwargs)
 
     @staticmethod
     @event_manager.handler_decorator('@pwbs/init/local_config')
-    @service_manager.inject('log', 'config_manager')
-    @service_manager.inject('argument_parser/local', as_kwargs=False)
-    def initialize_local_config(*args, nf, log, config_manager, services, **kwargs):
+    @service_manager.inject('log')
+    @service_manager.inject('argument_parser/local', 'config_manager', as_kwargs=False)
+    def initialize_local_config(*args, nf, log, services, **kwargs):
         """Initialize Local Configuration"""
         try:
-            config_manager.commands_to_commandlist()
-            for cmd in config_manager.commands.items():
+            config_manager['commands'] = PWBS_CM.commands_to_commandlist(config_manager['config_data'])
+            for cmd in config_manager['commands'].items():
                 arg = cmd.argument_parser()
                 services['argument_parser/local'].add_argument(cmd.name, nargs="?", help=arg)
         except PWBSConfigFileDontExistError as e:
             log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
             log.log_debug(repr(e))
         except PWBSInvalidConfigFile as e:
-            if isinstance(config_manager.configmanager.error, PWBSConfigFileDontExistError):
+            if isinstance(services['config_manager'].configmanager.error, PWBSConfigFileDontExistError):
                 log.log_debug("CALLER: pwbs.pwbs_class.PWBS.localconfig_parser_initializer()")
                 log.log_debug(repr(e))
             else:

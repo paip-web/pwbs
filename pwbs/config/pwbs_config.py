@@ -17,44 +17,18 @@ from pwbs.command.command import CommandType, Platform, CommandMode
 
 class PWBS_ConfigManager:
     """PWBS Config Class"""
-
-    def __init__(self, filename="pwbs.json"):
-        """Constructor of the Class"""
-        # Variables
-        """Logger"""
-        self.log = Logger()
-        """Verbose Level"""
-        self.verbose = 1
-        """Debug Mode"""
-        self.debug = False
-        """Config File Manager"""
-        self.configmanager = ConfigManager(filename)
-        """Commands"""
-        self.commands = CommandList([])
-        # Constructor Methods
-        self.config_file()
-
-    def config_file(self):
-        """Config File Function
-        Returns:
-            JSON Object from Config File
-        """
-        self.log.log_debug("Loading Configuration File Data...")
-        data = self.configmanager.load()
-        self.log.log_debug("Configuration File Data Loaded.")
-        return data
-
-    def commands_to_commandlist(self):
+    @staticmethod
+    def commands_to_commandlist(config_data):
         commands = []
         """Testing for invalid Configuration File"""
         try:
-            assert self.config_file()["commands"] is not None
+            assert config_data["commands"] is not None
         except AssertionError as e:
             raise PWBSInvalidConfigFile("Invalid Configuration File") from e
         except KeyError as e:
             raise PWBSInvalidConfigFile("Invalid Configuration File") from e
         """Loop of creating Commands"""
-        for name, body in self.config_file()["commands"].items():
+        for name, body in config_data["commands"].items():
             if isinstance(body, str):
                 # Single Task
                 commands.append(Command(
@@ -102,7 +76,7 @@ class PWBS_ConfigManager:
                     arguments,
                     None,
                     platform))
-        self.commands = CommandList(commands)
+        return CommandList(commands)
 
     @staticmethod
     def ctcl__cmdtype(commandbody):
