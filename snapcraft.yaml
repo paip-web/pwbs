@@ -1,0 +1,18 @@
+name: pwbs
+version: git
+summary: PAiP Web Build System
+description: |
+    PWBS is Build System for easy automation process.
+base: core18
+confinement: classic
+grade: stable
+
+parts:
+    pwbs:
+        plugin: python
+        python-version: python3
+        source: .
+
+apps:
+    pwbs:
+        command: pwbs
