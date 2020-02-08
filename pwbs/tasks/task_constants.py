@@ -71,3 +71,36 @@ class TaskConstants:
                 return 'pt'
 
         return TaskModeConstants
+
+    @staticmethod
+    def task_verbose():
+        """Task Verbose Constants"""
+        class TaskVerboseConstants:
+            """Task Verbose Constants Class"""
+
+            @staticmethod
+            def none():
+                """None - Verbose Level"""
+                return 0
+
+            @staticmethod
+            def normal():
+                """Normal Verbose Level"""
+                return 1
+
+            @staticmethod
+            def verbose():
+                """Verbose -  Verbose Level"""
+                return 2
+
+            @staticmethod
+            def more_verbose():
+                """More Verbose - Verbose Level"""
+                return 3
+
+            @staticmethod
+            def debug():
+                """Debug Verbose Level"""
+                return 255
+
+        return TaskVerboseConstants

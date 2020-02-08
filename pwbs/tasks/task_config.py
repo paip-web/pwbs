@@ -58,7 +58,7 @@ class TaskConfig:
         self.verbose = config.get('verbose', None)
 
         """Debug Mode of this task"""
-        self.debug = config.get('debug', None)
+        self.debug = config.get('debug', False)
 
         """Is task meant to be run through docker"""
         self.docker = config.get('dockerized', False)

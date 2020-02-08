@@ -6,7 +6,7 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
 """
 # Imports
-from pwbs.tasks.task import Task
+from pwbs.tasks.configuration_aware_task import ConfigurationAwareTask
 from pwbs.core import service_manager
 from pwbs.tasks.task_factory import task_factory_map
 from pwbs.tasks.task_constants import TaskConstants
@@ -22,7 +22,7 @@ __license__ = 'MIT'
 __docformat__ = 'restructuredtext en'
 
 
-class MultiTaskMode(Task):
+class MultiTaskMode(ConfigurationAwareTask):
     """MultiTask Mode Class"""
 
     @staticmethod
@@ -35,13 +35,23 @@ class MultiTaskMode(Task):
         """
         Task Execution Method
         """
-        log.log_verbose("Running {0} Task...".format(self.name), 1)
-        # Loop in Commands and their output
-        for task in self.config.extends.split(','):
+        # Process Commands and their output
+
+        def execute_command(task_name: str) -> None:
+            """
+            Execute Task
+            :param str task_name: Task Name
+            """
             # Log Execute
-            log.log_verbose('Executing "{0}"...'.format(task), 2)
-            if task not in tasks:
-                raise UserError(ErrorMessages.task_not_found(task))
-            tasks[task](*args, tasks=tasks, **kwargs)
-        # Log Finish
-        log.log_verbose("Finished {0} Task...".format(self.name), 1)
+            log.log_verbose('Executing "{0}"...'.format(task_name), TaskConstants.task_verbose().verbose())
+            if task_name not in tasks:
+                raise UserError(ErrorMessages.task_not_found(task_name))
+            tasks[task_name](*args, tasks=tasks, **kwargs)
+
+        if isinstance(self.config.commands, str):
+            execute_command(self.config.commands)
+        elif isinstance(self.config.commands, list):
+            for task in self.config.commands:
+                execute_command(task)
+        else:
+            raise UserError(ErrorMessages.invalid_configuration_for_task(self.name))

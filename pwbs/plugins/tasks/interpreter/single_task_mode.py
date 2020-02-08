@@ -6,7 +6,7 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
 LICENSE - MIT
 """
 # Imports
-from pwbs.tasks.task import Task
+from pwbs.tasks.configuration_aware_task import ConfigurationAwareTask
 from pwbs.core import service_manager
 from pwbs.tasks.task_factory import task_factory_map
 from pwbs.tasks.task_constants import TaskConstants
@@ -21,7 +21,7 @@ __license__ = 'MIT'
 __docformat__ = 'restructuredtext en'
 
 
-class SingleTaskMode(Task):
+class SingleTaskMode(ConfigurationAwareTask):
     """Single Command Task Mode Class"""
 
     @staticmethod
@@ -35,10 +35,7 @@ class SingleTaskMode(Task):
         """
         Task Execution Method
         """
-        log.log_verbose("Running {0} Task...".format(self.name), 1)
         # Loop in Commands and their output
         for cmd_in, cmd_out in zip(self.config.commands, execute_generator(self.config.commands)):
             # Log Execute
-            log.log_verbose('Executing "{0}"...'.format(cmd_in), 2)
-        # Log Finish
-        log.log_verbose("Finished {0} Task...".format(self.name), 1)
+            log.log_verbose('Executing "{0}"...'.format(cmd_in), TaskConstants.task_verbose().verbose())

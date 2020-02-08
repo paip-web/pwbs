@@ -83,3 +83,12 @@ class ErrorMessages:
         :return str: Error Message
         """
         return "No task was executed"
+
+    @staticmethod
+    def invalid_configuration_for_task(task_name: str) -> str:
+        """
+        Task has invalid configuration
+        :param str task_name: Name of Task
+        :return str: Error Message
+        """
+        return 'Invalid configuration found for task "{0}"'.format(task_name)
