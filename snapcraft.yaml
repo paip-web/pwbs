@@ -4,8 +4,8 @@ summary: PAiP Web Build System
 description: |
     PWBS is Build System for easy automation process.
 base: core18
-confinement: devmode
-grade: devel
+confinement: classic
+grade: stable
 
 parts:
     pwbs:
@@ -15,4 +15,4 @@ parts:
 
 apps:
     pwbs:
-        command: bin/pwbs
+        command: pwbs
