@@ -5,7 +5,7 @@
 This module creates function to get information about system.
 
 NAME - PAiP Web Module - OS Information
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 VERSION - v.0.0.0.1
 """

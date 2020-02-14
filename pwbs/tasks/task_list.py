@@ -2,7 +2,7 @@
 """PAiP Web Build System - Task List Class
 
 NAME - PAiP Web Build System
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 """
 # Imports

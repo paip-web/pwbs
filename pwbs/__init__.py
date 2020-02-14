@@ -2,11 +2,8 @@
 """PAiP Web Build System
 
 NAME - PAiP Web Build System
-
 AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
-
 LICENSE - MIT
-
 """
 
 # Underscore Variables

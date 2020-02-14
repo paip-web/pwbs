@@ -5,7 +5,7 @@ In exactly this file is some functions for running tests from code.
 READ - README.md in tests for rules of tests
 
 NAME - PAiP Web Build System
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 
 """

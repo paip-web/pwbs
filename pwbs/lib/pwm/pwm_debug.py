@@ -5,7 +5,7 @@
 This module creates Debug decorator as well as ProgramConfiguration class which can be used to Configure Program and Debug Mode
 
 NAME - PAiP Web Module - Debug
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 VERSION - v.0.0.0.2
 
