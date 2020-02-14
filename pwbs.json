@@ -14,6 +14,8 @@
                 "python setup.py bdist_wheel --universal"
             ]
         },
-        "publish-pypi": "twine upload dist/*"
+        "publish-pypi": "twine upload dist/*",
+        "build-docker-image": "sudo docker build -t pwbs .",
+        "run-docker-image": "sudo docker run --rm -ti pwbs"
     }
 }
