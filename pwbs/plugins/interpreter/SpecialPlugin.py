@@ -6,12 +6,14 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 """
 # Imports
+import sys
 from pwbs.api.plugin import Plugin
 from pwbs.core import service_manager
 from pwbs.core import event_manager
 from pwbs.core import config_manager
 from pwbs import __version__ as pwbs_version
 from pwbs.tests import test_runner
+from pwbs.runner.docker import DockerRunner
 
 # Underscore Variables
 """Author of the module"""
@@ -110,6 +112,17 @@ class SpecialPlugin(Plugin):
         """Run Tests"""
         if arguments.run_tests is True:
             test_runner()
+            return nf(*args, executed=True, **kwargs)
+        return nf(*args, executed, **kwargs)
+
+    @staticmethod
+    @event_manager.handler_decorator('@pwbs/interpreter/special')
+    @config_manager.inject('arguments')
+    def run_in_docker(*args, nf, arguments, executed=False, **kwargs):
+        """Run Inside Docker"""
+        if arguments.run_in_docker is True and DockerRunner.is_it_docker() is False:
+            docker_runner = DockerRunner()
+            docker_runner.execute(' '.join(sys.argv[1:]))
             return nf(*args, executed=True, **kwargs)
         return nf(*args, executed, **kwargs)
 

@@ -62,6 +62,14 @@ class InitPlugin(Plugin):
             action="store_true",
             help=_('show this help message and exit'),
         )
+        service_manager['argument_parser'].add_argument(
+            '--run-inside-docker',
+            required=False,
+            dest="run_in_docker",
+            action="store_true",
+            help="""Run specified tasks in docker container
+            \nThis flag does not work in a Docker Container""",
+        )
         service_manager['config']['arguments'] = service_manager['argument_parser'].parse_args()
         service_manager['log'].log_debug("Argument Parser: {0}".format(repr(service_manager['config']['arguments'])))
         return nf(*args, **kwargs)

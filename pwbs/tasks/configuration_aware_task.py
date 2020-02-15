@@ -7,9 +7,12 @@ LICENSE - MIT
 """
 # Imports
 from abc import ABC
+import sys
 import sentry_sdk
+from pwbs.runner.docker import DockerRunner
 from pwbs.tasks.task import Task
 from pwbs.core import service_manager
+from pwbs.core import config_manager
 from pwbs.tasks.task_constants import TaskConstants
 from pwbs.core import UserError
 from pwbs.core.error_messages import ErrorMessages
@@ -41,6 +44,22 @@ class ConfigurationAwareTask(Task, ABC):
         """
         # Extend Task Configuration
         self.config.extend_from_cli_arguments()
+        # Run task in docker
+        if self.config.docker and DockerRunner.is_it_docker() is False:
+            docker_runner = DockerRunner()
+            # Run single task in container
+            pwbs_args = sys.argv[1:]
+            parsed_args = config_manager['arguments']
+            pwbs_task_found = False
+            pwbs_args_wo_tasks = []
+            for arg in pwbs_args:
+                if arg in parsed_args.Task and pwbs_task_found is False:
+                    pwbs_task_found = True
+                    pwbs_args_wo_tasks.append(self.config.name)
+                elif arg not in parsed_args.Task:
+                    pwbs_args_wo_tasks.append(arg)
+            docker_runner.execute(''.join(pwbs_args_wo_tasks))
+            return False
         # Verbose Level and Debug Mode
         # # Save old values
         self.tmp_storage['debug'] = log.debug_state
@@ -61,6 +80,7 @@ class ConfigurationAwareTask(Task, ABC):
             log.log_verbose('Task {} is deprecated!'.format(self.name), TaskConstants.task_verbose().normal())
         # Log Before
         log.log_verbose("Running {0} Task...".format(self.name), TaskConstants.task_verbose().normal())
+        return True
 
     @service_manager.inject('log')
     def after_execute(self, *args, tasks, log, **kwargs):
@@ -100,6 +120,7 @@ class ConfigurationAwareTask(Task, ABC):
         self.process_config()
         with sentry_sdk.configure_scope() as scope:
             self.config.attach_to_sentry(scope)
-        self.before_execute(*args, **kwargs)
-        self.execute(*args, **kwargs)
-        self.after_execute(*args, **kwargs)
+        be = self.before_execute(*args, **kwargs)
+        if be is True:
+            self.execute(*args, **kwargs)
+            self.after_execute(*args, **kwargs)

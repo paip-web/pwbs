@@ -9,12 +9,13 @@ LICENSE - MIT
 from argparse import Namespace
 from typing import List
 from typing import Union
+from datetime import datetime
 from pwbs.tasks.configuration_aware_task import ConfigurationAwareTask
 from pwbs.core import service_manager
 from pwbs.core import config_manager
 from pwbs.tasks.task_factory import task_factory_map
 from pwbs.tasks.task_constants import TaskConstants
-from pwbs.lib.pwm.pwm_exec import execute_generator
+from pwbs.runner.shell import ShellRunner
 
 # Underscore Variables
 """Author of the module"""
@@ -76,6 +77,19 @@ class SingleTaskMode(ConfigurationAwareTask):
             return new_commands
         return process_command(commands)
 
+    @staticmethod
+    def task_prefixer(task_name: str, text=''):
+        """
+        Function to prefix text for tasks
+        :param task_name: Task Name
+        :param text: Text to prefix
+        """
+        if isinstance(text, int):
+            text = "Return Code: {0}".format(text)
+        elif isinstance(text, bytes):
+            text = text.decode("utf-8")
+        return "PWBS: {0} [{1}] | {2}".format(task_name, datetime.now().strftime("%H:%M:%S"), text)
+
     @service_manager.inject('log')
     @config_manager.inject('arguments')
     def execute(self, *args, log, arguments, **kwargs):
@@ -83,7 +97,10 @@ class SingleTaskMode(ConfigurationAwareTask):
         Task Execution Method
         """
         commands = self.preprocess_commands(self.config.commands, arguments)
+        shell_runner = ShellRunner()
         # Loop in Commands and their output
-        for cmd_in, cmd_out in zip(commands, execute_generator(commands)):
+        for cmd_in, cmd_out in zip(commands, shell_runner.execute(commands, capture_output=True)):
             # Log Execute
             log.log_verbose('Executing "{0}"...'.format(cmd_in), TaskConstants.task_verbose().verbose())
+            for cmd_output in cmd_out:
+                log.log(cmd_output, lambda txt: SingleTaskMode.task_prefixer(self.config.name, txt))

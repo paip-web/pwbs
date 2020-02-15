@@ -11,6 +11,7 @@ from pwbs.core import event_manager
 from pwbs.core import NotImplementedFeatureError
 from pwbs.core import UserError
 from pwbs.core import service_manager
+from pwbs.runner.docker import DockerNotSupportedException
 
 # Underscore Variables
 """Author of the module"""
@@ -48,6 +49,8 @@ class MainPlugin(Plugin):
         except NotImplementedFeatureError as e:
             print("Not Implemented Feature Called!")
             print(str(e))
+        except DockerNotSupportedException as e:
+            print('Docker is not supported on your system!')
         except SystemExit as e:
             event_manager('@pwbs/main/catch/SystemExit', exception=e, *args, **kwargs)
         except KeyboardInterrupt as e:
