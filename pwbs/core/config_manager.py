@@ -62,11 +62,12 @@ class ConfigManager:
             return self.config[config_name]
         raise ConfigurationNotFoundException.create_error(config_name)
 
-    def inject(self, *configuration_to_inject: str, as_kwargs: bool = True):
+    def inject(self, *configuration_to_inject: str, as_kwargs: bool = True, kwarg_name: str = 'configurations'):
         """
         Configuration Injector Decorator
         :param configuration_to_inject: Configuration to Inject
         :param as_kwargs: Inject Configuration as kwargs not as configuration object
+        :param kwarg_name: Name for kwarg that Configuration will be injected to if as_kwargs is True
         """
         def inject(injection_destination):
             """
@@ -81,7 +82,7 @@ class ConfigManager:
                 if as_kwargs:
                     kwargs = {**kwargs, **configurations}
                 else:
-                    kwargs['configurations'] = configurations
+                    kwargs[kwarg_name] = configurations
                 return injection_destination(*args, **kwargs)
             return injector
         return inject

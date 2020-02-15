@@ -6,8 +6,10 @@ AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 """
 # Imports
+from argparse import Namespace
 from typing import Dict
 from sentry_sdk.scope import Scope
+from pwbs.core import config_manager
 from pwbs.tasks.task_constants import TaskConstants as Constants
 from pwbs.core.platform import Platform
 
@@ -69,8 +71,22 @@ class TaskConfig:
         """Is task deprecated"""
         self.deprecated = config.get('deprecated', False)
 
+        """Is task argumented"""
+        self.argumented = config.get('argumented', False)
+
         """Configuration Data"""
         self.data = config
+
+    @config_manager.inject('arguments')
+    def extend_from_cli_arguments(self, arguments: Namespace):
+        """
+        Extend Task Configuration with Arguments Provided From CLI Flags
+        :param arguments: PWBS CLI Arguments
+        :return: Task Configuration
+        """
+        if self.argumented and arguments.arguments_for_tasks is not None and len(arguments.arguments_for_tasks) != 0:
+            self.arguments.extend(arguments.arguments_for_tasks)
+        return self
 
     def attach_to_sentry(self, scope: Scope):
         """Attach configuration information to sentry scope"""

@@ -22,6 +22,7 @@ interface ModedTaskObject {
     mode: PWBSMode, // Type of the task
     commands: SingleTask | MultiCommandTask, // Commands to do in this task
     arguments: PWBSArguments, // Arguments of the task
+    argumented: boolean, // Should this task be processed as argumented task or not
     async: boolean, // Should this task be executed asynchronously
     configuration: PWBSTaskConfiguration, // Configuration of the task
     verbose: VerboseLevel, /// Verbose Level

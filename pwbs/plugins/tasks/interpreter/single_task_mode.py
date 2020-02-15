@@ -45,22 +45,36 @@ class SingleTaskMode(ConfigurationAwareTask):
             return ""
         return ' '.join(args)
 
-    @staticmethod
-    def preprocess_commands(commands: Union[str, List[str]], arguments: Namespace) -> Union[str, List[str]]:
+    def preprocess_commands(self, commands: Union[str, List[str]], arguments: Namespace) -> Union[str, List[str]]:
         """
         Preprocess Commands
         :param commands: Commands for Task
         :param arguments: PWBS Arguments
         :return: Preprocessed Commands for Task
         """
+        def process_command(command: str) -> str:
+            """
+            Process Single Command
+            :param command: Command
+            :return: New Command
+            """
+            processed_command = command
+            if self.config.argumented and self.config.arguments is not None and len(self.config.arguments) != 0:
+                processed_command = processed_command.format(*self.config.arguments)
+            processed_command = "{0} {1}".format(
+                processed_command,
+                SingleTaskMode.get_forward_arguments(arguments.arguments_to_forward)
+            )
+            return processed_command
+
         if isinstance(commands, list):
             new_commands = []
             for cmd in commands:
                 new_commands.append(
-                    "{0} {1}".format(cmd, SingleTaskMode.get_forward_arguments(arguments.arguments_to_forward))
+                    process_command(cmd)
                 )
             return new_commands
-        return "{0} {1}".format(commands, SingleTaskMode.get_forward_arguments(arguments.arguments_to_forward))
+        return process_command(commands)
 
     @service_manager.inject('log')
     @config_manager.inject('arguments')
@@ -68,7 +82,7 @@ class SingleTaskMode(ConfigurationAwareTask):
         """
         Task Execution Method
         """
-        commands = SingleTaskMode.preprocess_commands(self.config.commands, arguments)
+        commands = self.preprocess_commands(self.config.commands, arguments)
         # Loop in Commands and their output
         for cmd_in, cmd_out in zip(commands, execute_generator(commands)):
             # Log Execute

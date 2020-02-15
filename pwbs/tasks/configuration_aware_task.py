@@ -7,7 +7,6 @@ LICENSE - MIT
 """
 # Imports
 from abc import ABC
-
 import sentry_sdk
 from pwbs.tasks.task import Task
 from pwbs.core import service_manager
@@ -40,6 +39,8 @@ class ConfigurationAwareTask(Task, ABC):
         Before Task Execution Method
         Provide all params from execute method except services applied through service manager
         """
+        # Extend Task Configuration
+        self.config.extend_from_cli_arguments()
         # Verbose Level and Debug Mode
         # # Save old values
         self.tmp_storage['debug'] = log.debug_state

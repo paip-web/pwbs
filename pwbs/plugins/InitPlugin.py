@@ -62,15 +62,6 @@ class InitPlugin(Plugin):
             action="store_true",
             help=_('show this help message and exit'),
         )
-        service_manager['argument_parser'].add_argument(
-            '-fa',
-            '--forward-args',
-            '--forward-arguments',
-            required=False,
-            dest="arguments_to_forward",
-            nargs=ap.REMAINDER,
-            help="""Provide arguments you want to provided to all of your commands in tasks""",
-        )
         service_manager['config']['arguments'] = service_manager['argument_parser'].parse_args()
         service_manager['log'].log_debug("Argument Parser: {0}".format(repr(service_manager['config']['arguments'])))
         return nf(*args, **kwargs)
@@ -145,6 +136,28 @@ class InitPlugin(Plugin):
             action="store_true",
             required=False,
             help="""Starting PWBS Self-Testing Module""")
+        service_manager['argument_parser/task-options'] = service_manager['argument_parser'].add_argument_group(
+            "Tasks Options",
+            "Task Options Flags that provide additional data to task commands")
+        service_manager['argument_parser/task-options'].add_argument(
+            '-fa',
+            '--forward-args',
+            '--forward-arguments',
+            required=False,
+            dest="arguments_to_forward",
+            nargs=ap.REMAINDER,
+            help="""Provide arguments you want to be provided to all of your commands in tasks
+            \nThis flag cannot be used with --args flag""",
+        )
+        service_manager['argument_parser/task-options'].add_argument(
+            '-a',
+            '--args',
+            required=False,
+            dest="arguments_for_tasks",
+            nargs=ap.REMAINDER,
+            help="""Provide arguments accessible in task commands
+            \nThis flag cannot be used with --forward-arguments flag""",
+        )
         service_manager['argument_parser'].add_argument(
             "Task",
             nargs="*",
