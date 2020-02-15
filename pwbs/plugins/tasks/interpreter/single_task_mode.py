@@ -105,9 +105,8 @@ class SingleTaskMode(ConfigurationAwareTask):
         commands = self.preprocess_commands(self.config.commands, arguments)
         shell_runner = ShellRunner()
         # Loop in Commands and their output
-        for cmd_in, cmd_out in zip(commands, shell_runner.execute(commands, capture_output=True)):
+        for cmd_in, cmd_out in zip(commands, shell_runner.execute(commands)):
             # Log Execute
             log.log_verbose('Executing "{0}"...'.format(cmd_in), TaskConstants.task_verbose().verbose())
             for cmd_output in cmd_out:
-                if cmd_output is not None:
-                    log.log(cmd_output, lambda txt: SingleTaskMode.task_prefixer(self.config.name, txt))
+                pass
