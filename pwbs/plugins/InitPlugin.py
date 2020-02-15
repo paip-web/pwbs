@@ -42,7 +42,7 @@ class InitPlugin(Plugin):
     @event_manager.handler_decorator('@pwbs/init')
     def initialize_pwbs(*args, nf, **kwargs):
         """Initialize PWBS"""
-        service_manager['log'] = Logger()
+        service_manager['log'] = Logger() if 'log' not in service_manager.services.keys() else service_manager['log']
         service_manager['argument_parser'] = ap.ArgumentParser(
             formatter_class=ap.RawTextHelpFormatter,
             prog="pwbs",
@@ -61,6 +61,15 @@ class InitPlugin(Plugin):
             required=False,
             action="store_true",
             help=_('show this help message and exit'),
+        )
+        service_manager['argument_parser'].add_argument(
+            '-fa',
+            '--forward-args',
+            '--forward-arguments',
+            required=False,
+            dest="arguments_to_forward",
+            nargs=ap.REMAINDER,
+            help="""Provide arguments you want to provided to all of your commands in tasks""",
         )
         service_manager['config']['arguments'] = service_manager['argument_parser'].parse_args()
         service_manager['log'].log_debug("Argument Parser: {0}".format(repr(service_manager['config']['arguments'])))

@@ -27,6 +27,8 @@ class BaseLogger(object):
         """Constructor of the Class"""
         """Story Log for Delayed Debug"""
         self.debug_delayed_story = []
+        self.debug_state = False
+        self.verbose_state = 1
         # Initiator of Debug Mode
         self.debug()
         # Initiator of Verbose Mode

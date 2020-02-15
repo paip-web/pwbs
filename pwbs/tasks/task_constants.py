@@ -90,7 +90,7 @@ class TaskConstants:
 
             @staticmethod
             def verbose():
-                """Verbose -  Verbose Level"""
+                """Verbose - Verbose Level"""
                 return 2
 
             @staticmethod
