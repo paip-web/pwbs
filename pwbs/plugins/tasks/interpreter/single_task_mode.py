@@ -78,16 +78,22 @@ class SingleTaskMode(ConfigurationAwareTask):
         return process_command(commands)
 
     @staticmethod
-    def task_prefixer(task_name: str, text=''):
+    def task_prefixer(task_name: str, text=None):
         """
         Function to prefix text for tasks
         :param task_name: Task Name
         :param text: Text to prefix
         """
-        if isinstance(text, int):
-            text = "Return Code: {0}".format(text)
-        elif isinstance(text, bytes):
+        if text is None:
+            text = (None, '')
+        text_type = text[0]
+        text = text[1]
+        if isinstance(text, bytes):
             text = text.decode("utf-8")
+        if text_type == ShellRunner.constants()['return_code']:
+            text = "Return Code: {0}".format(text)
+        elif text_type == ShellRunner.constants()['stderr']:
+            return "PWBS ERROR: {0} [{1}] | {2}".format(task_name, datetime.now().strftime("%H:%M:%S"), text)
         return "PWBS: {0} [{1}] | {2}".format(task_name, datetime.now().strftime("%H:%M:%S"), text)
 
     @service_manager.inject('log')
@@ -103,4 +109,5 @@ class SingleTaskMode(ConfigurationAwareTask):
             # Log Execute
             log.log_verbose('Executing "{0}"...'.format(cmd_in), TaskConstants.task_verbose().verbose())
             for cmd_output in cmd_out:
-                log.log(cmd_output, lambda txt: SingleTaskMode.task_prefixer(self.config.name, txt))
+                if cmd_output is not None:
+                    log.log(cmd_output, lambda txt: SingleTaskMode.task_prefixer(self.config.name, txt))
