@@ -58,7 +58,7 @@ class ConfigurationAwareTask(Task, ABC):
                     pwbs_args_wo_tasks.append(self.config.name)
                 elif arg not in parsed_args.Task:
                     pwbs_args_wo_tasks.append(arg)
-            docker_runner.execute(''.join(pwbs_args_wo_tasks))
+            docker_runner.execute(' '.join(pwbs_args_wo_tasks))
             return False
         # Verbose Level and Debug Mode
         # # Save old values
