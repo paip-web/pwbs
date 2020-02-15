@@ -83,21 +83,21 @@ class DockerRunner(Runner):
             process = run(docker_command, shell=True, capture_output=True, check=False)
         else:
             process = run(docker_command, shell=True, check=False)
-        if capture_output and 'connect: permission denied' in str(process.stderr):
+        if capture_output and 'connect: permission denied' in process.stderr.decode('utf-8'):
             raise DockerCommandPermissionErrorException("Command {} failed by Permissions".format(docker_command))
         if capture_output and process.returncode != 0:
             raise DockerNotSupportedException(
                 "Command {} failed by status code {} with: {}".format(
                     docker_command,
                     process.returncode,
-                    ' '.join((str(process.stdout), str(process.stderr)))
+                    ' '.join((process.stdout.decode('utf-8'), process.stderr.decode('utf-8')))
                 )
             )
         if process.returncode != 0:
             raise DockerCommandFailedException(
                 "Command {} failed with: {}".format(
                     docker_command,
-                    ' '.join((str(process.stdout), str(process.stderr)))
+                    ' '.join((process.stdout.decode('utf-8'), process.stderr.decode('utf-8')))
                 )
             )
         return process
