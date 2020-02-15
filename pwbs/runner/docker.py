@@ -44,6 +44,21 @@ class DockerCommandPermissionErrorException(Exception):
     """
     pass
 
+# Decode to String
+
+
+def convert_to_string(text) -> str:
+    """
+    Convert to String
+    :param text: What to convert to string
+    :return: Converted string
+    """
+    if text is None:
+        return ''
+    if isinstance(text, bytes):
+        return text.decode('utf-8')
+    return str(text)
+
 # Docker Runner Class
 
 
@@ -83,21 +98,21 @@ class DockerRunner(Runner):
             process = run(docker_command, shell=True, capture_output=True, check=False)
         else:
             process = run(docker_command, shell=True, check=False)
-        if capture_output and 'connect: permission denied' in process.stderr.decode('utf-8'):
+        if capture_output and 'connect: permission denied' in convert_to_string(process.stderr):
             raise DockerCommandPermissionErrorException("Command {} failed by Permissions".format(docker_command))
         if capture_output and process.returncode != 0:
             raise DockerNotSupportedException(
                 "Command {} failed by status code {} with: {}".format(
                     docker_command,
                     process.returncode,
-                    ' '.join((process.stdout.decode('utf-8'), process.stderr.decode('utf-8')))
+                    ' '.join((convert_to_string(process.stdout), convert_to_string(process.stderr)))
                 )
             )
         if process.returncode != 0:
             raise DockerCommandFailedException(
                 "Command {} failed with: {}".format(
                     docker_command,
-                    ' '.join((process.stdout.decode('utf-8'), process.stderr.decode('utf-8')))
+                    ' '.join((convert_to_string(process.stdout), convert_to_string(process.stderr)))
                 )
             )
         return process
