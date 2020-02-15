@@ -155,7 +155,8 @@ class DockerRunner(Runner):
                 image=self.docker_image,
                 tag=self.docker_image_tag,
                 command=command
-            )
+            ),
+            sudo=self.sudo_needed
         )
 
     def execute(self, command: str, *args, **kwargs):
