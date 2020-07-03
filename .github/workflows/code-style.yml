@@ -3,7 +3,7 @@ name: Code Style
 on: [push]
 
 jobs:
-  tests:
+  Code Style:
     runs-on: ubuntu-latest
 
     steps:
@@ -11,5 +11,3 @@ jobs:
     - name: Super-Linter
       continue-on-error: true
       uses: github/super-linter@master
-      env:
-        ACTIONS_RUNNER_DEBUG: true
