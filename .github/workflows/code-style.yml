@@ -1,0 +1,13 @@
+name: Code Style
+
+on: [push]
+
+jobs:
+  Code_Style:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Super-Linter
+      continue-on-error: true
+      uses: github/super-linter@master
