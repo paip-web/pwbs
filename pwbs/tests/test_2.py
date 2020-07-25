@@ -2,7 +2,7 @@
 """PAiP Web Build System - Test
 
 NAME - PAiP Web Build System
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 
 """
@@ -52,20 +52,3 @@ def test_2_1():
     except PWBSInvalidConfigFile:
         assert True # It's Working
 
-
-def test_2_2():
-    """Testing PWBS Config Manager"""
-    # Import
-    from ..config.pwbs_config import PWBS_ConfigManager
-    from ..config.config_manager import PWBSConfigFileDontExistError
-    from ..config.config_manager import PWBSInvalidConfigFile
-    # Values
-    t1 = PWBS_ConfigManager()
-    t1.log.log("Test 2.2")
-    try:
-        t1.config_file()
-        t1.commands_to_commandlist()
-    except PWBSConfigFileDontExistError:
-        assert True # It's Working
-    except PWBSInvalidConfigFile:
-        assert True # It's Working

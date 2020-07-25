@@ -6,7 +6,7 @@ This module creates functions to watch files as well as Hashing Files.
 Watching files working by change in hash of files.
 
 NAME - PAiP Web Module - Watcher
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 VERSION - v.0.0.0.1
 """

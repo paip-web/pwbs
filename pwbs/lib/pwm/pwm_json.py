@@ -5,7 +5,7 @@
 This module creates function to read and write JSON.
 
 NAME - PAiP Web Module - JSON
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 VERSION - v.0.0.0.3
 """

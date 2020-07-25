@@ -5,7 +5,7 @@
 This module creates function to call command line commands.
 
 NAME - PAiP Web Module - Execute Commands
-AUTHOR - Patryk Adamczyk <patrykadamczyk@paip.com.pl>
+AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
 LICENSE - MIT
 VERSION - v.0.0.0.4
 """

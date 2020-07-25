@@ -112,3 +112,5 @@ venv.bak/
 .vscode/
 # PyCharm
 .idea/
+# GitHub CodeSpaces
+pythonenv*/

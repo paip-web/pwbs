@@ -7,8 +7,8 @@ LICENSE - MIT
 
 """
 # Imports
-from __future__ import print_function
 from pwbs.core import prefix_text
+from pwbs.core import prefix_error_text
 
 # Class Definition
 
@@ -27,6 +27,8 @@ class BaseLogger(object):
         """Constructor of the Class"""
         """Story Log for Delayed Debug"""
         self.debug_delayed_story = []
+        self.debug_state = False
+        self.verbose_state = 1
         # Initiator of Debug Mode
         self.debug()
         # Initiator of Verbose Mode
@@ -74,6 +76,14 @@ class BaseLogger(object):
                 Defaults to Default PWBS Prefixer.
         """
         return print(prefix(text))
+
+    def log_error(self, error: BaseException, prefix=prefix_error_text) -> None:
+        """
+        Log Error
+        :param BaseException error: Text to log
+        :param prefix: Prefixer
+        """
+        return self.log(str(error), prefix)
 
     def log_wop(self, text):
         """Log Function Without Prefixer

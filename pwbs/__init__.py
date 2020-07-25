@@ -2,11 +2,8 @@
 """PAiP Web Build System
 
 NAME - PAiP Web Build System
-
 AUTHOR - Patryk Adamczyk <patrykadamczyk@paipweb.com>
-
 LICENSE - MIT
-
 """
 
 # Underscore Variables
@@ -14,7 +11,7 @@ LICENSE - MIT
 """Title of Program"""
 __title__ = 'pwbs'
 """Version of Program"""
-__version__ = '0.5.0-dev2'
+__version__ = '0.6.0-dev0'
 """Author of the module"""
 __author__ = 'Patryk Adamczyk'
 """Module License"""
@@ -25,15 +22,18 @@ __docformat__ = 'restructuredtext en'
 # Imports
 
 import sentry_sdk
-from pwbs.pwbs_class import PWBS
-from pwbs.api.pwbs_event_manager import PWBSEventManager
 from pwbs.lib.pwm.pwm_system import SystemVersion
+from pwbs.core import service_manager
+from pwbs.core import event_manager
 
 # Running as pwbs command
 
 
 def main():
     """Main Function of Program"""
+    print("PAiP Web Build System v.{0}".format(__version__))
+    service_manager['plugin_manager'].change_plugins()
+    print("Loaded Plugins: {}".format(service_manager['plugin_manager'].get_loaded_plugin_names()))
     sentry_sdk.init(
         "https://0398c7c94f4d4d8fb3e1907598038d71@sentry.io/1452213",
         release=("{0}@{1}".format(__title__, __version__))
@@ -57,23 +57,7 @@ def main():
                 sys_info.system_version
             )
         )
-
-    # Initialize PWBS Event Manager
-    pwbs_em = PWBSEventManager.initialize()
-    pwbs_class_var = PWBS()
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-initialized",
-        pwbs_var=pwbs_class_var
-    )
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-before-main",
-        pwbs_var=pwbs_class_var
-    )
-    pwbs_class_var.main()
-    pwbs_em.startEvent(
-        "pwbs-event--pwbs_class-after-main",
-        pwbs_var=pwbs_class_var
-    )
+    event_manager('@pwbs/main')
 
 
 if __name__ == '__main__':
